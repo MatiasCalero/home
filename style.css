@@ -323,7 +323,7 @@ body {
 .elemento-child-first {
   height: 90%;
   width: 45%;
-  background-image: url("https://staging5.cincuentaytrescuarentaynueve.com/wp-content/uploads/2024/11/image2400_400.png");
+  background-image: url("https://github.com/MatiasCalero/home/blob/main/images/image2400_400.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -583,5 +583,5 @@ img {
 
 /* Estilos de los contenedores de WordPress */
 #content {
-	 background-image: url(https://cincuentaytrescuarentaynueve.com/wp-content/uploads/2024/11/Artboard-1-copy-6.png);
+	 background-image: url(https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/fondo_page.png);
 }
