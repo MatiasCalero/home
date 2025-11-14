@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sitio oficial de Matías Calero – proyectos, recursos, galería y convocatorias." />
+  <meta name="description" content="Sitio oficial de Matias Calero – proyectos, recursos, galería y convocatorias." />
   <title>Matias Calero</title>
 
   <!-- Google Fonts -->
@@ -15,221 +15,177 @@
     :root {
       --font-body: 'DM Sans', sans-serif;
       --font-title: 'Libre Baskerville', serif;
-      --transition: 0.25s ease;
+      --transition: 0.22s ease;
       --color-text: #111;
-      --color-accent: #000;
+      --accent: #000;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:var(--font-body);
+      color:var(--color-text);
+      background:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
-    body {
-      font-family: var(--font-body);
-      color: var(--color-text);
-      background: #fff;
-      overflow-x: hidden;
+    header.header-vertical{
+      position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid #eee;
+      display:flex;align-items:center;justify-content:center;padding:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;
     }
+    header.header-vertical::-webkit-scrollbar{display:none}
 
-    /* HEADER */
-    .header-vertical {
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      background: #fff;
-      z-index: 50;
-      border-bottom: 1px solid #eee;
-    }
+    .nav-list{display:flex;gap:28px;padding:0 18px;list-style:none;white-space:nowrap}
+    .nav-list a{color:var(--color-text);text-decoration:none;font-size:1rem;padding-bottom:6px;position:relative;display:inline-block}
+    .nav-list a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:var(--transition)}
+    .nav-list a:hover::after,.nav-list a.active::after{width:100%}
 
-    .header-content ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      justify-content: center;
+    /* ===== scroll horiz ===== */
+    .contenedor-horizontal{
+      display:flex;align-items:center;gap:36px;padding:44px 20px;
+      height:100vh;
+      overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
     }
+    .contenedor-horizontal::-webkit-scrollbar{display:none}
+    
 
-    .header-content a {
-      text-decoration: none;
-      color: #111;
-      font-size: 1rem;
-      font-weight: 400;
-      position: relative;
-      padding-bottom: 5px;
-      transition: var(--transition);
-    }
+    /* ===== mat ===== */
+    .title{font-family:var(--font-title);font-size:4.6rem;line-height:1.05;white-space:nowrap}
+    @media (max-width:900px){.title{font-size:3.2rem}}
+    @media (max-width:420px){.title{font-size:2.4rem}}
 
-    /* Animated underline */
-    .header-content a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0%;
-      height: 2px;
-      background: #000;
-      transition: var(--transition);
-    }
+    /* flechita */
+    .subinfo{display:inline-flex;align-items:center;gap:10px;margin-top:12px;font-size:1.05rem;opacity:.92}
+    .arrow{display:inline-flex;align-items:center}
+    .arrow svg{width:22px;height:22px;display:block}
+    .arrow svg{animation:arrowmove 1.6s infinite ease-in-out}
+    @keyframes arrowmove{0%{transform:translateX(0);opacity:.7}50%{transform:translateX(8px);opacity:1}100%{transform:translateX(0);opacity:.7}}
 
-    .header-content a:hover::after,
-    .header-content a.active::after {
-      width: 100%;
-    }
+    /* Elementos reserva */
+    .elemento{min-width:350px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+    @media (max-width:768px){.elemento{min-width:260px}}
 
-    /* MAIN */
-    .contenedor-horizontal {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      gap: 40px;
-      padding: 40px 20px;
-    }
+    img{max-width:100%;height:auto;border-radius:6px;display:block}
 
-    .contenedor-horizontal::-webkit-scrollbar {
-      display: none;
-    }
+    /* thanks styled like title but smaller */
+    .thanks{font-family:var(--font-title);font-size:2.4rem;line-height:1.05;margin-bottom:12px}
+    @media (max-width:600px){.thanks{font-size:1.65rem}}
 
-    /* TITLE */
-    .title {
-      font-family: var(--font-title);
-      font-size: 4.2rem;
-      line-height: 1.1;
-      padding-bottom: 20px;
-      white-space: nowrap;
-      overflow: visible;
-    }
+    .line{width:48px;height:2px;background:var(--accent);margin:14px auto;border-radius:2px}
+    .sociales{display:flex;gap:18px;justify-content:center;margin-top:8px}
+    .sociales a{text-decoration:none;color:var(--color-text);font-weight:500;position:relative}
+    .sociales a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:var(--transition)}
+    .sociales a:hover::after{width:100%}
 
-    /* ELEMENTOS */
-    .elemento {
-      min-width: 350px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      display: block;
-      loading: lazy;
-    }
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+      /* hide scrollbar para firefox */
+    .contenedor-horizontal{scrollbar-width:none;}
 
-    /* FOOTER CONTACT */
-    .elemento_container_contacto {
-      min-width: 300px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .sociales a {
-      display: inline-block;
-      margin: 10px;
-      color: #111;
-      font-weight: 500;
-      text-decoration: none;
-      position: relative;
-    }
-
-    .sociales a::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #000;
-      transition: var(--transition);
-    }
-
-    .sociales a:hover::after {
-      width: 100%;
-    }
-
-    @media (max-width: 768px) {
-      .title {
-        font-size: 2.8rem;
-      }
-      .contenedor-horizontal {
-        padding: 20px;
-        gap: 20px;
-      }
-      .elemento {
-        min-width: 260px;
-      }
-    }
   </style>
 </head>
-
 <body>
 
-<header class="header-vertical">
-  <nav class="header-content">
-    <ul>
+<header class="header-vertical" id="headerScroll">
+  <nav aria-label="Principal">
+    <ul class="nav-list">
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#recursos">Recursos</a></li>
-      <li><a href="#convocatorias">Convocatorias</a></li>
       <li><a href="#galeria">Galería</a></li>
+      <li><a href="#convocatorias">Convocatorias</a></li>
       <li><a href="#home" class="active">Home</a></li>
     </ul>
   </nav>
 </header>
 
-<section class="contenedor-horizontal" id="grab">
+<section class="contenedor-horizontal" id="grab" aria-label="Galería horizontal">
+
+  <div class="elemento" aria-hidden="false">
+    <h1 class="title">matias calero</h1>
+    <p class="subinfo">
+      Desliza a la derecha
+      <span class="arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000" aria-hidden="true">
+          <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
+        </svg>
+      </span>
+    </p>
+  </div>
+
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/j7rdARW.png" alt="valor de más"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/O73VhqQ.png" alt="nube gris"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/tUqr0gb.png" alt="culpa"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/exnidyf.png" alt="violento"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/uNmx6cj.png" alt="vuelve corazón"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/m25PItU.png" alt="C"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/TcKPpZN.png" alt="arcoiris"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/duw1qyr.png" alt="no hay problema"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/uwb4Myj.png" alt="nadie piensa en ti mejor que yo"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/0XnaiiU.png" alt="loop"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/OXA7hpR.png" alt="tiempo"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/MMKd1dU.png" alt="sueños"></div>
+  <div class="elemento"><img loading="lazy" src="https://i.imgur.com/LqFjZbK.png" alt="sueños 2"></div>
 
   <div class="elemento">
-    <h1 class="title">matias calero</h1>
-  </div>
-
-  <div class="elemento"><img src="https://i.imgur.com/j7rdARW.png" alt="valor de más"></div>
-  <div class="elemento"><img src="https://i.imgur.com/O73VhqQ.png" alt="nube gris"></div>
-  <div class="elemento"><img src="https://i.imgur.com/tUqr0gb.png" alt="culpa"></div>
-  <div class="elemento"><img src="https://i.imgur.com/exnidyf.png" alt="violento"></div>
-  <div class="elemento"><img src="https://i.imgur.com/uNmx6cj.png" alt="vuelve corazón"></div>
-  <div class="elemento"><img src="https://i.imgur.com/m25PItU.png" alt="C"></div>
-  <div class="elemento"><img src="https://i.imgur.com/TcKPpZN.png" alt="arcoiris"></div>
-  <div class="elemento"><img src="https://i.imgur.com/duw1qyr.png" alt="no hay problema"></div>
-  <div class="elemento"><img src="https://i.imgur.com/uwb4Myj.png" alt="nadie piensa en ti mejor que yo"></div>
-  <div class="elemento"><img src="https://i.imgur.com/0XnaiiU.png" alt="loop"></div>
-  <div class="elemento"><img src="https://i.imgur.com/OXA7hpR.png" alt="tiempo"></div>
-  <div class="elemento"><img src="https://i.imgur.com/MMKd1dU.png" alt="sueños"></div>
-  <div class="elemento"><img src="https://i.imgur.com/LqFjZbK.png" alt="sueños 2"></div>
-
-  <div class="elemento_container_contacto">
-    <p>gracias por estar aquí.</p>
+    <p class="thanks">gracias por estar aquí.</p>
+    <div class="line"></div>
     <div class="sociales">
-      <a href="https://www.instagram.com/matias_calero/" target="_blank">instagram</a>
-      <a href="https://www.youtube.com/@matias_calero" target="_blank">youtube</a>
+      <a href="https://www.instagram.com/matias_calero/" target="_blank" rel="noopener">instagram</a>
+      <a href="https://www.youtube.com/@matias_calero" target="_blank" rel="noopener">youtube</a>
     </div>
   </div>
+
 </section>
 
 <script>
-  const slider = document.getElementById('grab');
+  (function(){
+    const scroller = document.getElementById('grab');
+    if(!scroller) return;
 
-  slider.addEventListener('wheel', e => {
-    e.preventDefault();
-    slider.scrollLeft += e.deltaY * 0.5;
-  }, { passive: false });
+    scroller.addEventListener('wheel', function(e){
+      if(e.ctrlKey) return;
+      e.preventDefault();
+      
+      const speed = 0.8;
+      scroller.scrollLeft += e.deltaY * speed;
+    }, { passive: false });
 
-  let isDown = false, startX, scrollLeft;
+    let isDown = false, startX, scrollStart;
+    scroller.addEventListener('mousedown', (e)=>{
+      isDown = true;
+      scroller.classList.add('dragging');
+      startX = e.pageX - scroller.offsetLeft;
+      scrollStart = scroller.scrollLeft;
+      e.preventDefault();
+    });
+    window.addEventListener('mouseup', ()=>{ isDown = false; scroller.classList.remove('dragging'); });
+    window.addEventListener('mousemove', (e)=>{
+      if(!isDown) return;
+      const x = e.pageX - scroller.offsetLeft;
+      const walk = (x - startX) * 1.6; 
+      scroller.scrollLeft = scrollStart - walk;
+    });
 
-  slider.addEventListener('touchstart', e => {
-    isDown = true;
-    startX = e.touches[0].pageX;
-    scrollLeft = slider.scrollLeft;
-  });
+    let tStartX=0, tScrollStart=0;
+    scroller.addEventListener('touchstart', (e)=>{
+      tStartX = e.touches[0].pageX;
+      tScrollStart = scroller.scrollLeft;
+    }, { passive: true });
+    scroller.addEventListener('touchmove', (e)=>{
+      const x = e.touches[0].pageX;
+      const walk = (x - tStartX) * 1.6;
+      scroller.scrollLeft = tScrollStart - walk;
+    }, { passive: true });
 
-  slider.addEventListener('touchend', () => isDown = false);
+  })();
 
-  slider.addEventListener('touchmove', e => {
-    if (!isDown) return;
-    const x = e.touches[0].pageX;
-    const walk = (x - startX) * 1.8;
-    slider.scrollLeft = scrollLeft - walk;
+  document.querySelectorAll('.nav-list a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      document.querySelectorAll('.nav-list a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+    });
   });
 </script>
 
