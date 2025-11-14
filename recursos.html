@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Recursos de economía: libros, guías, repositorios y material académico seleccionado y accesible." />
+  <title>recursos – matias calero</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Libre+Baskerville:wght@700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --font-body: 'DM Sans', sans-serif;
+      --font-title: 'Libre Baskerville', serif;
+      --transition: 0.22s ease;
+      --color-text: #111;
+      --accent: #000;
+      --bg: #faf7ef;
+      --header-height: 68px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+      padding-top: var(--header-height);
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: var(--bg);
+      border-bottom: 1px solid #e7e3da;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      z-index: 1000;
+    }
+
+    nav {
+      display: block;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 1.15rem;
+      padding-bottom: 5px;
+      position: relative;
+    }
+
+    .nav-list a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-list a:hover::after,
+    .nav-list a.active::after {
+      width: 100%;
+    }
+
+    /* 🧨 Hamburguesa no alimentar después de medianoche */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      width: 26px;
+      height: 2px;
+      background: #000;
+      border-radius: 2px;
+      transition: 0.25s;
+    }
+
+    @media (max-width: 650px) {
+      .hamburger {
+        display: flex;
+      }
+
+      nav {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        border-bottom: 1px solid #e7e3da;
+        display: none;
+        flex-direction: column;
+        gap: 14px;
+        padding: 14px 0;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      .nav-list {
+        flex-direction: column;
+        gap: 14px;
+      }
+    }
+
+    /* ====== CONTENIDO ====== */
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      text-align: left;
+      margin-bottom: 22px;
+    }
+
+    p.descripcion {
+      font-size: 1.25rem;
+      max-width: 760px;
+      line-height: 1.55;
+      opacity: .92;
+      margin-bottom: 50px;
+    }
+
+    /* tarjeta */
+    .recurso-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .recurso-item img {
+      width: clamp(160px, 30vw, 240px);
+      border-radius: 6px;
+      flex-shrink: 0;
+      transition: transform .25s ease;
+    }
+
+    .recurso-item img:hover {
+      transform: scale(1.03);
+    }
+
+    .recurso-info h2 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .recurso-info p {
+      font-size: 1.15rem;
+      opacity: .92;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <button class="hamburger" id="hamb" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="navMenu">
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+        <li><a href="recursos.html" class="active" aria-current="page">Recursos</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="convocatorias.html">Convocatorias</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <h1>recursos</h1>
+
+    <p class="descripcion">
+      Una selección clara y directa de materiales esenciales para empezar en economía:
+      libros, guías y repositorios confiables. Todo gratuito, accesible y pensado para quienes
+      quieren aprender sin complicarse.
+    </p>
+
+    <!-- ===== ITEM: UNALM ===== -->
+    <div class="recurso-item">
+
+      <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" target="_blank">
+        <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png"
+          alt="UNALM Economía">
+      </a>
+
+      <div class="recurso-info">
+        <h2>UNALM</h2>
+        <p>Economía todos los ciclos. Currícula 2019.</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const hamb = document.getElementById('hamb');
+    const nav = document.getElementById('navMenu');
+
+    hamb.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      hamb.setAttribute('aria-expanded', open);
+    });
+  </script>
+
+</body>
+
+</html>
