@@ -3,151 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sitio oficial de Matías Calero – proyectos, recursos y galería." />
-  <title>Matías Calero</title>
+  <meta name="description" content="Sitio oficial de Matías Calero – proyectos, recursos, galería y convocatorias." />
+  <title>Matias Calero</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://i.imgur.com/mIrSQJO.png" type="image/png" />
-
-  <!-- Google Fonts (Libre Baskerville for title, DM Sans for body) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
 
   <style>
-    body { font-family: 'DM Sans', sans-serif; margin: 0; }
-    .title {
-      font-family: 'Libre Baskerville', serif;
-      font-weight: 700;
-      text-transform: lowercase;
-      letter-spacing: 1px;
+    :root {
+      --font-body: 'DM Sans', sans-serif;
+      --font-title: 'Libre Baskerville', serif;
+      --transition: 0.25s ease;
+      --color-text: #111;
+      --color-accent: #000;
     }
-    img { max-width: 100%; height: auto; display: block; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .header-vertical {
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 50;
+      border-bottom: 1px solid #eee;
+    }
+
+    .header-content ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .header-content a {
+      text-decoration: none;
+      color: #111;
+      font-size: 1rem;
+      font-weight: 400;
+      position: relative;
+      padding-bottom: 5px;
+      transition: var(--transition);
+    }
+
+    /* Animated underline */
+    .header-content a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: #000;
+      transition: var(--transition);
+    }
+
+    .header-content a:hover::after,
+    .header-content a.active::after {
+      width: 100%;
+    }
+
+    /* MAIN */
+    .contenedor-horizontal {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+
+    .contenedor-horizontal::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* TITLE */
+    .title {
+      font-family: var(--font-title);
+      font-size: 4.2rem;
+      line-height: 1.1;
+      padding-bottom: 20px;
+      white-space: nowrap;
+      overflow: visible;
+    }
+
+    /* ELEMENTOS */
+    .elemento {
+      min-width: 350px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+      loading: lazy;
+    }
+
+    /* FOOTER CONTACT */
+    .elemento_container_contacto {
+      min-width: 300px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .sociales a {
+      display: inline-block;
+      margin: 10px;
+      color: #111;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .sociales a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: var(--transition);
+    }
+
+    .sociales a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2.8rem;
+      }
+      .contenedor-horizontal {
+        padding: 20px;
+        gap: 20px;
+      }
+      .elemento {
+        min-width: 260px;
+      }
+    }
   </style>
 </head>
 
-<body class="home">
-  <div id="page" class="site">
-    <div class="site-content-contain">
-      <div id="content" class="site-content">
-        <main id="main" class="site-main">
-          <article id="post-67" class="twentyseventeen-panel">
-            <div class="panel-content">
-              <div class="wrap">
+<body>
 
-                <header class="header-vertical">
-                  <nav class="header-content">
-                    <ul class="list-links">
-                      <li><a href="#">Proyectos</a></li>
-                      <li><a href="#">Recursos</a></li>
-                      <li><a href="#">Galería</a></li>
-                      <li><a href="https://matiascalero.github.io/home/">Home</a></li>
-                    </ul>
-                  </nav>
-                </header>
+<header class="header-vertical">
+  <nav class="header-content">
+    <ul>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#convocatorias">Convocatorias</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#home" class="active">Home</a></li>
+    </ul>
+  </nav>
+</header>
 
-                <section class="contenedor-horizontal" id="grab">
-                  <div class="elemento">
-                    <div class="elemento_caja">
-                      <div class="elemento_textos">
-                        <h1 class="title">matias calero</h1>
-                        <div class="arrow">
-                          <p>Desliza a la derecha</p>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="84" height="64" viewBox="0 0 24 24" fill="rgba(0,0,0,1)">
-                            <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<section class="contenedor-horizontal" id="grab">
 
-                  <!-- Imágenes -->
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/j7rdARW.png" alt="valor de más" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/O73VhqQ.png" alt="nube gris" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/tUqr0gb.png" alt="culpa" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/exnidyf.png" alt="violento" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/uNmx6cj.png" alt="vuelve corazón" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/m25PItU.png" alt="C" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/TcKPpZN.png" alt="arcoiris" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/duw1qyr.png" alt="no hay problema" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/uwb4Myj.png" alt="nadie va a pensar en ti mejor que yo" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/0XnaiiU.png" alt="loop" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/OXA7hpR.png" alt="tiempo" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/MMKd1dU.png" alt="sueños" /></figure>
-                  </div>
-                  <div class="elemento elemento_width_auto">
-                    <figure><img loading="lazy" src="https://i.imgur.com/LqFjZbK.png" alt="sueños 2" /></figure>
-                  </div>
-
-                  <div class="elemento elemento_container_contacto">
-                    <div class="elemento_contacto">
-                      <p>gracias por estar aquí.</p>
-                      <div class="line"></div>
-                      <div class="sociales">
-                        <a href="https://www.instagram.com/matias_calero/" target="_blank" rel="noopener">instagram</a>
-                        <a href="https://www.youtube.com/@matias_calero" target="_blank" rel="noopener">youtube</a>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </article>
-        </main>
-      </div>
-    </div>
+  <div class="elemento">
+    <h1 class="title">matias calero</h1>
   </div>
 
-  <!-- Script optimizado -->
-  <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-      const slider = document.getElementById('grab');
-      slider.addEventListener('wheel', e => {
-        e.preventDefault();
-        slider.scrollLeft += e.deltaY;
-      }, { passive: false });
+  <div class="elemento"><img src="https://i.imgur.com/j7rdARW.png" alt="valor de más"></div>
+  <div class="elemento"><img src="https://i.imgur.com/O73VhqQ.png" alt="nube gris"></div>
+  <div class="elemento"><img src="https://i.imgur.com/tUqr0gb.png" alt="culpa"></div>
+  <div class="elemento"><img src="https://i.imgur.com/exnidyf.png" alt="violento"></div>
+  <div class="elemento"><img src="https://i.imgur.com/uNmx6cj.png" alt="vuelve corazón"></div>
+  <div class="elemento"><img src="https://i.imgur.com/m25PItU.png" alt="C"></div>
+  <div class="elemento"><img src="https://i.imgur.com/TcKPpZN.png" alt="arcoiris"></div>
+  <div class="elemento"><img src="https://i.imgur.com/duw1qyr.png" alt="no hay problema"></div>
+  <div class="elemento"><img src="https://i.imgur.com/uwb4Myj.png" alt="nadie piensa en ti mejor que yo"></div>
+  <div class="elemento"><img src="https://i.imgur.com/0XnaiiU.png" alt="loop"></div>
+  <div class="elemento"><img src="https://i.imgur.com/OXA7hpR.png" alt="tiempo"></div>
+  <div class="elemento"><img src="https://i.imgur.com/MMKd1dU.png" alt="sueños"></div>
+  <div class="elemento"><img src="https://i.imgur.com/LqFjZbK.png" alt="sueños 2"></div>
 
-      let isDown = false, startX, scrollLeft;
-      slider.addEventListener('touchstart', e => {
-        isDown = true;
-        startX = e.touches[0].pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-      });
-      slider.addEventListener('touchend', () => isDown = false);
-      slider.addEventListener('touchmove', e => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.touches[0].pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-      });
-    });
-  </script>
+  <div class="elemento_container_contacto">
+    <p>gracias por estar aquí.</p>
+    <div class="sociales">
+      <a href="https://www.instagram.com/matias_calero/" target="_blank">instagram</a>
+      <a href="https://www.youtube.com/@matias_calero" target="_blank">youtube</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slider = document.getElementById('grab');
+
+  slider.addEventListener('wheel', e => {
+    e.preventDefault();
+    slider.scrollLeft += e.deltaY * 0.5;
+  }, { passive: false });
+
+  let isDown = false, startX, scrollLeft;
+
+  slider.addEventListener('touchstart', e => {
+    isDown = true;
+    startX = e.touches[0].pageX;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('touchend', () => isDown = false);
+
+  slider.addEventListener('touchmove', e => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX;
+    const walk = (x - startX) * 1.8;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+</script>
+
 </body>
 </html>
