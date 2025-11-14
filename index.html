@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="https://i.imgur.com/9l8KQxP.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sitio oficial de Matias Calero – proyectos, recursos, galería y convocatorias." />
-  <title>Matias Calero</title>
+  <meta name="description" content="Sitio oficial de Matías Calero – proyectos, recursos, galería y convocatorias." />
+  <title>matias calero</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
 
   <style>
+    /* este es el CSS. No alimentar después de medianoche. */
     :root {
       --font-body: 'DM Sans', sans-serif;
       --font-title: 'Libre Baskerville', serif;
@@ -21,7 +23,15 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+    html,body{
+      font-family:var(--font-body);
+      color:var(--color-text);
+      background: #f3f0e7; /* color hueso god */
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      overflow-y:hidden; /* ← Oculta la barra de scroll vertical */
+    }
     body{
       font-family:var(--font-body);
       color:var(--color-text);
@@ -31,6 +41,7 @@
       overflow-x:hidden;
     }
 
+    /* ===== HEADER (scrollable on small widths) ===== */
     header.header-vertical{
       position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid #eee;
       display:flex;align-items:center;justify-content:center;padding:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;
@@ -38,11 +49,11 @@
     header.header-vertical::-webkit-scrollbar{display:none}
 
     .nav-list{display:flex;gap:28px;padding:0 18px;list-style:none;white-space:nowrap}
-    .nav-list a{color:var(--color-text);text-decoration:none;font-size:1rem;padding-bottom:6px;position:relative;display:inline-block}
+    .nav-list a{color:var(--color-text);text-decoration:none;font-size:1.15rem;padding-bottom:6px;position:relative;display:inline-block}
     .nav-list a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:var(--transition)}
     .nav-list a:hover::after,.nav-list a.active::after{width:100%}
 
-    /* ===== scroll horiz ===== */
+    /* ===== MAIN HORIZONTAL SCROLLER ===== */
     .contenedor-horizontal{
       display:flex;align-items:center;gap:36px;padding:44px 20px;
       height:100vh;
@@ -51,19 +62,19 @@
     .contenedor-horizontal::-webkit-scrollbar{display:none}
     
 
-    /* ===== mat ===== */
-    .title{font-family:var(--font-title);font-size:4.6rem;line-height:1.05;white-space:nowrap}
-    @media (max-width:900px){.title{font-size:3.2rem}}
-    @media (max-width:420px){.title{font-size:2.4rem}}
+    /* ===== Title ===== */
+    .title{font-family:var(--font-title);font-size:5.2rem;line-height:1.05;white-space:nowrap}
+    @media (max-width:900px){.title{font-size:3.8rem}}
+    @media (max-width:420px){.title{font-size:2.9rem}}
 
-    /* flechita */
-    .subinfo{display:inline-flex;align-items:center;gap:10px;margin-top:12px;font-size:1.05rem;opacity:.92}
+    /* Subinfo + arrow centered on midline */
+    .subinfo{display:inline-flex;align-items:center;gap:10px;margin-top:12px;font-size:1.2rem;opacity:.92}
     .arrow{display:inline-flex;align-items:center}
     .arrow svg{width:22px;height:22px;display:block}
     .arrow svg{animation:arrowmove 1.6s infinite ease-in-out}
     @keyframes arrowmove{0%{transform:translateX(0);opacity:.7}50%{transform:translateX(8px);opacity:1}100%{transform:translateX(0);opacity:.7}}
 
-    /* Elementos reserva */
+    /* Element card */
     .elemento{min-width:350px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center}
     @media (max-width:768px){.elemento{min-width:260px}}
 
@@ -79,23 +90,25 @@
     .sociales a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:var(--transition)}
     .sociales a:hover::after{width:100%}
 
-
+    /* small tweaks */
     .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
-      /* hide scrollbar para firefox */
+      /* hide scrollbar for firefox */
     .contenedor-horizontal{scrollbar-width:none;}
 
+      /* Fin del CSS. Si algo falla, fue el duende del scroll. */
   </style>
 </head>
 <body>
+<!-- Si llegaste hasta aquí en el código, desbloqueaste un easter egg invisible → 🐢 -->
 
 <header class="header-vertical" id="headerScroll">
   <nav aria-label="Principal">
     <ul class="nav-list">
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#recursos">Recursos</a></li>
-      <li><a href="#galeria">Galería</a></li>
-      <li><a href="#convocatorias">Convocatorias</a></li>
-      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#proyectos">proyectos</a></li>
+      <li><a href="#recursos">recursos</a></li>
+      <li><a href="#galeria">galería</a></li>
+      <li><a href="#convocatorias">convocatorias</a></li>
+      <li><a href="#home" class="active">home</a></li>
     </ul>
   </nav>
 </header>
@@ -140,18 +153,22 @@
 </section>
 
 <script>
+  // Horizontal wheel & drag support for the scroller
   (function(){
     const scroller = document.getElementById('grab');
     if(!scroller) return;
 
+    // Wheel -> horizontal scroll
     scroller.addEventListener('wheel', function(e){
+      // Only intercept vertical wheel (deltaY) - allow ctrl+wheel (zoom) to pass
       if(e.ctrlKey) return;
       e.preventDefault();
-      
+      // smoothing multiplier, tweakable
       const speed = 0.8;
       scroller.scrollLeft += e.deltaY * speed;
     }, { passive: false });
 
+    // Mouse drag (desktop) support
     let isDown = false, startX, scrollStart;
     scroller.addEventListener('mousedown', (e)=>{
       isDown = true;
@@ -164,10 +181,11 @@
     window.addEventListener('mousemove', (e)=>{
       if(!isDown) return;
       const x = e.pageX - scroller.offsetLeft;
-      const walk = (x - startX) * 1.6; 
+      const walk = (x - startX) * 1.6; // drag speed
       scroller.scrollLeft = scrollStart - walk;
     });
 
+    // Touch drag already behaves naturally, but adding small multiplier for responsiveness
     let tStartX=0, tScrollStart=0;
     scroller.addEventListener('touchstart', (e)=>{
       tStartX = e.touches[0].pageX;
@@ -181,6 +199,7 @@
 
   })();
 
+  // Keep active link underline in sync when clicking anchors
   document.querySelectorAll('.nav-list a').forEach(a=>{
     a.addEventListener('click', (e)=>{
       document.querySelectorAll('.nav-list a').forEach(x=>x.classList.remove('active'));
@@ -189,5 +208,6 @@
   });
 </script>
 
+<!-- Fin del body. Aquí no hay más secretos… o sí? -->
 </body>
 </html>
