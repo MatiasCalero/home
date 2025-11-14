@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
-
+  <!-- este es el CSS. No alimentar después de medianoche -->
   <style>
     /* Hola, este es el CSS. No alimentar después de medianoche. */
     :root {
@@ -20,38 +20,55 @@
       --transition: 0.22s ease;
       --color-text: #111;
       --accent: #000;
+      --bg: #faf7ef; /* hueso god */ 
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{
-      font-family:var(--font-body);
-      color:var(--color-text);
-      background: #f3f0e7; /* color hueso */
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-      overflow-y:hidden; /* ← Oculta la barra de scroll vertical */
-    }
+    html,body{height:100%}
+
     body{
       font-family:var(--font-body);
       color:var(--color-text);
-      background:#fff;
+      background:var(--bg);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
+      /* permitir scrolling si el contenido lo requiere */
     }
 
-    /* ===== HEADER scrollable on small widths ===== */
+    /* ===== HEADER: desktop centered, mobile hamburger ===== */
     header.header-vertical{
-      position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid #eee;
-      display:flex;align-items:center;justify-content:center;padding:12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid #eee;
+      display:flex;align-items:center;justify-content:center;padding:12px 16px;
     }
+
     header.header-vertical::-webkit-scrollbar{display:none}
+
+    /* nav default for desktop: centered and visible */
+    nav{display:block;position:static;background:none;border:none;padding:0}
 
     .nav-list{display:flex;gap:28px;padding:0 18px;list-style:none;white-space:nowrap}
     .nav-list a{color:var(--color-text);text-decoration:none;font-size:1.15rem;padding-bottom:6px;position:relative;display:inline-block}
     .nav-list a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:var(--transition)}
     .nav-list a:hover::after,.nav-list a.active::after{width:100%}
+
+    /* hamburger (mobile) */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:8px}
+    .hamburger span{width:24px;height:2px;background:#000;border-radius:2px;transition:0.25s}
+
+    /* ===== MOBILE ===== */
+    @media(max-width:650px){
+      .hamburger{display:flex}
+      header.header-vertical{justify-content:space-between}
+
+      nav{
+        position:absolute;top:58px;left:0;width:100%;background:#fff;border-bottom:1px solid #eee;
+        display:none;flex-direction:column;align-items:center;padding:12px 0;box-shadow:0 4px 14px rgba(0,0,0,0.06);
+      }
+      nav.open{display:flex}
+
+      .nav-list{flex-direction:column;gap:14px;padding:0}
+    }
 
     /* ===== MAIN HORIZONTAL SCROLLER ===== */
     .contenedor-horizontal{
@@ -60,18 +77,21 @@
       overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
     }
     .contenedor-horizontal::-webkit-scrollbar{display:none}
-    
+    .contenedor-horizontal{scrollbar-width:none}
 
-    /* ===== Title ===== */
-    .title{font-family:var(--font-title);font-size:5.2rem;line-height:1.05;white-space:nowrap}
-    @media (max-width:900px){.title{font-size:3.8rem}}
-    @media (max-width:420px){.title{font-size:2.9rem}}
+    /* Title */
+    .title{font-family:var(--font-title);font-size:6rem;line-height:1.05;white-space:normal;text-align:center}
+    @media(max-width:900px){.title{font-size:4.4rem}}
+    @media(max-width:700px){.title{font-size:3.5rem}}
+    @media(max-width:450px){.title{font-size:2.8rem}}
+    @media(max-width:900px){.title{font-size:3.8rem}}
+    @media(max-width:700px){.title{font-size:3.6rem}}
+    @media(max-width:450px){.title{font-size:2.8rem}}
 
     /* Subinfo + arrow centered on midline */
-    .subinfo{display:inline-flex;align-items:center;gap:10px;margin-top:12px;font-size:1.2rem;opacity:.92}
+    .subinfo{display:inline-flex;align-items:center;gap:12px;margin-top:12px;font-size:1.35rem;opacity:.92}
     .arrow{display:inline-flex;align-items:center}
-    .arrow svg{width:22px;height:22px;display:block}
-    .arrow svg{animation:arrowmove 1.6s infinite ease-in-out}
+    .arrow svg{width:22px;height:22px;display:block;animation:arrowmove 1.6s infinite ease-in-out}
     @keyframes arrowmove{0%{transform:translateX(0);opacity:.7}50%{transform:translateX(8px);opacity:1}100%{transform:translateX(0);opacity:.7}}
 
     /* Element card */
@@ -81,28 +101,29 @@
     img{max-width:100%;height:auto;border-radius:6px;display:block}
 
     /* thanks styled like title but smaller */
-    .thanks{font-family:var(--font-title);font-size:2.4rem;line-height:1.05;margin-bottom:12px}
+    .thanks{font-family:var(--font-title);font-size:2.8rem;line-height:1.1;margin-bottom:16px}
     @media (max-width:600px){.thanks{font-size:1.65rem}}
 
     .line{width:48px;height:2px;background:var(--accent);margin:14px auto;border-radius:2px}
     .sociales{display:flex;gap:18px;justify-content:center;margin-top:8px}
-    .sociales a{text-decoration:none;color:var(--color-text);font-weight:500;position:relative}
+    .sociales a{text-decoration:none;color:var(--color-text);font-weight:500;font-size:1.25rem;position:relative}
     .sociales a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:var(--transition)}
     .sociales a:hover::after{width:100%}
 
     /* small tweaks */
     .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
-      /* hide scrollbar for firefox */
-    .contenedor-horizontal{scrollbar-width:none;}
-
-      /* Fin del CSS. Si algo falla, fue el maldito scroll. */
+    /* Fin del CSS. Si algo falla, fue el maldito scroll. */
   </style>
+
 </head>
 <body>
 <!-- Si llegaste hasta aquí, desbloqueaste un easter egg invisible → 🐢 -->
 
 <header class="header-vertical" id="headerScroll">
-  <nav aria-label="Principal">
+  <div class="hamburger" id="hamb" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <nav aria-label="Principal" id="navMenu">
     <ul class="nav-list">
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#recursos">Recursos</a></li>
@@ -206,9 +227,16 @@
       a.classList.add('active');
     });
   });
+  // Hamburguesa
+  const hamb = document.getElementById('hamb');
+  const navMenu = document.getElementById('navMenu');
+  hamb.addEventListener('click', ()=>{
+    navMenu.classList.toggle('open');
+    hamb.classList.toggle('active');
+  });
+
 </script>
 
-<!-- Fin Aquí no hay más secretos… o sí -->
+<!-- Fin, no hay más secretos… o si -->
 </body>
 </html>
-
