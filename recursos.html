@@ -26,13 +26,7 @@
       --bg: #faf7ef;
       --header-height: 68px;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * {box-sizing: border-box; margin: 0; padding: 0;}
     body {
       font-family: var(--font-body);
       background: var(--bg);
@@ -40,120 +34,103 @@
       -webkit-font-smoothing: antialiased;
       padding-top: var(--header-height);
     }
-
-    /* ====== HEADER ====== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--header-height);
-      background: var(--bg);
-      border-bottom: 1px solid #e7e3da;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 18px;
-      z-index: 1000;
+    /* ===== HEADER ===== */
+    header.header-vertical{
+      position:sticky;
+      top:0;
+      z-index:200;
+      background:var(--bg);
+      border-bottom:1px solid #e7e3da;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      height:var(--header-height);
     }
-
-    nav {
-      display: block;
+    nav{display:block}
+    .nav-list{
+      display:flex;
+      gap:28px;
+      list-style:none;
+      white-space:nowrap;
     }
-
-    .nav-list {
-      list-style: none;
-      display: flex;
-      gap: 28px;
+    .nav-list a{
+      color:var(--color-text);
+      text-decoration:none;
+      font-size:1.15rem;
+      padding-bottom:6px;
+      position:relative;
+      display:inline-block;
     }
-
-    .nav-list a {
-      text-decoration: none;
-      color: var(--color-text);
-      font-size: 1.15rem;
-      padding-bottom: 5px;
-      position: relative;
+    .nav-list a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      height:2px;
+      width:0;
+      background:var(--accent);
+      transition:var(--transition);
     }
-
-    .nav-list a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 2px;
-      width: 0;
-      background: var(--accent);
-      transition: var(--transition);
-    }
-
     .nav-list a:hover::after,
-    .nav-list a.active::after {
-      width: 100%;
+    .nav-list a.active::after{
+      width:100%;
     }
-
-    /* 🧨 Hamburguesa no alimentar después de medianoche */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-      padding: 6px;
+    .hamburger{
+      display:none;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+      border:0;
+      background:transparent;
+      padding:6px;
     }
-
-    .hamburger span {
-      width: 26px;
-      height: 2px;
-      background: #000;
-      border-radius: 2px;
-      transition: 0.25s;
+    .hamburger span{
+      display:block;
+      width:26px;
+      height:2px;
+      background:#000;
+      border-radius:2px;
+      transition:.25s;
     }
-
-    @media (max-width: 650px) {
-      .hamburger {
-        display: flex;
-      }
-
-      nav {
-        position: absolute;
-        top: var(--header-height);
-        left: 0;
-        width: 100%;
-        background: var(--bg);
-        border-bottom: 1px solid #e7e3da;
-        display: none;
-        flex-direction: column;
-        gap: 14px;
-        padding: 14px 0;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-      }
-
-      nav.open {
-        display: flex;
-      }
-
-      .nav-list {
-        flex-direction: column;
-        gap: 14px;
-      }
+    .hamburger[aria-expanded="true"] span:nth-child(1){
+      transform:translateY(7px) rotate(45deg);
     }
-
-    /* ====== CONTENIDO ====== */
-
+    .hamburger[aria-expanded="true"] span:nth-child(2){
+      opacity:0;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(3){
+      transform:translateY(-7px) rotate(-45deg);
+    }
+    @media(max-width:650px){
+      .hamburger{display:flex}
+      nav{
+        position:absolute;
+        top:var(--header-height);
+        left:0;
+        width:100%;
+        background:var(--bg);
+        border-bottom:1px solid #e7e3da;
+        display:none;
+        flex-direction:column;
+        align-items:center;
+        padding:12px 0;
+        box-shadow:0 4px 14px rgba(0,0,0,0.06);
+      }
+      nav.open{display:flex;}
+      .nav-list{flex-direction:column;gap:14px;}
+    }
     main {
       max-width: 1100px;
       margin: 0 auto;
       padding: 60px 24px;
     }
-
     h1 {
       font-family: var(--font-title);
       font-size: clamp(2.4rem, 6vw, 4rem);
       text-align: left;
       margin-bottom: 22px;
     }
-
     p.descripcion {
       font-size: 1.25rem;
       max-width: 760px;
@@ -161,52 +138,59 @@
       opacity: .92;
       margin-bottom: 50px;
     }
-
-    /* tarjeta */
+    /* tarjeta universidad */
     .recurso-item {
       display: flex;
-      align-items: flex-start;
-      gap: 28px;
+      align-items: center;
+      gap: 38px;
       margin-bottom: 60px;
       flex-wrap: wrap;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      padding: 32px 28px;
+      transition: box-shadow .22s;
     }
-
+    .recurso-item:hover {
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
     .recurso-item img {
-      width: clamp(160px, 30vw, 240px);
-      border-radius: 6px;
+      width: clamp(220px, 32vw, 320px);
+      border-radius: 18px;
       flex-shrink: 0;
       transition: transform .25s ease;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
-
     .recurso-item img:hover {
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
-
     .recurso-info h2 {
       font-family: var(--font-title);
-      font-size: 2rem;
-      margin-bottom: 6px;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
     }
-
     .recurso-info p {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       opacity: .92;
       max-width: 500px;
       line-height: 1.5;
     }
-
+    @media(max-width:900px){
+      .recurso-item{flex-direction:column;align-items:flex-start;}
+      .recurso-item img{width:100%;max-width:340px;}
+    }
   </style>
 
 </head>
 
 <body>
 
-  <header>
-    <button class="hamburger" id="hamb" aria-expanded="false">
+  <header class="header-vertical" id="headerScroll">
+    <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </button>
-
-    <nav id="navMenu">
+    <nav aria-label="Principal" id="navMenu">
       <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
         <li><a href="proyectos.html">Proyectos</a></li>
@@ -227,31 +211,69 @@
       quieren aprender sin complicarse.
     </p>
 
-    <!-- ===== ITEM: UNALM ===== -->
+    <!-- ===== UNIVERSIDADES ===== -->
     <div class="recurso-item">
-
+      <img src="https://github.com/MatiasCalero/home/blob/main/images/unmsm.png?raw=true" alt="UNMSM" />
+      <div class="recurso-info">
+        <h2>UNMSM</h2>
+        <p>Materiales de economía y recursos académicos de la Universidad Nacional Mayor de San Marcos. <br> <a href="#" style="text-decoration:underline;color:var(--accent);">Ver recursos</a></p>
+      </div>
+    </div>
+    <div class="recurso-item">
+      <img src="https://github.com/MatiasCalero/home/blob/main/images/pucp.png?raw=true" alt="PUCP" />
+      <div class="recurso-info">
+        <h2>PUCP</h2>
+        <p>Guías, libros y repositorios de la Pontificia Universidad Católica del Perú. <br> <a href="#" style="text-decoration:underline;color:var(--accent);">Ver recursos</a></p>
+      </div>
+    </div>
+    <div class="recurso-item">
+      <img src="https://github.com/MatiasCalero/home/blob/main/images/uni.png?raw=true" alt="UNI" />
+      <div class="recurso-info">
+        <h2>UNI</h2>
+        <p>Material académico y recursos de la Universidad Nacional de Ingeniería. <br> <a href="#" style="text-decoration:underline;color:var(--accent);">Ver recursos</a></p>
+      </div>
+    </div>
+    <div class="recurso-item">
+      <img src="https://github.com/MatiasCalero/home/blob/main/images/up.png?raw=true" alt="Universidad Pacífico" />
+      <div class="recurso-info">
+        <h2>Universidad Pacífico</h2>
+        <p>Recursos y materiales de economía de la Universidad Pacífico. <br> <a href="#" style="text-decoration:underline;color:var(--accent);">Ver recursos</a></p>
+      </div>
+    </div>
+    <!-- UNALM original -->
+    <div class="recurso-item">
       <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" target="_blank">
-        <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png"
-          alt="UNALM Economía">
+        <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png" alt="UNALM Economía" />
       </a>
-
       <div class="recurso-info">
         <h2>UNALM</h2>
         <p>Economía todos los ciclos. Currícula 2019.</p>
       </div>
-
     </div>
 
   </main>
 
   <script>
-    const hamb = document.getElementById('hamb');
-    const nav = document.getElementById('navMenu');
-
-    hamb.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      hamb.setAttribute('aria-expanded', open);
-    });
+    // nav + hamburger replicado del home
+    (function(){
+      const hamb = document.getElementById('hamb');
+      const nav = document.getElementById('navMenu');
+      const links = nav.querySelectorAll('a');
+      hamb.addEventListener('click', ()=>{
+        const openNow = nav.classList.toggle('open');
+        hamb.setAttribute('aria-expanded', openNow);
+      });
+      links.forEach(link=>{
+        link.addEventListener('click', ()=>{
+          if(nav.classList.contains('open')){
+            nav.classList.remove('open');
+            hamb.setAttribute('aria-expanded', 'false');
+          }
+          links.forEach(l=>l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+    })();
   </script>
 
 </body>
