@@ -311,45 +311,62 @@
 </section>
 
 <script>
-  // Horizontal scroll optimizado
+  // Scroll horizontal profesional: rueda y mouse en desktop, arrastre táctil fluido en mobile
   (function(){
     const scroller = document.getElementById('grab');
     if(!scroller) return;
 
-    // wheel -> horizontal
+    // Siempre permitir scroll con rueda en desktop
     scroller.addEventListener('wheel', function(e){
-      if(e.ctrlKey) return;
-      e.preventDefault();
-      scroller.scrollLeft += e.deltaY * 0.7;
+      // Solo bloquear si no es touch
+      if (window.matchMedia('(pointer: fine)').matches) {
+        if(e.ctrlKey) return;
+        e.preventDefault();
+        scroller.scrollLeft += e.deltaY * 0.7;
+      }
     }, { passive:false });
 
-    // drag desktop
-    let isDown = false, startX, scrollStart;
-    scroller.addEventListener('mousedown', (e)=>{
-      if(e.button!==0) return;
-      isDown = true;
-      startX = e.pageX;
-      scrollStart = scroller.scrollLeft;
-      e.preventDefault();
-    });
+    // Arrastre con mouse en desktop
+    if (window.matchMedia('(pointer: fine)').matches) {
+      let isDown = false, startX, scrollStart;
+      scroller.addEventListener('mousedown', (e)=>{
+        if(e.button!==0) return;
+        isDown = true;
+        startX = e.pageX;
+        scrollStart = scroller.scrollLeft;
+        scroller.classList.add('dragging');
+        e.preventDefault();
+      });
+      window.addEventListener('mouseup', ()=>{
+        isDown = false;
+        scroller.classList.remove('dragging');
+      });
+      window.addEventListener('mousemove', (e)=>{
+        if(!isDown) return;
+        const walk = (e.pageX - startX) * 1.5;
+        scroller.scrollLeft = scrollStart - walk;
+      });
+    }
 
-    window.addEventListener('mouseup', ()=> isDown = false);
-    window.addEventListener('mousemove', (e)=>{
-      if(!isDown) return;
-      const walk = (e.pageX - startX) * 1.5;
-      scroller.scrollLeft = scrollStart - walk;
-    });
-
-    // touch
-    let tStartX=0,tScrollStart=0;
-    scroller.addEventListener('touchstart', e=>{
-      tStartX = e.touches[0].pageX;
-      tScrollStart = scroller.scrollLeft;
-    });
-    scroller.addEventListener('touchmove', e=>{
-      const walk = (e.touches[0].pageX - tStartX) * 1.5;
-      scroller.scrollLeft = tScrollStart - walk;
-    });
+    // Arrastre táctil fluido en mobile/tablet
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      let tStartX=0, tScrollStart=0;
+      scroller.addEventListener('touchstart', e=>{
+        if(e.touches.length!==1) return;
+        tStartX = e.touches[0].pageX;
+        tScrollStart = scroller.scrollLeft;
+        scroller.classList.add('dragging');
+      }, { passive:true });
+      scroller.addEventListener('touchmove', e=>{
+        if(e.touches.length!==1) return;
+        // Evita atascos: no bloquea el scroll vertical si el movimiento es diagonal
+        const walk = (e.touches[0].pageX - tStartX) * 1.5;
+        scroller.scrollLeft = tScrollStart - walk;
+      }, { passive:true });
+      scroller.addEventListener('touchend', ()=>{
+        scroller.classList.remove('dragging');
+      });
+    }
   })();
 
   // nav + hamburger
