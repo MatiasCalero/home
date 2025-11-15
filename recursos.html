@@ -206,12 +206,9 @@
 <body>
 
   <header class="header-vertical" id="headerScroll">
-    <div class="nav-mobile-wrap">
-      <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-      <a href="index.html" class="nav-title-mobile" style="font-family:var(--font-title);font-size:1.45rem;margin-left:14px;color:var(--color-text);text-decoration:none;display:none;">matias calero</a>
-    </div>
+    <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
     <nav aria-label="Principal" id="navMenu">
       <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
@@ -276,7 +273,7 @@
   </main>
 
   <script>
-    // nav + hamburger replicado del home
+    // nav + hamburger idéntico al home
     (function(){
       const hamb = document.getElementById('hamb');
       const nav = document.getElementById('navMenu');
