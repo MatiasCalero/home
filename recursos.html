@@ -123,7 +123,26 @@
     main {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 60px 24px 24px 24px;
+    }
+    .nav-title-mobile {
+      display: none;
+      align-items: center;
+      font-family: var(--font-title);
+      font-size: 1.45rem;
+      margin-left: 14px;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: opacity .22s;
+    }
+    @media(max-width:650px){
+      .nav-title-mobile {
+        display: inline-flex;
+      }
+      .nav-mobile-wrap {
+        display: flex;
+        align-items: center;
+      }
     }
     h1 {
       font-family: var(--font-title);
@@ -187,9 +206,12 @@
 <body>
 
   <header class="header-vertical" id="headerScroll">
-    <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-mobile-wrap">
+      <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="nav-title-mobile" style="font-family:var(--font-title);font-size:1.45rem;margin-left:14px;color:var(--color-text);text-decoration:none;display:none;">matias calero</a>
+    </div>
     <nav aria-label="Principal" id="navMenu">
       <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
@@ -211,7 +233,18 @@
       quieren aprender sin complicarse.
     </p>
 
-    <!-- ===== UNIVERSIDADES ===== -->
+    <!-- UNALM primero -->
+    <div class="recurso-item">
+      <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" target="_blank">
+        <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png" alt="UNALM Economía" />
+      </a>
+      <div class="recurso-info">
+        <h2>UNALM</h2>
+        <p>Economía todos los ciclos. Currícula 2019.<br>
+          <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" style="text-decoration:underline;color:var(--accent);">Ver recursos</a>
+        </p>
+      </div>
+    </div>
     <div class="recurso-item">
       <img src="https://github.com/MatiasCalero/home/blob/main/images/unmsm.png?raw=true" alt="UNMSM" />
       <div class="recurso-info">
@@ -240,17 +273,6 @@
         <p>Recursos y materiales de economía de la Universidad Pacífico. <br> <a href="#" style="text-decoration:underline;color:var(--accent);">Ver recursos</a></p>
       </div>
     </div>
-    <!-- UNALM original -->
-    <div class="recurso-item">
-      <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" target="_blank">
-        <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png" alt="UNALM Economía" />
-      </a>
-      <div class="recurso-info">
-        <h2>UNALM</h2>
-        <p>Economía todos los ciclos. Currícula 2019.</p>
-      </div>
-    </div>
-
   </main>
 
   <script>

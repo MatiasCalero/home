@@ -346,24 +346,8 @@
       });
     }
 
-    // Arrastre táctil fluido en mobile/tablet
-    if('ontouchstart' in window || navigator.maxTouchPoints > 0){
-      let tStartX=0, tScrollStart=0;
-      scroller.addEventListener('touchstart', e=>{
-        if(e.touches.length!==1) return;
-        tStartX = e.touches[0].pageX;
-        tScrollStart = scroller.scrollLeft;
-        scroller.classList.add('dragging');
-      }, { passive:true });
-      scroller.addEventListener('touchmove', e=>{
-        if(e.touches.length!==1) return;
-        const walk = (e.touches[0].pageX - tStartX) * 1.5;
-        scroller.scrollLeft = tScrollStart - walk;
-      }, { passive:true });
-      scroller.addEventListener('touchend', ()=>{
-        scroller.classList.remove('dragging');
-      });
-    }
+    // En móviles/tablet, usar scroll horizontal nativo (más sensible y fluido)
+    // No se necesita manejo manual de eventos táctiles
   })();
 
   // nav + hamburger
