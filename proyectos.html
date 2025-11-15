@@ -133,75 +133,92 @@
       margin-bottom:38px;
       max-width:700px;
     }
-    .proyectos-list{
-      display:flex;
-      flex-direction:column;
-      gap:38px;
-      margin-bottom:32px;
+    .tarjetas-apiladas {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: 32px;
     }
-    .proyecto-card{
-      background:#fff;
-      border-radius:22px;
-      box-shadow:0 2px 16px rgba(0,0,0,0.04);
-      padding:32px 26px;
-      display:flex;
-      flex-direction:row;
-      gap:32px;
-      align-items:center;
-      transition:box-shadow .22s;
+    .tarjeta-proyecto {
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      padding: 0;
+      overflow: hidden;
+      transition: box-shadow .22s, transform .22s;
+      cursor: pointer;
+      max-width: 100%;
     }
-    .proyecto-card.reverse{
-      flex-direction:row-reverse;
+    .tarjeta-proyecto:hover, .tarjeta-proyecto.expanded {
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px) scale(1.012);
     }
-    .proyecto-img{
-      width:clamp(120px,22vw,180px);
-      height:clamp(120px,22vw,180px);
-      border-radius:18px;
-      object-fit:cover;
-      box-shadow:0 2px 12px rgba(0,0,0,0.07);
-      flex-shrink:0;
-      background:#eee;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .tarjeta-cabecera {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 24px 26px;
+      cursor: pointer;
     }
-    .proyecto-info{
-      flex:1;
-      min-width:0;
+    .tarjeta-img {
+      width: clamp(90px, 18vw, 140px);
+      height: clamp(90px, 18vw, 140px);
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      flex-shrink: 0;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .proyecto-titulo{
-      font-family:var(--font-title);
-      font-size:1.45rem;
-      margin-bottom:8px;
-      color:var(--accent);
+    .tarjeta-titulo {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      font-weight: 700;
     }
-    .proyecto-descripcion{
-      font-size:1.08rem;
-      opacity:.92;
-      margin-bottom:10px;
+    .tarjeta-detalle {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      padding: 0 26px;
+      transition: max-height .38s var(--transition), opacity .22s var(--transition), padding .22s var(--transition);
     }
-    .proyecto-meta{
-      font-size:.98rem;
-      color:#444;
-      margin-top:4px;
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
+    .tarjeta-proyecto.expanded .tarjeta-detalle {
+      max-height: 400px;
+      opacity: 1;
+      padding: 18px 26px 24px 26px;
     }
-    .proyecto-link{
-      color:var(--accent);
-      text-decoration:underline;
-      font-size:1.08rem;
-      margin-top:8px;
-      font-weight:500;
-      transition:color .18s;
+    .tarjeta-descripcion {
+      font-size: 1.08rem;
+      opacity: .92;
+      margin-bottom: 10px;
     }
-    .proyecto-link:hover{
-      color:#444;
+    .tarjeta-meta {
+      font-size: .98rem;
+      color: #444;
+      margin-top: 4px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .tarjeta-link {
+      color: var(--accent);
+      text-decoration: underline;
+      font-size: 1.08rem;
+      margin-top: 8px;
+      font-weight: 500;
+      transition: color .18s;
+      display: inline-block;
+    }
+    .tarjeta-link:hover {
+      color: #444;
     }
     @media(max-width:900px){
-      .proyecto-card,.proyecto-card.reverse{flex-direction:column;gap:18px;align-items:flex-start;}
-      .proyecto-img{width:100%;max-width:220px;height:auto;}
+      .tarjeta-cabecera{flex-direction:column;align-items:flex-start;gap:12px;}
+      .tarjeta-img{width:100%;max-width:180px;height:auto;}
     }
   </style>
 </head>
@@ -225,70 +242,80 @@
     <p class="descripcion">
       Un recorrido por los proyectos que definen mi trayectoria: desde la Economía y el voluntariado, hasta el emprendimiento y el liderazgo estudiantil. Cada iniciativa refleja compromiso, creatividad y vocación de servicio.
     </p>
-    <div class="proyectos-list">
-      <!-- Proyecto 1: Emprendimiento de flores -->
-      <div class="proyecto-card">
-        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Emprendimiento de flores" class="proyecto-img" />
-        <div class="proyecto-info">
-          <div class="proyecto-titulo">Emprendimiento Floral – Florece</div>
-          <div class="proyecto-descripcion">Fundador de Florece, un proyecto de venta y diseño de arreglos florales para eventos y ocasiones especiales. Creatividad, gestión y atención personalizada.</div>
-          <div class="proyecto-meta">
+    <div class="tarjetas-apiladas">
+      <!-- Tarjeta 1: Emprendimiento de flores -->
+      <div class="tarjeta-proyecto">
+        <div class="tarjeta-cabecera">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Emprendimiento de flores" class="tarjeta-img" />
+          <div class="tarjeta-titulo">Emprendimiento Floral – Florece</div>
+        </div>
+        <div class="tarjeta-detalle">
+          <div class="tarjeta-descripcion">Fundador de Florece, un proyecto de venta y diseño de arreglos florales para eventos y ocasiones especiales. Creatividad, gestión y atención personalizada.</div>
+          <div class="tarjeta-meta">
             <span>2023 – Actualidad</span>
             <span>Sector: Emprendimiento</span>
           </div>
-          <a href="#" class="proyecto-link">Ver más</a>
+          <a href="#" class="tarjeta-link">Ver más</a>
         </div>
       </div>
-      <!-- Proyecto 2: Bombero voluntario -->
-      <div class="proyecto-card reverse">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bombero voluntario" class="proyecto-img" />
-        <div class="proyecto-info">
-          <div class="proyecto-titulo">Bombero Voluntario</div>
-          <div class="proyecto-descripcion">Miembro activo de la Compañía de Bomberos, participando en operaciones de rescate, prevención y formación comunitaria. Trabajo en equipo y vocación de servicio.</div>
-          <div class="proyecto-meta">
+      <!-- Tarjeta 2: Bombero voluntario -->
+      <div class="tarjeta-proyecto">
+        <div class="tarjeta-cabecera">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bombero voluntario" class="tarjeta-img" />
+          <div class="tarjeta-titulo">Bombero Voluntario</div>
+        </div>
+        <div class="tarjeta-detalle">
+          <div class="tarjeta-descripcion">Miembro activo de la Compañía de Bomberos, participando en operaciones de rescate, prevención y formación comunitaria. Trabajo en equipo y vocación de servicio.</div>
+          <div class="tarjeta-meta">
             <span>2022 – Actualidad</span>
             <span>Sector: Voluntariado</span>
           </div>
-          <a href="#" class="proyecto-link">Ver más</a>
+          <a href="#" class="tarjeta-link">Ver más</a>
         </div>
       </div>
-      <!-- Proyecto 3: Dirigente estudiantil -->
-      <div class="proyecto-card">
-        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80" alt="Dirigente estudiantil" class="proyecto-img" />
-        <div class="proyecto-info">
-          <div class="proyecto-titulo">Liderazgo Estudiantil</div>
-          <div class="proyecto-descripcion">Ex dirigente estudiantil en la facultad de Economía, impulsando proyectos de bienestar, representación y formación académica para estudiantes.</div>
-          <div class="proyecto-meta">
+      <!-- Tarjeta 3: Dirigente estudiantil -->
+      <div class="tarjeta-proyecto">
+        <div class="tarjeta-cabecera">
+          <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80" alt="Dirigente estudiantil" class="tarjeta-img" />
+          <div class="tarjeta-titulo">Liderazgo Estudiantil</div>
+        </div>
+        <div class="tarjeta-detalle">
+          <div class="tarjeta-descripcion">Ex dirigente estudiantil en la facultad de Economía, impulsando proyectos de bienestar, representación y formación académica para estudiantes.</div>
+          <div class="tarjeta-meta">
             <span>2021 – 2023</span>
             <span>Sector: Académico</span>
           </div>
-          <a href="#" class="proyecto-link">Ver más</a>
+          <a href="#" class="tarjeta-link">Ver más</a>
         </div>
       </div>
-      <!-- Proyecto 4: Voluntariado social -->
-      <div class="proyecto-card reverse">
-        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Voluntariado social" class="proyecto-img" />
-        <div class="proyecto-info">
-          <div class="proyecto-titulo">Voluntariado Social</div>
-          <div class="proyecto-descripcion">Participación en iniciativas de apoyo comunitario, educación financiera y acompañamiento a jóvenes en situación vulnerable.</div>
-          <div class="proyecto-meta">
+      <!-- Tarjeta 4: Voluntariado social -->
+      <div class="tarjeta-proyecto">
+        <div class="tarjeta-cabecera">
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Voluntariado social" class="tarjeta-img" />
+          <div class="tarjeta-titulo">Voluntariado Social</div>
+        </div>
+        <div class="tarjeta-detalle">
+          <div class="tarjeta-descripcion">Participación en iniciativas de apoyo comunitario, educación financiera y acompañamiento a jóvenes en situación vulnerable.</div>
+          <div class="tarjeta-meta">
             <span>2020 – Actualidad</span>
             <span>Sector: Social</span>
           </div>
-          <a href="#" class="proyecto-link">Ver más</a>
+          <a href="#" class="tarjeta-link">Ver más</a>
         </div>
       </div>
-      <!-- Proyecto 5: Investigación en Economía -->
-      <div class="proyecto-card">
-        <img src="https://images.unsplash.com/photo-1465101178521-c1a4c8a0f8f9?auto=format&fit=crop&w=400&q=80" alt="Investigación en Economía" class="proyecto-img" />
-        <div class="proyecto-info">
-          <div class="proyecto-titulo">Investigación en Economía</div>
-          <div class="proyecto-descripcion">Desarrollo de estudios y análisis sobre mercados, políticas públicas y desarrollo sostenible. Publicaciones y presentaciones en congresos.</div>
-          <div class="proyecto-meta">
+      <!-- Tarjeta 5: Investigación en Economía -->
+      <div class="tarjeta-proyecto">
+        <div class="tarjeta-cabecera">
+          <img src="https://images.unsplash.com/photo-1465101178521-c1a4c8a0f8f9?auto=format&fit=crop&w=400&q=80" alt="Investigación en Economía" class="tarjeta-img" />
+          <div class="tarjeta-titulo">Investigación en Economía</div>
+        </div>
+        <div class="tarjeta-detalle">
+          <div class="tarjeta-descripcion">Desarrollo de estudios y análisis sobre mercados, políticas públicas y desarrollo sostenible. Publicaciones y presentaciones en congresos.</div>
+          <div class="tarjeta-meta">
             <span>2022 – Actualidad</span>
             <span>Sector: Investigación</span>
           </div>
-          <a href="#" class="proyecto-link">Ver más</a>
+          <a href="#" class="tarjeta-link">Ver más</a>
         </div>
       </div>
     </div>
@@ -314,6 +341,14 @@
         });
       });
     })();
+    // Animación de tarjetas apiladas
+    document.querySelectorAll('.tarjeta-proyecto').forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Evita expandir si se hace click en el enlace
+        if(e.target.classList.contains('tarjeta-link')) return;
+        card.classList.toggle('expanded');
+      });
+    });
   </script>
 </body>
 </html>
