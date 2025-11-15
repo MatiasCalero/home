@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Proyectos personales y profesionales de Matias Calero – Economía, voluntariado, emprendimiento y liderazgo estudiantil." />
+  <title>proyectos – matias calero</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --font-body: 'DM Sans', sans-serif;
+      --font-title: 'Libre Baskerville', serif;
+      --transition: 0.22s ease;
+      --color-text: #111;
+      --accent: #000;
+      --bg: #faf7ef;
+      --header-height: 68px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--font-body);
+      color:var(--color-text);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      padding-top:var(--header-height);
+    }
+    header.header-vertical{
+      position:sticky;
+      top:0;
+      z-index:200;
+      background:var(--bg);
+      border-bottom:1px solid #e7e3da;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      height:var(--header-height);
+    }
+    nav{display:block}
+    .nav-list{
+      display:flex;
+      gap:28px;
+      list-style:none;
+      white-space:nowrap;
+    }
+    .nav-list a{
+      color:var(--color-text);
+      text-decoration:none;
+      font-size:1.15rem;
+      padding-bottom:6px;
+      position:relative;
+      display:inline-block;
+    }
+    .nav-list a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      height:2px;
+      width:0;
+      background:var(--accent);
+      transition:var(--transition);
+    }
+    .nav-list a:hover::after,
+    .nav-list a.active::after{
+      width:100%;
+    }
+    .hamburger{
+      display:none;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+      border:0;
+      background:transparent;
+      padding:6px;
+    }
+    .hamburger span{
+      display:block;
+      width:26px;
+      height:2px;
+      background:#000;
+      border-radius:2px;
+      transition:.25s;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(1){
+      transform:translateY(7px) rotate(45deg);
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(2){
+      opacity:0;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(3){
+      transform:translateY(-7px) rotate(-45deg);
+    }
+    @media(max-width:650px){
+      .hamburger{display:flex}
+      nav{
+        position:absolute;
+        top:var(--header-height);
+        left:0;
+        width:100%;
+        background:var(--bg);
+        border-bottom:1px solid #e7e3da;
+        display:none;
+        flex-direction:column;
+        align-items:center;
+        padding:12px 0;
+        box-shadow:0 4px 14px rgba(0,0,0,0.06);
+      }
+      nav.open{display:flex;}
+      .nav-list{flex-direction:column;gap:14px;}
+    }
+    main{
+      max-width:1000px;
+      margin:0 auto;
+      padding:54px 20px 24px 20px;
+    }
+    h1{
+      font-family:var(--font-title);
+      font-size:clamp(2.2rem,6vw,3.2rem);
+      margin-bottom:18px;
+      text-align:left;
+    }
+    p.descripcion{
+      font-size:1.18rem;
+      line-height:1.55;
+      opacity:.92;
+      margin-bottom:38px;
+      max-width:700px;
+    }
+    .proyectos-list{
+      display:flex;
+      flex-direction:column;
+      gap:38px;
+      margin-bottom:32px;
+    }
+    .proyecto-card{
+      background:#fff;
+      border-radius:22px;
+      box-shadow:0 2px 16px rgba(0,0,0,0.04);
+      padding:32px 26px;
+      display:flex;
+      flex-direction:row;
+      gap:32px;
+      align-items:center;
+      transition:box-shadow .22s;
+    }
+    .proyecto-card.reverse{
+      flex-direction:row-reverse;
+    }
+    .proyecto-img{
+      width:clamp(120px,22vw,180px);
+      height:clamp(120px,22vw,180px);
+      border-radius:18px;
+      object-fit:cover;
+      box-shadow:0 2px 12px rgba(0,0,0,0.07);
+      flex-shrink:0;
+      background:#eee;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .proyecto-info{
+      flex:1;
+      min-width:0;
+    }
+    .proyecto-titulo{
+      font-family:var(--font-title);
+      font-size:1.45rem;
+      margin-bottom:8px;
+      color:var(--accent);
+    }
+    .proyecto-descripcion{
+      font-size:1.08rem;
+      opacity:.92;
+      margin-bottom:10px;
+    }
+    .proyecto-meta{
+      font-size:.98rem;
+      color:#444;
+      margin-top:4px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .proyecto-link{
+      color:var(--accent);
+      text-decoration:underline;
+      font-size:1.08rem;
+      margin-top:8px;
+      font-weight:500;
+      transition:color .18s;
+    }
+    .proyecto-link:hover{
+      color:#444;
+    }
+    @media(max-width:900px){
+      .proyecto-card,.proyecto-card.reverse{flex-direction:column;gap:18px;align-items:flex-start;}
+      .proyecto-img{width:100%;max-width:220px;height:auto;}
+    }
+  </style>
+</head>
+<body>
+  <header class="header-vertical" id="headerScroll">
+    <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="Principal" id="navMenu">
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="proyectos.html" class="active" aria-current="page">Proyectos</a></li>
+        <li><a href="recursos.html">Recursos</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="convocatorias.html">Convocatorias</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>proyectos personales y profesionales</h1>
+    <p class="descripcion">
+      Un recorrido por los proyectos que definen mi trayectoria: desde la Economía y el voluntariado, hasta el emprendimiento y el liderazgo estudiantil. Cada iniciativa refleja compromiso, creatividad y vocación de servicio.
+    </p>
+    <div class="proyectos-list">
+      <!-- Proyecto 1: Emprendimiento de flores -->
+      <div class="proyecto-card">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Emprendimiento de flores" class="proyecto-img" />
+        <div class="proyecto-info">
+          <div class="proyecto-titulo">Emprendimiento Floral – Florece</div>
+          <div class="proyecto-descripcion">Fundador de Florece, un proyecto de venta y diseño de arreglos florales para eventos y ocasiones especiales. Creatividad, gestión y atención personalizada.</div>
+          <div class="proyecto-meta">
+            <span>2023 – Actualidad</span>
+            <span>Sector: Emprendimiento</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver más</a>
+        </div>
+      </div>
+      <!-- Proyecto 2: Bombero voluntario -->
+      <div class="proyecto-card reverse">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bombero voluntario" class="proyecto-img" />
+        <div class="proyecto-info">
+          <div class="proyecto-titulo">Bombero Voluntario</div>
+          <div class="proyecto-descripcion">Miembro activo de la Compañía de Bomberos, participando en operaciones de rescate, prevención y formación comunitaria. Trabajo en equipo y vocación de servicio.</div>
+          <div class="proyecto-meta">
+            <span>2022 – Actualidad</span>
+            <span>Sector: Voluntariado</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver más</a>
+        </div>
+      </div>
+      <!-- Proyecto 3: Dirigente estudiantil -->
+      <div class="proyecto-card">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80" alt="Dirigente estudiantil" class="proyecto-img" />
+        <div class="proyecto-info">
+          <div class="proyecto-titulo">Liderazgo Estudiantil</div>
+          <div class="proyecto-descripcion">Ex dirigente estudiantil en la facultad de Economía, impulsando proyectos de bienestar, representación y formación académica para estudiantes.</div>
+          <div class="proyecto-meta">
+            <span>2021 – 2023</span>
+            <span>Sector: Académico</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver más</a>
+        </div>
+      </div>
+      <!-- Proyecto 4: Voluntariado social -->
+      <div class="proyecto-card reverse">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Voluntariado social" class="proyecto-img" />
+        <div class="proyecto-info">
+          <div class="proyecto-titulo">Voluntariado Social</div>
+          <div class="proyecto-descripcion">Participación en iniciativas de apoyo comunitario, educación financiera y acompañamiento a jóvenes en situación vulnerable.</div>
+          <div class="proyecto-meta">
+            <span>2020 – Actualidad</span>
+            <span>Sector: Social</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver más</a>
+        </div>
+      </div>
+      <!-- Proyecto 5: Investigación en Economía -->
+      <div class="proyecto-card">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a4c8a0f8f9?auto=format&fit=crop&w=400&q=80" alt="Investigación en Economía" class="proyecto-img" />
+        <div class="proyecto-info">
+          <div class="proyecto-titulo">Investigación en Economía</div>
+          <div class="proyecto-descripcion">Desarrollo de estudios y análisis sobre mercados, políticas públicas y desarrollo sostenible. Publicaciones y presentaciones en congresos.</div>
+          <div class="proyecto-meta">
+            <span>2022 – Actualidad</span>
+            <span>Sector: Investigación</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    // nav + hamburger idéntico al home
+    (function(){
+      const hamb = document.getElementById('hamb');
+      const nav = document.getElementById('navMenu');
+      const links = nav.querySelectorAll('a');
+      hamb.addEventListener('click', ()=>{
+        const openNow = nav.classList.toggle('open');
+        hamb.setAttribute('aria-expanded', openNow);
+      });
+      links.forEach(link=>{
+        link.addEventListener('click', ()=>{
+          if(nav.classList.contains('open')){
+            nav.classList.remove('open');
+            hamb.setAttribute('aria-expanded', 'false');
+          }
+          links.forEach(l=>l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
