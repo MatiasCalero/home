@@ -152,7 +152,7 @@
       scroll-behavior:smooth;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
-      scroll-snap-type:x proximity; /* hace la navegación más precisa, pero suave */
+      /* scroll-snap-type eliminado para scroll fluido */
     }
     .contenedor-horizontal::-webkit-scrollbar{display:none}
 
@@ -196,7 +196,7 @@
       flex-direction:column;
       align-items:center;
       text-align:center;
-      scroll-snap-align:center;
+      /* scroll-snap-align eliminado para scroll fluido */
       min-width:clamp(240px, 70vw, 350px);
     }
 
@@ -316,18 +316,16 @@
     const scroller = document.getElementById('grab');
     if(!scroller) return;
 
-    // Siempre permitir scroll con rueda en desktop
+    // Scroll horizontal fluido con la rueda en todos los dispositivos
     scroller.addEventListener('wheel', function(e){
-      // Solo bloquear si no es touch
-      if (window.matchMedia('(pointer: fine)').matches) {
-        if(e.ctrlKey) return;
-        e.preventDefault();
-        scroller.scrollLeft += e.deltaY * 0.7;
-      }
+      // Siempre horizontal, nunca snap por imagen
+      if(e.ctrlKey) return;
+      e.preventDefault();
+      scroller.scrollLeft += e.deltaY * 0.7;
     }, { passive:false });
 
     // Arrastre con mouse en desktop
-    if (window.matchMedia('(pointer: fine)').matches) {
+    if(window.matchMedia('(hover: hover) and (pointer: fine)').matches){
       let isDown = false, startX, scrollStart;
       scroller.addEventListener('mousedown', (e)=>{
         if(e.button!==0) return;
@@ -349,7 +347,7 @@
     }
 
     // Arrastre táctil fluido en mobile/tablet
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    if('ontouchstart' in window || navigator.maxTouchPoints > 0){
       let tStartX=0, tScrollStart=0;
       scroller.addEventListener('touchstart', e=>{
         if(e.touches.length!==1) return;
@@ -359,7 +357,6 @@
       }, { passive:true });
       scroller.addEventListener('touchmove', e=>{
         if(e.touches.length!==1) return;
-        // Evita atascos: no bloquea el scroll vertical si el movimiento es diagonal
         const walk = (e.touches[0].pageX - tStartX) * 1.5;
         scroller.scrollLeft = tScrollStart - walk;
       }, { passive:true });
