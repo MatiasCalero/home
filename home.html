@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sitio oficial de Matias Calero – proyectos, recursos, galería y convocatorias." />
+  <title>matias calero</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== VARIABLES Y TEMA ===== */
+    :root {
+      /* Tema Claro (Default) */
+      --font-body: 'DM Sans', sans-serif;
+      --font-title: 'Libre Baskerville', serif;
+      --transition-fast: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-smooth: 0.4s ease;
+      
+      --color-text: #1a1a1a;
+      --color-subtext: #4a4a4a;
+      --accent: #000000;
+      --bg: #f2eddf; /* hueso god */
+      --header-bg: rgba(242, 237, 223, 0.95);
+      --border-color: #e7e3da;
+      --shadow: rgba(0, 0, 0, 0.08);
+      
+      /* AUMENTADO: Altura de cabecera */
+      --header-height: 90px;
+    }
+
+    [data-theme="dark"] {
+      /* Tema Oscuro (Elegante) */
+      --color-text: #eaeaea;
+      --color-subtext: #a0a0a0;
+      --accent: #ffffff;
+      --bg: #121212; /* Gris profundo, no negro absoluto */
+      --header-bg: rgba(18, 18, 18, 0.95);
+      --border-color: #2a2a2a;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+
+    body{
+      font-family:var(--font-body);
+      color:var(--color-text);
+      background:var(--bg);
+      transition: background var(--transition-smooth), color var(--transition-smooth);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header.header-vertical{
+      position:fixed;
+      top:0;
+      left: 0;
+      width: 100%;
+      z-index:200;
+      background:var(--header-bg);
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--border-color);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 32px; 
+      height:var(--header-height);
+      transition: background var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    /* LOGO MC */
+    .logo-mc {
+      font-family: var(--font-title);
+      font-size: 2.2rem; 
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: -1.5px;
+      z-index: 202;
+      transition: transform var(--transition-fast);
+    }
+    .logo-mc:hover {
+      transform: scale(1.05);
+    }
+
+    /* CONTENEDOR DERECHO (NAV + TOOLS) */
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    nav{display:block}
+
+    .nav-list{
+      display:flex;
+      gap:32px;
+      list-style:none;
+      white-space:nowrap;
+    }
+
+    .nav-list a{
+      color:var(--color-text);
+      text-decoration:none;
+      font-size:1.15rem; 
+      font-weight: 500;
+      padding-bottom:6px;
+      position:relative;
+      display:inline-block;
+      opacity: 0.8;
+      transition: opacity var(--transition-fast);
+    }
+
+    .nav-list a:hover, .nav-list a.active{
+      opacity: 1;
+    }
+
+    .nav-list a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      height:2px;
+      width:0;
+      background:var(--accent);
+      transition:var(--transition-fast);
+    }
+
+    .nav-list a:hover::after,
+    .nav-list a.active::after{
+      width:100%;
+    }
+
+    /* ===== THEME SWITCH ===== */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-fast), color var(--transition-smooth);
+    }
+    .theme-toggle:hover {
+      transform: rotate(20deg) scale(1.15);
+    }
+    .theme-toggle svg {
+      width: 26px; 
+      height: 26px;
+      fill: currentColor;
+    }
+    /* Ocultar icono según tema */
+    [data-theme="light"] .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun { display: none; }
+
+    /* ===== HAMBURGER ===== */
+    .hamburger{
+      display:none;
+      flex-direction:column;
+      gap:6px;
+      cursor:pointer;
+      border:0;
+      background:transparent;
+      padding:6px;
+      z-index: 202;
+    }
+
+    .hamburger span{
+      display:block;
+      width:28px;
+      height:3px;
+      background:var(--color-text);
+      border-radius:3px;
+      transition:.25s;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(1){ transform:translateY(9px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-9px) rotate(-45deg); }
+
+    @media(max-width:850px){
+      .hamburger{display:flex}
+      .nav-list { display: none; } 
+
+      nav{
+        position:absolute;
+        top:var(--header-height);
+        left:0;
+        width:100%;
+        background:var(--bg);
+        border-bottom:1px solid var(--border-color);
+        display:none;
+        flex-direction:column;
+        align-items:center;
+        padding:30px 0;
+        box-shadow:0 10px 30px var(--shadow);
+      }
+
+      nav.open{
+        display:flex;
+        animation: slideDown 0.3s ease forwards;
+      }
+      
+      nav.open .nav-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+      
+      .nav-list a {
+        font-size: 1.4rem;
+      }
+
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    /* ===== SCROLLER HORIZONTAL ===== */
+    .contenedor-horizontal{
+      display:flex;
+      align-items:center;
+      gap:60px;
+      padding:0 60px;
+      height:100vh; 
+      padding-top: var(--header-height); 
+      overflow-x:auto;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      /* scroll-snap-type eliminado para scroll fluido */
+    }
+    .contenedor-horizontal::-webkit-scrollbar{display:none}
+
+    /* ===== CONTENIDO & ANIMACIONES ===== */
+    .elemento{
+      flex-shrink:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      min-width:clamp(320px, 70vw, 650px); 
+      opacity: 0; 
+      animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Delay progresivo */
+    .elemento:nth-child(1) { animation-delay: 0.1s; }
+    .elemento:nth-child(2) { animation-delay: 0.2s; }
+    .elemento:nth-child(3) { animation-delay: 0.3s; }
+    .elemento:nth-child(4) { animation-delay: 0.4s; }
+
+    .title{
+      font-family:var(--font-title);
+      font-size:clamp(4rem, 12vw, 8.5rem); 
+      line-height:0.95;
+      color: var(--color-text);
+      text-align:center;
+      white-space:normal;
+      max-width:92vw;
+      transition: color var(--transition-smooth);
+    }
+
+    .subinfo{
+      display:inline-flex;
+      align-items:center;
+      gap:16px;
+      margin-top:32px;
+      font-size:clamp(1.2rem, 2.5vw, 1.5rem); 
+      color: var(--color-subtext);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    .arrow svg{
+      width:26px;
+      height:auto;
+      fill: var(--color-text);
+      animation:arrowmove 2s infinite ease-in-out;
+    }
+
+    @keyframes arrowmove{
+      0%, 100%{transform:translateX(0);opacity:0.5}
+      50%{transform:translateX(12px);opacity:1}
+    }
+
+    /* IMAGENES */
+    .img-wrapper {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 15px 45px -10px var(--shadow);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      display: flex; 
+      justify-content: center;
+    }
+
+    .img-wrapper:hover {
+      transform: scale(1.015);
+      box-shadow: 0 25px 60px -12px var(--shadow);
+    }
+
+    img{
+      width: auto;
+      height: auto;
+      max-height: 82vh; 
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* FINAL SECTION */
+    .thanks{
+      font-family:var(--font-title);
+      font-size:clamp(2.5rem, 6vw, 4rem);
+      margin-bottom:24px;
+      color: var(--color-text);
+    }
+
+    .line{
+      width:80px;
+      height:3px;
+      background:var(--accent);
+      margin:24px auto;
+      border-radius:3px;
+      opacity: 0.6;
+    }
+
+    .sociales{display:flex;gap:32px;justify-content:center;margin-top:16px}
+
+    .sociales a{
+      text-decoration:none;
+      color:var(--color-subtext);
+      font-weight:500;
+      font-size: 1.5rem; 
+      position:relative;
+      transition: color var(--transition-fast);
+    }
+    
+    .sociales a:hover {
+      color: var(--color-text);
+    }
+
+    .sociales a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:var(--accent);
+      transition:var(--transition-fast);
+    }
+    .sociales a:hover::after{width:100%}
+
+    /* DRAGGING STATE */
+    .contenedor-horizontal.dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+    .contenedor-horizontal.dragging .img-wrapper {
+      transform: scale(0.98); 
+      transition: transform 0.2s;
+    }
+
+    /* Y si algo falla, fue culpa del maldito scroll. */
+  </style>
+</head>
+
+<body>
+
+<header class="header-vertical" id="headerScroll">
+  <a href="#home" class="logo-mc">mc</a>
+
+  <div class="header-controls">
+    <nav aria-label="Principal" id="navMenu">
+      <ul class="nav-list">
+        <li><a href="#home" class="active" aria-current="page">Inicio</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="recursos.html">Recursos</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#convocatorias">Convocatorias</a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+         <path d="M12 4V2M12 20V22M4 12H2M22 12H20M17.65 6.35L19.06 4.94M6.34 17.66L4.93 19.07M17.65 17.66L19.06 19.07M6.34 6.35L4.93 4.94M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+      </svg>
+    </button>
+
+    <button class="hamburger" id="hamb" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="contenedor-horizontal" id="grab" aria-label="Galería horizontal">
+
+  <div class="elemento" id="home">
+    <h1 class="title">matias calero</h1>
+    <p class="subinfo">
+      Desliza a la derecha
+      <span class="arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
+        </svg>
+      </span>
+    </p>
+  </div>
+
+  <div class="elemento" id="proyectos"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/j7rdARW.png" alt="valor de más"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/O73VhqQ.png" alt="nube gris"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/tUqr0gb.png" alt="culpa"></div></div>
+  <div class="elemento" id="galeria"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/exnidyf.png" alt="violento"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/uNmx6cj.png" alt="vuelve corazón"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/m25PItU.png" alt="C"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/TcKPpZN.png" alt="arcoiris"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/duw1qyr.png" alt="no hay problema"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/uwb4Myj.png" alt="nadie piensa en ti mejor que yo"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/0XnaiiU.png" alt="loop"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/OXA7hpR.png" alt="tiempo"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/MMKd1dU.png" alt="sueños"></div></div>
+  <div class="elemento"><div class="img-wrapper"><img loading="lazy" src="https://i.imgur.com/LqFjZbK.png" alt="sueños 2"></div></div>
+
+  <div class="elemento" id="convocatorias">
+    <p class="thanks">gracias por estar aquí.</p>
+    <div class="line"></div>
+    <div class="sociales">
+      <a href="https://www.instagram.com/matias_calero/" target="_blank">instagram</a>
+      <a href="https://www.youtube.com/@matias_calero" target="_blank">youtube</a>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // 1. GESTIÓN DEL TEMA (LIGHT/DARK)
+  (function(){
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Cargar preferencia guardada
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  })();
+
+  // 2. SCROLL HORIZONTAL (Optimizado)
+  (function(){
+    const scroller = document.getElementById('grab');
+    if(!scroller) return;
+
+    scroller.addEventListener('wheel', function(e){
+      if(e.ctrlKey) return;
+      e.preventDefault();
+      scroller.scrollLeft += e.deltaY * 0.8; 
+    }, { passive:false });
+
+    if(window.matchMedia('(hover: hover) and (pointer: fine)').matches){
+      let isDown = false, startX, scrollStart;
+      
+      scroller.addEventListener('mousedown', (e)=>{
+        if(e.button!==0) return;
+        isDown = true;
+        startX = e.pageX;
+        scrollStart = scroller.scrollLeft;
+        scroller.classList.add('dragging');
+        e.preventDefault(); 
+      });
+
+      window.addEventListener('mouseup', ()=>{
+        isDown = false;
+        scroller.classList.remove('dragging');
+      });
+
+      window.addEventListener('mousemove', (e)=>{
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const walk = (x - startX) * 1.5;
+        scroller.scrollLeft = scrollStart - walk;
+      });
+    }
+  })();
+
+  // 3. MENÚ HAMBURGER
+  (function(){
+    const hamb = document.getElementById('hamb');
+    const nav = document.getElementById('navMenu');
+    const links = nav.querySelectorAll('a');
+
+    hamb.addEventListener('click', ()=>{
+      const openNow = nav.classList.toggle('open');
+      hamb.setAttribute('aria-expanded', openNow);
+    });
+
+    links.forEach(link=>{
+      link.addEventListener('click', ()=>{
+        if(window.innerWidth <= 850) {
+          nav.classList.remove('open');
+          hamb.setAttribute('aria-expanded', 'false');
+        }
+        links.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
