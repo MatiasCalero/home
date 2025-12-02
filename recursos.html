@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Recursos de Economía - Matias Calero" />
+    <title>Recursos - matias calero</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Libre+Baskerville:wght@700&display=swap"
+        rel="stylesheet" />
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <style>
+        /* ===== VARIABLES (Sincronizadas con Home) ===== */
+        :root {
+            --font-body: 'DM Sans', sans-serif;
+            --font-title: 'Libre Baskerville', serif;
+            --transition-smooth: 0.4s ease;
+            --transition-fast: 0.25s ease;
+
+            --color-text: #1a1a1a;
+            --color-subtext: #4a4a4a;
+            --accent: #000000;
+            --bg: #f2eddf;
+            --header-bg: rgba(242, 237, 223, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --border-color: #e7e3da;
+            --shadow: rgba(0, 0, 0, 0.08);
+
+            --header-height: 90px;
+
+            /* Colores Infografía */
+            --info-red: #da2c25;
+            --info-black: #1a1a1a;
+        }
+
+        [data-theme="dark"] {
+            --color-text: #eaeaea;
+            --color-subtext: #a0a0a0;
+            --accent: #ffffff;
+            --bg: #121212;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --info-black: #2d2d2d;
+            /* Más claro para contraste en dark mode */
+        }
+
+        /* ===== BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--bg);
+            transition: background var(--transition-smooth), color var(--transition-smooth);
+            padding-top: var(--header-height);
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER (Igual a Home) ===== */
+        header.header-vertical {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 200;
+            background: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: var(--header-height);
+            transition: background var(--transition-smooth), border-color var(--transition-smooth);
+        }
+
+        .logo-mc {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -1.5px;
+            transition: transform var(--transition-fast);
+        }
+
+        .logo-mc:hover {
+            transform: scale(1.05);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-list a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.8;
+            transition: opacity var(--transition-fast);
+        }
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            opacity: 1;
+        }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--accent);
+            transition: var(--transition-fast);
+        }
+
+        .nav-list a:hover::after,
+        .nav-list a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+
+        [data-theme="light"] .icon-moon {
+            display: none;
+        }
+
+        [data-theme="dark"] .icon-sun {
+            display: none;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--color-text);
+            border-radius: 3px;
+            transition: 0.25s;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 80px 24px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* SUBMENU */
+        .submenu {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+
+        .pill {
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            border: 1px solid transparent;
+        }
+
+        .pill.active {
+            background: var(--color-text);
+            color: var(--bg);
+        }
+
+        .pill.inactive {
+            color: var(--color-subtext);
+            border: 1px solid var(--border-color);
+        }
+
+        .pill.inactive:hover {
+            border-color: var(--color-text);
+            color: var(--color-text);
+        }
+
+        /* ESQUEMA INTERACTIVO DE ECONOMÍA */
+        .schema-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            min-height: 380px;
+            /* Altura para contener info */
+        }
+
+        .schema-card {
+            flex: 1;
+            position: relative;
+            border-radius: 16px;
+            padding: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: flex 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Colores Específicos */
+        .schema-card.positiva {
+            background: var(--info-red);
+            box-shadow: 0 10px 30px rgba(218, 44, 37, 0.3);
+        }
+
+        .schema-card.normativa {
+            background: var(--info-black);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estado inicial (cerrado) */
+        .schema-content-hidden {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            margin-top: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
+        }
+
+        .schema-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .schema-subtitle {
+            font-family: var(--font-body);
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .tap-hint {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* Estado Activo (Hover o Click) */
+        .schema-card:hover,
+        .schema-card.expanded {
+            flex: 2;
+            /* Crece */
+        }
+
+        .schema-card:hover .schema-content-hidden,
+        .schema-card.expanded .schema-content-hidden {
+            max-height: 500px;
+            /* Espacio suficiente */
+            opacity: 1;
+            margin-top: 24px;
+        }
+
+        .schema-card:hover .tap-hint,
+        .schema-card.expanded .tap-hint {
+            display: none;
+        }
+
+        /* Listas dentro del esquema */
+        .schema-content-hidden ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .schema-content-hidden li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .schema-content-hidden li:last-child {
+            border-bottom: none;
+        }
+
+        .schema-content-hidden strong {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.1rem;
+        }
+
+        /* INTRO TEXT */
+        .intro-text {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            line-height: 1.4;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            text-align: center;
+            color: var(--color-text);
+            font-weight: 400;
+        }
+
+        /* GRID RECURSOS */
+        .recursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .recurso-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recurso-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .recurso-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            /* Asegura que la imagen llene el espacio */
+            object-position: center;
+            background: #fff;
+            /* Fondo blanco por si son logos transparentes */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .recurso-info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .recurso-info h2 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--color-text);
+        }
+
+        .recurso-info p {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 850px) {
+            .nav-list {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .schema-container {
+                flex-direction: column;
+            }
+
+            .schema-card {
+                min-height: 200px;
+            }
+
+            /* Mobile Menu */
+            nav.mobile-open {
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                box-shadow: 0 10px 30px var(--shadow);
+            }
+
+            nav.mobile-open .nav-list {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav.mobile-open .nav-list a {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-vertical">
+        <a href="home.html" class="logo-mc">mc</a>
+
+        <div class="header-controls">
+            <nav id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="home.html">Inicio</a></li>
+                    <li><a href="home.html#proyectos">Proyectos</a></li>
+                    <li><a href="#" class="active">Recursos</a></li>
+                    <li><a href="home.html#galeria">Galería</a></li>
+                </ul>
+            </nav>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 4V2M12 20V22M4 12H2M22 12H20M17.65 6.35L19.06 4.94M6.34 17.66L4.93 19.07M17.65 17.66L19.06 19.07M6.34 6.35L4.93 4.94M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+                </svg>
+            </button>
+
+            <button class="hamburger" id="hamb"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="submenu">
+            <a href="#" class="pill active">Economía</a>
+            <a href="#" class="pill inactive">Otros</a>
+        </div>
+
+        <div class="schema-container">
+
+            <div class="schema-card positiva" onclick="toggleCard(this)">
+                <h2 class="schema-title">Positiva</h2>
+                <p class="schema-subtitle">Economía Descriptiva y Teoría</p>
+                <span class="tap-hint">Ver detalles +</span>
+
+                <div class="schema-content-hidden">
+                    <ul>
+                        <li>
+                            <strong>Economía Descriptiva</strong>
+                            Recoge información para elaborar bases de datos (INEI, MEF, SUNAT, BCRP).
+                        </li>
+                        <li>
+                            <strong>Teoría Económica</strong>
+                            Analiza datos y utiliza teorías para comprender la realidad.
+                            <br><em>Microeconomía:</em> Consumidores y empresas.
+                            <br><em>Macroeconomía:</em> Variables agregadas (PBI, Inflación).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="schema-card normativa" onclick="toggleCard(this)">
+                <h2 class="schema-title">Normativa</h2>
+                <p class="schema-subtitle">Juicio de Valor y Política</p>
+                <span class="tap-hint">Ver detalles +</span>
+
+                <div class="schema-content-hidden">
+                    <ul>
+                        <li>
+                            <strong>Juicio de Valor</strong>
+                            Subjetiva. Propone cómo <em>deberían</em> ser los fenómenos económicos.
+                        </li>
+                        <li>
+                            <strong>Política Económica</strong>
+                            Medidas del Estado para lograr objetivos.
+                            <br><em>Monetaria (BCRP):</em> Estabilidad, liquidez.
+                            <br><em>Fiscal (MEF):</em> Impuestos, gasto público.
+                        </li>
+                    </ul>
+                    <div style="margin-top:15px; font-size:0.8em; opacity:0.6;">* División atribuida comúnmente a J.N.
+                        Keynes.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="intro-text">
+            Una selección clara y directa de materiales esenciales para empezar en economía: libros, guías y
+            repositorios confiables. Todo gratuito, accesible y pensado para quienes quieren aprender sin complicarse.
+        </p>
+
+        <div class="recursos-grid">
+
+            <div class="recurso-item">
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank">
+                    <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png"
+                        alt="UNALM Economía" loading="lazy" />
+                </a>
+                <div class="recurso-info">
+                    <h2>UNALM</h2>
+                    <p>Economía todos los ciclos. Currícula 2019.<br><br>
+                        <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                            target="_blank"
+                            style="text-decoration:underline;color:var(--color-text); font-weight:500;">Ver recursos
+                            →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="recurso-item">
+                <a href="#">
+                    <img src="https://github.com/MatiasCalero/home/blob/main/images/unmsm.png?raw=true" alt="UNMSM"
+                        loading="lazy" />
+                </a>
+                <div class="recurso-info">
+                    <h2>UNMSM</h2>
+                    <p>Materiales de economía y recursos académicos de la Universidad Nacional Mayor de San
+                        Marcos.<br><br>
+                        <a href="#" style="text-decoration:underline;color:var(--color-text); font-weight:500;">Ver
+                            recursos →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="recurso-item">
+                <a href="#">
+                    <img src="https://github.com/MatiasCalero/home/blob/main/images/pucp.png?raw=true" alt="PUCP"
+                        loading="lazy" />
+                </a>
+                <div class="recurso-info">
+                    <h2>PUCP</h2>
+                    <p>Guías, libros y repositorios de la Pontificia Universidad Católica del Perú.<br><br>
+                        <a href="#" style="text-decoration:underline;color:var(--color-text); font-weight:500;">Ver
+                            recursos →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="recurso-item">
+                <a href="#">
+                    <img src="https://github.com/MatiasCalero/home/blob/main/images/uni.png?raw=true" alt="UNI"
+                        loading="lazy" />
+                </a>
+                <div class="recurso-info">
+                    <h2>UNI</h2>
+                    <p>Material académico y recursos de la Universidad Nacional de Ingeniería.<br><br>
+                        <a href="#" style="text-decoration:underline;color:var(--color-text); font-weight:500;">Ver
+                            recursos →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="recurso-item">
+                <a href="#">
+                    <img src="https://github.com/MatiasCalero/home/blob/main/images/up.png?raw=true"
+                        alt="Universidad Pacífico" loading="lazy" />
+                </a>
+                <div class="recurso-info">
+                    <h2>Universidad Pacífico</h2>
+                    <p>Recursos y materiales de economía de la Universidad Pacífico.<br><br>
+                        <a href="#" style="text-decoration:underline;color:var(--color-text); font-weight:500;">Ver
+                            recursos →</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        // 1. Theme Logic
+        const toggle = document.getElementById('themeToggle');
+        toggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+
+        // 2. Mobile Menu Logic
+        const hamb = document.getElementById('hamb');
+        const nav = document.getElementById('navMenu');
+        hamb.addEventListener('click', () => {
+            nav.classList.toggle('mobile-open');
+        });
+
+        // 3. Interactive Schema Logic
+        function toggleCard(element) {
+            // Si ya está expandido, lo cerramos
+            if (element.classList.contains('expanded')) {
+                element.classList.remove('expanded');
+            } else {
+                // Cerramos otros primero para efecto acordeón
+                document.querySelectorAll('.schema-card').forEach(el => el.classList.remove('expanded'));
+                // Expandimos el clickeado
+                element.classList.add('expanded');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
