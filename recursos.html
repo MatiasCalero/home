@@ -44,6 +44,10 @@
             /* Colores Infografía */
             --info-red: #da2c25;
             --info-black: #1a1a1a;
+            
+            /* Color Bibliografía Card */
+            --biblio-card-bg: #fcfaf4;
+            --tag-bg: #eaddcf;
         }
 
         [data-theme="dark"] {
@@ -56,6 +60,9 @@
             --border-color: #2a2a2a;
             --shadow: rgba(0, 0, 0, 0.4);
             --info-black: #2d2d2d;
+            
+            --biblio-card-bg: rgba(255, 255, 255, 0.05);
+            --tag-bg: #333;
         }
 
         html { scroll-behavior: smooth; }
@@ -206,7 +213,7 @@
         }
         .btn-branch:hover { opacity: 0.8; }
 
-        /* ===== GRID RECURSOS ===== */
+        /* ===== GRID RECURSOS (IMÁGENES MEJORADAS) ===== */
         .intro-text {
             font-size: 1.1rem; line-height: 1.4; text-align: center; max-width: 800px;
             margin: 0 auto 40px auto; color: var(--color-text);
@@ -222,25 +229,89 @@
         .recurso-item:hover {
             transform: translateY(-5px); box-shadow: 0 10px 25px var(--shadow); border-color: var(--info-red);
         }
+        
+        /* AQUÍ ESTÁ EL CAMBIO PARA LAS IMÁGENES */
         .recurso-item img {
-            width: 100%; height: 180px; object-fit: contain; padding: 20px;
-            background: #fff; border-bottom: 1px solid var(--border-color);
+            width: 100%;
+            height: 200px; /* Altura fija y mayor para impacto */
+            object-fit: cover; /* Llena el espacio sin bordes blancos */
+            object-position: center;
+            padding: 0; /* SIN PADDING */
+            margin: 0;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+            display: block;
         }
+
         .recurso-info { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .recurso-info h2 { font-family: var(--font-title); font-size: 1.4rem; margin-bottom: 10px; }
         .recurso-info p { font-size: 1rem; color: var(--color-subtext); line-height: 1.5; margin-bottom: 15px; }
         .recurso-link { text-decoration: underline; color: var(--color-text); font-weight: 500; }
 
-        /* ===== BIBLIOGRAFÍA ===== */
+        /* ===== BIBLIOGRAFÍA (ESTILO TARJETA) ===== */
         .biblio-section { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color); }
         .biblio-title { font-family: var(--font-title); font-size: 2rem; margin-bottom: 30px; text-align: center; }
         .biblio-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        
         .biblio-col h4 { 
             font-size: 1.2rem; margin-bottom: 20px; padding-bottom: 10px; 
             border-bottom: 2px solid var(--color-text); display: inline-block;
         }
-        .biblio-list li { margin-bottom: 10px; color: var(--color-subtext); }
-        .biblio-list strong { color: var(--color-text); }
+
+        .biblio-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .biblio-card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--biblio-card-bg); 
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .biblio-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--color-text);
+        }
+
+        .biblio-book-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+
+        .biblio-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-body);
+        }
+
+        .biblio-author {
+            font-size: 0.9rem;
+            color: var(--color-subtext);
+        }
+
+        .biblio-tag {
+            background-color: var(--tag-bg);
+            color: var(--color-subtext);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
 
         /* ===== FOOTER CREATIVO & RETRO BTN ===== */
         .creative-footer {
@@ -274,7 +345,7 @@
             border: 2px solid #000000;
             border-radius: 8px;
             text-decoration: none;
-            box-shadow: 5px 5px 0px #000000; /* Sombra dura negra */
+            box-shadow: 5px 5px 0px #000000; 
             transition: all 0.15s ease;
         }
 
@@ -288,7 +359,6 @@
             box-shadow: 2px 2px 0px #000000;
         }
         
-        /* Ajuste para Dark Mode del botón */
         [data-theme="dark"] .retro-btn {
             background-color: #1a1a1a;
             color: #ffffff;
@@ -495,61 +565,73 @@
         <div class="biblio-section" id="bibliografia">
             <h2 class="biblio-title">Bibliografía</h2>
             <div class="biblio-cols">
+                
                 <div class="biblio-col" id="biblio-micro">
                     <h4>Microeconomía</h4>
                     <ul class="biblio-list">
                         <li>
-                            <a href="https://archive.org/details/mankiwprincipiosdeeconomia7maedicion2017">
-                                <strong>Principios de Microeconomía</strong>
-                                <span style="font-size:0.9em; opacity:0.7;">Mankiw, G.</span>
-                                <span class="tag">Escencial</span>
+                            <a href="https://archive.org/details/mankiwprincipiosdeeconomia7maedicion2017" class="biblio-card" target="_blank">
+                                <span class="biblio-book-title">Principios de Microeconomía</span>
+                                <div class="biblio-meta">
+                                    <span class="biblio-author">Mankiw, G.</span>
+                                    <span class="biblio-tag">Esencial</span>
+                                </div>
                             </a>
                         </li>
-                        
                         <li>
-                            <a href="https://danielmorochoruiz.files.wordpress.com/2017/01/microeconomia_-_pyndick.pdf">
-                                <strong>Microeconomía 8va Ed.</strong>
-                                <span style="font-size:0.9em; opacity:0.7;">Pindyck & Rubinfeld</span>
-                                <span class="tag">Intermedio</span>
+                            <a href="https://danielmorochoruiz.files.wordpress.com/2017/01/microeconomia_-_pyndick.pdf" class="biblio-card" target="_blank">
+                                <span class="biblio-book-title">Microeconomía 8va Ed.</span>
+                                <div class="biblio-meta">
+                                    <span class="biblio-author">Pindyck & Rubinfeld</span>
+                                    <span class="biblio-tag">Intermedio</span>
+                                </div>
                             </a>
                         </li>
-                        
                         <li>
-                            <a href="https://drive.google.com/file/d/14k5_RJCDegIKiRnUzQcrfe1oADdBpua0/view?usp=sharing">
-                                <strong>Microeconomía Intermedia</strong>
-                                <span style="font-size:0.9em; opacity:0.7;">Varian, H.</span>
-                                <span class="tag">Intermedio</span>
+                            <a href="https://drive.google.com/file/d/14k5_RJCDegIKiRnUzQcrfe1oADdBpua0/view?usp=sharing" class="biblio-card" target="_blank">
+                                <span class="biblio-book-title">Microeconomía Intermedia</span>
+                                <div class="biblio-meta">
+                                    <span class="biblio-author">Varian, H.</span>
+                                    <span class="biblio-tag">Intermedio</span>
+                                </div>
                             </a>
                         </li>
                     </ul>
                 </div>
+
                 <div class="biblio-col" id="biblio-macro">
                     <h4>Macroeconomía</h4>
                     <ul class="biblio-list">
                         <li>
-                            <a href="https://drive.google.com/file/d/1hoYosV3EyfosbnEdeBr4Lo_m5zA1RRHV/view?usp=sharing">
-                                <strong>Macroeconomía</strong>
-                                <span style="font-size:0.9em; opacity:0.7;">Blanchard</span>
-                                <span class="tag">Escencial</span>
+                            <a href="https://drive.google.com/file/d/1hoYosV3EyfosbnEdeBr4Lo_m5zA1RRHV/view?usp=sharing" class="biblio-card" target="_blank">
+                                <span class="biblio-book-title">Macroeconomía</span>
+                                <div class="biblio-meta">
+                                    <span class="biblio-author">Blanchard</span>
+                                    <span class="biblio-tag">Esencial</span>
+                                </div>
                             </a>
                         </li>
                         <li>
-                            <a href="https://drive.google.com/file/d/1eJFj2uTLkfDFcxmhoWqy6jDY-AUmoPZB/view?usp=sharing">
-                                <strong>Macroeconomía</strong>
-                                <span style="font-size:0.9em; opacity:0.7;">Waldo Mendoza</span>
-                                <span class="tag">Intermedio</span>
+                            <a href="https://drive.google.com/file/d/1eJFj2uTLkfDFcxmhoWqy6jDY-AUmoPZB/view?usp=sharing" class="biblio-card" target="_blank">
+                                <span class="biblio-book-title">Macroeconomía</span>
+                                <div class="biblio-meta">
+                                    <span class="biblio-author">Waldo Mendoza</span>
+                                    <span class="biblio-tag">Intermedio</span>
+                                </div>
                             </a>
                         </li>
-                    
                         <li>
-                            <a href="http://www.ricardopanza.com.ar/files/macro1/Macroeconomia_en_la_economia_global_Larrain_Sachs_2da_Edi_pdf.pdf">
-                                <strong>Macroeconomía en la Economía Global</strong>
-                                <span style="font-size:0.9em; opacity:0.7;">Sachs & Larrain</span>
-                                <span class="tag">Intermedio</span>
+                            <a href="http://www.ricardopanza.com.ar/files/macro1/Macroeconomia_en_la_economia_global_Larrain_Sachs_2da_Edi_pdf.pdf" class="biblio-card" target="_blank">
+                                <span class="biblio-book-title">Macroeconomía Global</span>
+                                <div class="biblio-meta">
+                                    <span class="biblio-author">Sachs & Larrain</span>
+                                    <span class="biblio-tag">Intermedio</span>
+                                </div>
                             </a>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
 
@@ -608,6 +690,3 @@
 
 </body>
 </html>
-
-
-
