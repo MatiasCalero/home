@@ -7,8 +7,9 @@
         href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Recursos de Economía - Matias Calero" />
-    <title>Recursos de Economía - Matias Calero</title>
+    <title>Recursos de Economía</title>
 
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -44,7 +45,7 @@
             /* Colores Infografía */
             --info-red: #da2c25;
             --info-black: #1a1a1a;
-            
+
             /* Color Bibliografía Card */
             --biblio-card-bg: #fcfaf4;
             --tag-bg: #eaddcf;
@@ -60,15 +61,21 @@
             --border-color: #2a2a2a;
             --shadow: rgba(0, 0, 0, 0.4);
             --info-black: #2d2d2d;
-            
+
             --biblio-card-bg: rgba(255, 255, 255, 0.05);
             --tag-bg: #333;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         /* ===== BASE ===== */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: var(--font-body);
@@ -84,178 +91,657 @@
 
         /* ===== HEADER ===== */
         header.header-vertical {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 200;
-            background: var(--header-bg); backdrop-filter: blur(8px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 200;
+            background: var(--header-bg);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 32px; height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: var(--header-height);
             transition: background var(--transition-smooth), border-color var(--transition-smooth);
         }
 
         .logo-mc {
-            font-family: var(--font-title); font-size: 2.2rem; font-weight: 700;
-            color: var(--color-text); text-decoration: none; letter-spacing: -1.5px;
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -1.5px;
             transition: transform var(--transition-fast);
         }
-        .logo-mc:hover { transform: scale(1.05); }
 
-        .header-controls { display: flex; align-items: center; gap: 36px; }
-        .nav-list { display: flex; gap: 32px; list-style: none; }
-        
+        .logo-mc:hover {
+            transform: scale(1.05);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
         .nav-list a {
-            color: var(--color-text); text-decoration: none; font-size: 1.15rem;
-            font-weight: 500; position: relative; opacity: 0.8;
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.8;
             transition: opacity var(--transition-fast);
         }
-        .nav-list a:hover, .nav-list a.active { opacity: 1; }
-        .nav-list a::after {
-            content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
-            background: var(--accent); transition: var(--transition-fast);
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            opacity: 1;
         }
-        .nav-list a:hover::after, .nav-list a.active::after { width: 100%; }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--accent);
+            transition: var(--transition-fast);
+        }
+
+        .nav-list a:hover::after,
+        .nav-list a.active::after {
+            width: 100%;
+        }
 
         /* Theme Toggle & Hamburger */
-        .theme-toggle { background: none; border: none; cursor: pointer; color: var(--color-text); padding: 4px; transition: transform 0.2s; }
-        .theme-toggle:hover { transform: rotate(15deg) scale(1.1); }
-        .theme-toggle svg { width: 26px; height: 26px; fill: currentColor; }
-        [data-theme="light"] .icon-moon { display: none; }
-        [data-theme="dark"] .icon-sun { display: none; }
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+            padding: 4px;
+            transition: transform 0.2s;
+        }
 
-        .hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
-        .hamburger span { width: 28px; height: 3px; background: var(--color-text); border-radius: 3px; transition: 0.25s; }
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+
+        [data-theme="light"] .icon-moon {
+            display: none;
+        }
+
+        [data-theme="dark"] .icon-sun {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--color-text);
+            border-radius: 3px;
+            transition: 0.25s;
+        }
 
         /* ===== MAIN CONTENT ===== */
         main {
-            max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px;
-            opacity: 0; animation: fadeIn 0.8s ease forwards;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px 80px 24px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
             flex: 1;
         }
 
-        @keyframes fadeIn { to { opacity: 1; } }
-
-        /* SUBMENU */
-        .submenu { display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
-        .pill {
-            padding: 8px 24px; border-radius: 50px; font-size: 0.95rem; font-weight: 500;
-            text-decoration: none; transition: all var(--transition-fast);
-            border: 1px solid transparent;
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
-        .pill.active { background: var(--color-text); color: var(--bg); }
-        .pill.inactive { color: var(--color-subtext); border: 1px solid var(--border-color); }
-        .pill.inactive:hover { border-color: var(--color-text); color: var(--color-text); }
+
+        /* ===== TAB SYSTEM ===== */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 48px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-subtext);
+            padding: 12px 32px;
+            position: relative;
+            transition: color var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-text);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+        }
+
+        .tab-btn.active {
+            color: var(--color-text);
+        }
+
+        .tab-btn.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab-btn:hover {
+            color: var(--color-text);
+        }
+
+        /* TAB PANELS */
+        .tab-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: tabFadeIn 0.4s ease forwards;
+        }
+
+        @keyframes tabFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== UNALM TAB ===== */
+        .unalm-hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .unalm-hero h2 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .unalm-hero p {
+            font-size: 1.1rem;
+            color: var(--color-subtext);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .unalm-cycles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .cycle-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cycle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--color-text);
+        }
+
+        .cycle-num {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .cycle-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-subtext);
+        }
+
+        .cycle-courses {
+            font-size: 0.9rem;
+            color: var(--color-subtext);
+            margin-top: 4px;
+        }
+
+        /* ===== BOMBEROS TAB ===== */
+        .bomberos-hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .bomberos-hero h2 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .bomberos-hero p {
+            font-size: 1.1rem;
+            color: var(--color-subtext);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .bomberos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .bomberos-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bomberos-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px var(--shadow);
+            border-color: var(--info-red);
+        }
+
+        .bomberos-card-icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+
+        .bomberos-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+        }
+
+        .bomberos-card p {
+            font-size: 0.95rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+        }
+
+        .bomberos-card .card-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--info-red);
+            margin-top: auto;
+        }
+
+        .bomberos-badge {
+            display: inline-block;
+            background: var(--info-red);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+
+        @media(max-width: 600px) {
+            .tab-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
 
         /* DEFINICIÓN */
         .main-definition {
-            text-align: center; margin-bottom: 50px; max-width: 850px; margin-left: auto; margin-right: auto;
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .main-definition h1 { font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 15px; }
-        .main-definition p { font-size: 1.15rem; line-height: 1.6; color: var(--color-subtext); }
+
+        .main-definition h1 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .main-definition p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--color-subtext);
+        }
 
         /* ===== ESQUEMA INTERACTIVO ===== */
         .schema-container {
-            display: flex; gap: 20px; margin-bottom: 30px; min-height: 380px;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            min-height: 380px;
         }
 
         .schema-card {
-            flex: 1; position: relative; border-radius: 16px; padding: 30px;
-            color: #fff; cursor: pointer;
+            flex: 1;
+            position: relative;
+            border-radius: 16px;
+            padding: 30px;
+            color: #fff;
+            cursor: pointer;
             transition: flex 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s ease;
-            overflow: hidden; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .schema-card.positiva { background: var(--info-red); box-shadow: 0 10px 30px rgba(218, 44, 37, 0.3); }
-        .schema-card.normativa { background: var(--info-black); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        .schema-card.positiva {
+            background: var(--info-red);
+            box-shadow: 0 10px 30px rgba(218, 44, 37, 0.3);
+        }
 
-        .schema-title { font-family: var(--font-title); font-size: 2rem; margin-bottom: 10px; }
-        .schema-subtitle { font-family: var(--font-body); font-weight: 300; opacity: 0.9; font-size: 1.1rem; }
+        .schema-card.normativa {
+            background: var(--info-black);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .schema-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .schema-subtitle {
+            font-family: var(--font-body);
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
         .tap-hint {
-            margin-top: 15px; font-size: 0.8rem; opacity: 0.7; border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 4px 12px; border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
         .schema-content-hidden {
-            max-height: 0; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease;
-            margin-top: 0; font-size: 0.95rem; line-height: 1.5; text-align: left; width: 100%;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            margin-top: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
         }
 
-        .schema-card:hover, .schema-card.expanded { flex: 2; }
-        .schema-card:hover .schema-content-hidden, .schema-card.expanded .schema-content-hidden {
-            max-height: 500px; opacity: 1; margin-top: 24px;
+        .schema-card:hover,
+        .schema-card.expanded {
+            flex: 2;
         }
-        .schema-card:hover .tap-hint, .schema-card.expanded .tap-hint { display: none; }
 
-        .schema-content-hidden ul { list-style: none; padding-left: 0; }
+        .schema-card:hover .schema-content-hidden,
+        .schema-card.expanded .schema-content-hidden {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 24px;
+        }
+
+        .schema-card:hover .tap-hint,
+        .schema-card.expanded .tap-hint {
+            display: none;
+        }
+
+        .schema-content-hidden ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
         .schema-content-hidden li {
-            margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .schema-content-hidden li:last-child { border-bottom: none; }
-        .schema-content-hidden strong { font-weight: 700; display: block; margin-bottom: 4px; font-size: 1.1rem; }
+
+        .schema-content-hidden li:last-child {
+            border-bottom: none;
+        }
+
+        .schema-content-hidden strong {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.1rem;
+        }
 
         /* ===== SECCIÓN COMPLEMENTARIA: MICRO Y MACRO ===== */
-        .branches-section { display: flex; gap: 20px; margin-bottom: 60px; }
+        .branches-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
         .branch-card {
-            flex: 1; border: 1px solid var(--border-color); border-radius: 12px;
-            padding: 30px; background: var(--card-bg);
-            transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            background: var(--card-bg);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .branch-card:hover { transform: translateY(-5px); border-color: var(--color-text); }
-        .branch-header h3 { font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 10px; }
-        .branch-school { 
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; 
-            font-weight: 700; color: var(--info-red); margin-bottom: 15px; display: block;
+
+        .branch-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-text);
         }
-        .branch-def { font-size: 1rem; color: var(--color-subtext); line-height: 1.5; margin-bottom: 25px; }
+
+        .branch-header h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .branch-school {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--info-red);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .branch-def {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
         .btn-branch {
-            display: inline-block; padding: 10px 20px; background: var(--color-text); color: var(--bg);
-            text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 0.9rem;
-            align-self: flex-start; transition: opacity 0.3s;
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--color-text);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            align-self: flex-start;
+            transition: opacity 0.3s;
         }
-        .btn-branch:hover { opacity: 0.8; }
+
+        .btn-branch:hover {
+            opacity: 0.8;
+        }
 
         /* ===== GRID RECURSOS (IMÁGENES MEJORADAS) ===== */
         .intro-text {
-            font-size: 1.1rem; line-height: 1.4; text-align: center; max-width: 800px;
-            margin: 0 auto 40px auto; color: var(--color-text);
+            font-size: 1.1rem;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            color: var(--color-text);
         }
+
         .recursos-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
+
         .recurso-item {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 12px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; flex-direction: column;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
+
         .recurso-item:hover {
-            transform: translateY(-5px); box-shadow: 0 10px 25px var(--shadow); border-color: var(--info-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: var(--info-red);
         }
-        
+
         /* AQUÍ ESTÁ EL CAMBIO PARA LAS IMÁGENES */
         .recurso-item img {
             width: 100%;
-            height: 200px; /* Altura fija y mayor para impacto */
-            object-fit: cover; /* Llena el espacio sin bordes blancos */
+            height: 200px;
+            /* Altura fija y mayor para impacto */
+            object-fit: cover;
+            /* Llena el espacio sin bordes blancos */
             object-position: center;
-            padding: 0; /* SIN PADDING */
+            padding: 0;
+            /* SIN PADDING */
             margin: 0;
             background: #fff;
             border-bottom: 1px solid var(--border-color);
             display: block;
         }
 
-        .recurso-info { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .recurso-info h2 { font-family: var(--font-title); font-size: 1.4rem; margin-bottom: 10px; }
-        .recurso-info p { font-size: 1rem; color: var(--color-subtext); line-height: 1.5; margin-bottom: 15px; }
-        .recurso-link { text-decoration: underline; color: var(--color-text); font-weight: 500; }
+        .recurso-info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .recurso-info h2 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .recurso-info p {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .recurso-link {
+            text-decoration: underline;
+            color: var(--color-text);
+            font-weight: 500;
+        }
 
         /* ===== BIBLIOGRAFÍA (ESTILO TARJETA) ===== */
-        .biblio-section { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color); }
-        .biblio-title { font-family: var(--font-title); font-size: 2rem; margin-bottom: 30px; text-align: center; }
-        .biblio-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        
-        .biblio-col h4 { 
-            font-size: 1.2rem; margin-bottom: 20px; padding-bottom: 10px; 
-            border-bottom: 2px solid var(--color-text); display: inline-block;
+        .biblio-section {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .biblio-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .biblio-cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .biblio-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-text);
+            display: inline-block;
         }
 
         .biblio-list {
@@ -268,7 +754,7 @@
         .biblio-card {
             display: flex;
             flex-direction: column;
-            background-color: var(--biblio-card-bg); 
+            background-color: var(--biblio-card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 16px 20px;
@@ -278,7 +764,7 @@
 
         .biblio-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border-color: var(--color-text);
         }
 
@@ -315,24 +801,51 @@
 
         /* ===== FOOTER CREATIVO & RETRO BTN ===== */
         .creative-footer {
-            background: var(--bg); border-top: 1px solid var(--border-color);
-            padding: 50px 24px; margin-top: auto;
+            background: var(--bg);
+            border-top: 1px solid var(--border-color);
+            padding: 50px 24px;
+            margin-top: auto;
         }
+
         .footer-container {
-            max-width: 1100px; margin: 0 auto; display: flex;
-            justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
         }
-        
-        .footer-left h3 { font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 10px; }
-        .footer-left p { color: var(--color-subtext); margin-bottom: 20px; max-width: 400px; }
-        
+
+        .footer-left h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-left p {
+            color: var(--color-subtext);
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
+
         /* Enlaces de texto simples */
-        .social-text-links { display: flex; gap: 20px; }
-        .social-link-txt {
-            color: var(--color-text); font-weight: 500; text-decoration: none;
-            position: relative; font-size: 1rem;
+        .social-text-links {
+            display: flex;
+            gap: 20px;
         }
-        .social-link-txt:hover { text-decoration: underline; }
+
+        .social-link-txt {
+            color: var(--color-text);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .social-link-txt:hover {
+            text-decoration: underline;
+        }
 
         /* Botón Retro WhatsApp "Contáctame" */
         .retro-btn {
@@ -345,7 +858,7 @@
             border: 2px solid #000000;
             border-radius: 8px;
             text-decoration: none;
-            box-shadow: 5px 5px 0px #000000; 
+            box-shadow: 5px 5px 0px #000000;
             transition: all 0.15s ease;
         }
 
@@ -358,39 +871,400 @@
             transform: translate(3px, 3px);
             box-shadow: 2px 2px 0px #000000;
         }
-        
+
         [data-theme="dark"] .retro-btn {
             background-color: #1a1a1a;
             color: #ffffff;
             border-color: #ffffff;
             box-shadow: 5px 5px 0px #ffffff;
         }
-        [data-theme="dark"] .retro-btn:hover { box-shadow: 7px 7px 0px #ffffff; }
-        [data-theme="dark"] .retro-btn:active { box-shadow: 2px 2px 0px #ffffff; }
+
+        [data-theme="dark"] .retro-btn:hover {
+            box-shadow: 7px 7px 0px #ffffff;
+        }
+
+        [data-theme="dark"] .retro-btn:active {
+            box-shadow: 2px 2px 0px #ffffff;
+        }
 
         .footer-bottom {
-            text-align: center; margin-top: 40px; padding-top: 20px;
-            border-top: 1px solid var(--border-color); color: var(--color-subtext); font-size: 0.9rem;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--color-subtext);
+            font-size: 0.9rem;
         }
 
         /* RESPONSIVE */
         @media(max-width: 850px) {
-            .nav-list { display: none; }
-            .hamburger { display: flex; }
-            .schema-container, .branches-section { flex-direction: column; }
-            .schema-card { min-height: 200px; }
-            
+            .nav-list {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .schema-container,
+            .branches-section {
+                flex-direction: column;
+            }
+
+            .schema-card {
+                min-height: 200px;
+            }
+
             nav.mobile-open {
-                position: absolute; top: var(--header-height); left: 0; width: 100%;
-                background: var(--bg); border-bottom: 1px solid var(--border-color);
-                display: flex; flex-direction: column; align-items: center; padding: 30px 0;
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
                 box-shadow: 0 10px 30px var(--shadow);
             }
-            nav.mobile-open .nav-list { display: flex; flex-direction: column; gap: 20px; }
-            .footer-container { flex-direction: column; text-align: center; }
-            .social-text-links { justify-content: center; }
+
+            nav.mobile-open .nav-list {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-text-links {
+                justify-content: center;
+            }
+        }
+
+        /* ===== MÓDULOS ESBAS ===== */
+        .modules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: box-shadow 0.25s;
+        }
+
+        .module-card:hover {
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+            gap: 16px;
+        }
+
+        .module-header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .module-badge {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .module-title {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            line-height: 1.3;
+        }
+
+        .module-count {
+            font-size: 0.78rem;
+            color: var(--color-subtext);
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+        .module-toggle {
+            font-size: 1.2rem;
+            color: var(--color-subtext);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .module-card.mod-open .module-toggle {
+            transform: rotate(180deg);
+        }
+
+        .module-lessons {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-top: 0px solid var(--border-color);
+        }
+
+        .module-card.mod-open .module-lessons {
+            max-height: 800px;
+            border-top-width: 1px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--color-text);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .lesson-item:hover {
+            border-color: var(--color-text);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .lesson-num {
+            font-family: var(--font-title);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--info-red);
+            min-width: 22px;
+            padding-top: 1px;
+        }
+
+        /* ===== BOMBEROS SIDEBAR LAYOUT ===== */
+        .bomberos-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .bomberos-sidebar {
+            position: sticky;
+            top: calc(var(--header-height) + 24px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .bs-header {
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .bs-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .bs-header p {
+            font-size: 0.8rem;
+            color: var(--color-subtext);
+        }
+
+        .bs-nav {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .bs-nav-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-subtext);
+            text-align: left;
+            transition: background var(--transition-fast), color var(--transition-fast);
+            border-left: 3px solid transparent;
+        }
+
+        .bs-nav-btn:hover {
+            background: var(--border-color);
+            color: var(--color-text);
+        }
+
+        .bs-nav-btn.bs-active {
+            background: var(--border-color);
+            color: var(--color-text);
+            border-left-color: var(--color-text);
+        }
+
+        .bs-nav-emoji {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Content panels */
+        .bomberos-content {
+            min-height: 420px;
+        }
+
+        .bs-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .bs-panel.bs-panel-active {
+            display: block;
+            animation: tabFadeIn 0.35s ease forwards;
+        }
+
+        .bs-panel-header {
+            margin-bottom: 28px;
+        }
+
+        .bs-panel-header h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bs-panel-header p {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.55;
+        }
+
+        /* Sub-item cards grid */
+        .bs-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .bs-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 18px;
+            text-decoration: none;
+            color: var(--color-text);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+            cursor: pointer;
+        }
+
+        .bs-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow);
+            border-color: var(--color-text);
+        }
+
+        .bs-card-icon {
+            font-size: 1.6rem;
+        }
+
+        .bs-card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .bs-card-desc {
+            font-size: 0.82rem;
+            color: var(--color-subtext);
+            line-height: 1.4;
+        }
+
+        .bs-card-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--info-red);
+            margin-top: auto;
+        }
+
+        /* Pronto badge */
+        .bs-soon {
+            font-size: 0.7rem;
+            background: var(--border-color);
+            color: var(--color-subtext);
+            padding: 2px 8px;
+            border-radius: 4px;
+            align-self: flex-start;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media(max-width: 860px) {
+            .bomberos-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .bomberos-sidebar {
+                position: static;
+            }
+
+            .bs-nav {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 10px;
+                gap: 6px;
+            }
+
+            .bs-nav li {
+                flex: 0 0 auto;
+            }
+
+            .bs-nav-btn {
+                border-left: none;
+                border-radius: 8px;
+                border-bottom: 2px solid transparent;
+                padding: 8px 14px;
+                font-size: 0.82rem;
+            }
+
+            .bs-nav-btn.bs-active {
+                border-left-color: transparent;
+                border-bottom-color: var(--color-text);
+            }
         }
     </style>
+
+
 </head>
 
 <body>
@@ -402,16 +1276,21 @@
             <nav id="navMenu">
                 <ul class="nav-list">
                     <li><a href="index.html">Inicio</a></li>
-                    <li><a href="#proyectos">Proyectos</a></li>
                     <li><a href="recursos.html" class="active">Recursos</a></li>
-                    <li><a href="#galeria">Galería</a></li>
                     <li><a href="#convocatorias">Convocatorias</a></li>
                 </ul>
             </nav>
 
             <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-                <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 4V2M12 20V22M4 12H2M22 12H20M17.65 6.35L19.06 4.94M6.34 17.66L4.93 19.07M17.65 17.66L19.06 19.07M6.34 6.35L4.93 4.94M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <svg class="icon-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+                <svg class="icon-sun" viewBox="0 0 24 24">
+                    <path
+                        d="M12 4V2M12 20V22M4 12H2M22 12H20M17.65 6.35L19.06 4.94M6.34 17.66L4.93 19.07M17.65 17.66L19.06 19.07M6.34 6.35L4.93 4.94M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24">
+                    <path
+                        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+                </svg>
             </button>
 
             <button class="hamburger" id="hamb"><span></span><span></span><span></span></button>
@@ -420,220 +1299,792 @@
 
     <main>
 
-        <div class="submenu">
-            <a href="#" class="pill active">Economía</a>
-            <a href="https://feua.notion.site/blogfeua" class="pill inactive" target="_blank">UNALM</a>
-            <a href="https://webapp-prueba2.vercel.app/" class="pill inactive" target="_blank">Bomberos</a>
+        <nav class="tab-nav" role="tablist" aria-label="Secciones de recursos">
+            <button class="tab-btn active" role="tab" id="tab-economia" aria-controls="panel-economia"
+                aria-selected="true" onclick="switchTab('economia')">Economía</button>
+            <button class="tab-btn" role="tab" id="tab-unalm" aria-controls="panel-unalm" aria-selected="false"
+                onclick="switchTab('unalm')">UNALM</button>
+            <button class="tab-btn" role="tab" id="tab-bomberos" aria-controls="panel-bomberos" aria-selected="false"
+                onclick="switchTab('bomberos')">Bomberos</button>
+        </nav>
+
+        <!-- ===== PANEL: ECONOMÍA ===== -->
+        <div class="tab-panel active" id="panel-economia" role="tabpanel" aria-labelledby="tab-economia">
+
+            <div class="main-definition">
+                <h1>Economía</h1>
+                <p>Ciencia social que estudia las leyes que rigen los fenómenos económicos, analizando las relaciones
+                    sociales que los agentes establecen entre sí.</p>
+            </div>
+
+            <div class="schema-container">
+                <div class="schema-card positiva" onclick="toggleCard(this)">
+                    <h2 class="schema-title">Positiva</h2>
+                    <p class="schema-subtitle">Analiza fenómenos económicos tal como son</p>
+                    <span class="tap-hint">Ver detalles +</span>
+
+                    <div class="schema-content-hidden">
+                        <ul>
+                            <li>Muestra la realidad económica y predice resultados sin evaluación moral</li>
+                            <li>
+                                <strong>Economía Descriptiva</strong>
+                                Recoge información para elaborar bases de datos (INEI, MEF, SUNAT, BCRP, etc).
+                            </li>
+                            <li>
+                                <strong>Teoría Económica</strong>
+                                Analiza datos y utiliza teorías para comprender la realidad.
+                                <br>Aquí encontramos a la <em>Microeconomía</em> y <em>Macroeconomía</em>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="schema-card normativa" onclick="toggleCard(this)">
+                    <h2 class="schema-title">Normativa</h2>
+                    <p class="schema-subtitle">Propone cómo deberían ser los fenómenos económicos</p>
+                    <span class="tap-hint">Ver detalles +</span>
+
+                    <div class="schema-content-hidden">
+                        <ul>
+                            <li>
+                                <strong>Emite juicio de Valor</strong>
+                                Formula decisiones o recomendaciones basadas en <em>valores o teorías "más justas"</em>.
+                            </li>
+                            <li>
+                                <strong>Política Económica</strong>
+                                Medidas del Estado para lograr objetivos macroeconómicos.
+                                <br><em>- P. Monetaria (BCRP):</em> Estabilidad, liquidez.
+                                <br><em>- P. Fiscal (MEF):</em> Impuestos, gasto público.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="branches-section">
+                <div class="branch-card">
+                    <div class="branch-header">
+                        <h3>Microeconomía</h3>
+                        <span class="branch-school">Escuela Neoclásica s.XIX</span>
+                        <p class="branch-def">
+                            Estudio de decisiones y comportamiento de consumidores, empresas y mercados específicos.
+                            Para entender la asignación de recursos y formación de precios.
+                        </p>
+                    </div>
+                    <a href="#biblio-micro" class="btn-branch">Ver Bibliografía ↓</a>
+                </div>
+
+                <div class="branch-card">
+                    <div class="branch-header">
+                        <h3>Macroeconomía</h3>
+                        <span class="branch-school">Keynesianos s.XX</span>
+                        <p class="branch-def">
+                            Estudio de variables agregadas como el PBI, la inflación y el desempleo. Analiza la economía
+                            en
+                            su conjunto.
+                        </p>
+                    </div>
+                    <a href="#biblio-macro" class="btn-branch">Ver Bibliografía ↓</a>
+                </div>
+            </div>
+
+            <p class="intro-text">
+                Una selección clara y directa de materiales esenciales para empezar en economía: libros, guías y
+                repositorios confiables. Todo gratuito, accesible y pensado para quienes quieren aprender sin
+                complicarse.
+            </p>
+
+            <div class="recursos-grid">
+                <div class="recurso-item">
+                    <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                        target="_blank">
+                        <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png"
+                            alt="UNALM" loading="lazy" />
+                    </a>
+                    <div class="recurso-info">
+                        <h2>UNALM</h2>
+                        <p>Economía todos los ciclos. Currícula 2019.</p>
+                        <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                            target="_blank" class="recurso-link">Ver recursos →</a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <a href="#">
+                        <img src="https://github.com/MatiasCalero/home/blob/main/images/unmsm.png?raw=true" alt="UNMSM"
+                            loading="lazy" />
+                    </a>
+                    <div class="recurso-info">
+                        <h2>UNMSM</h2>
+                        <p>Materiales y recursos académicos San Marcos.</p>
+                        <a href="#" class="recurso-link">Ver recursos →</a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <a href="https://drive.google.com/drive/u/0/folders/1t7KUIGs0ePc5sE-qFoJaPnqlLil9FFBl">
+                        <img src="https://github.com/MatiasCalero/home/blob/main/images/pucp.png?raw=true" alt="PUCP"
+                            loading="lazy" />
+                    </a>
+                    <div class="recurso-info">
+                        <h2>PUCP</h2>
+                        <p>Guías, libros y repositorios de la Pontificia Universidad Católica.</p>
+                        <a href="https://drive.google.com/drive/u/0/folders/1t7KUIGs0ePc5sE-qFoJaPnqlLil9FFBl"
+                            class="recurso-link">Ver recursos →</a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <a href="#">
+                        <img src="https://github.com/MatiasCalero/home/blob/main/images/uni.png?raw=true" alt="UNI"
+                            loading="lazy" />
+                    </a>
+                    <div class="recurso-info">
+                        <h2>UNI</h2>
+                        <p>Material académico y recursos de la Universidad Nacional de Ingeniería.</p>
+                        <a href="#" class="recurso-link">Ver recursos →</a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <a href="#">
+                        <img src="https://github.com/MatiasCalero/home/blob/main/images/up.png?raw=true"
+                            alt="Universidad Pacífico" loading="lazy" />
+                    </a>
+                    <div class="recurso-info">
+                        <h2>Universidad Pacífico</h2>
+                        <p>Recursos y materiales de economía de la Universidad Pacífico.</p>
+                        <a href="#" class="recurso-link">Ver recursos →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="biblio-section" id="bibliografia">
+                <h2 class="biblio-title">Bibliografía</h2>
+                <div class="biblio-cols">
+
+                    <div class="biblio-col" id="biblio-micro">
+                        <h4>Microeconomía</h4>
+                        <ul class="biblio-list">
+                            <li>
+                                <a href="https://archive.org/details/mankiwprincipiosdeeconomia7maedicion2017"
+                                    class="biblio-card" target="_blank">
+                                    <span class="biblio-book-title">Principios de Microeconomía</span>
+                                    <div class="biblio-meta">
+                                        <span class="biblio-author">Mankiw, G.</span>
+                                        <span class="biblio-tag">Esencial</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://danielmorochoruiz.files.wordpress.com/2017/01/microeconomia_-_pyndick.pdf"
+                                    class="biblio-card" target="_blank">
+                                    <span class="biblio-book-title">Microeconomía 8va Ed.</span>
+                                    <div class="biblio-meta">
+                                        <span class="biblio-author">Pindyck & Rubinfeld</span>
+                                        <span class="biblio-tag">Intermedio</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://drive.google.com/file/d/14k5_RJCDegIKiRnUzQcrfe1oADdBpua0/view?usp=sharing"
+                                    class="biblio-card" target="_blank">
+                                    <span class="biblio-book-title">Microeconomía Intermedia</span>
+                                    <div class="biblio-meta">
+                                        <span class="biblio-author">Varian, H.</span>
+                                        <span class="biblio-tag">Intermedio</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="biblio-col" id="biblio-macro">
+                        <h4>Macroeconomía</h4>
+                        <ul class="biblio-list">
+                            <li>
+                                <a href="https://drive.google.com/file/d/1hoYosV3EyfosbnEdeBr4Lo_m5zA1RRHV/view?usp=sharing"
+                                    class="biblio-card" target="_blank">
+                                    <span class="biblio-book-title">Macroeconomía</span>
+                                    <div class="biblio-meta">
+                                        <span class="biblio-author">Blanchard</span>
+                                        <span class="biblio-tag">Esencial</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://drive.google.com/file/d/1eJFj2uTLkfDFcxmhoWqy6jDY-AUmoPZB/view?usp=sharing"
+                                    class="biblio-card" target="_blank">
+                                    <span class="biblio-book-title">Macroeconomía</span>
+                                    <div class="biblio-meta">
+                                        <span class="biblio-author">Waldo Mendoza</span>
+                                        <span class="biblio-tag">Intermedio</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://www.ricardopanza.com.ar/files/macro1/Macroeconomia_en_la_economia_global_Larrain_Sachs_2da_Edi_pdf.pdf"
+                                    class="biblio-card" target="_blank">
+                                    <span class="biblio-book-title">Macroeconomía Global</span>
+                                    <div class="biblio-meta">
+                                        <span class="biblio-author">Sachs & Larrain</span>
+                                        <span class="biblio-tag">Intermedio</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
+        <!-- ===== FIN PANEL: ECONOMÍA ===== -->
 
-        <div class="main-definition">
-            <h1>Economía</h1>
-            <p>Ciencia social que estudia las leyes que rigen los fenómenos económicos, analizando las relaciones sociales que los agentes establecen entre sí.</p>
+        <!-- ===== PANEL: UNALM ===== -->
+        <div class="tab-panel" id="panel-unalm" role="tabpanel" aria-labelledby="tab-unalm">
+
+            <div class="unalm-hero">
+                <h2>UNALM</h2>
+                <p>Materiales de estudio para la carrera de Economía en la Universidad Nacional Agraria La Molina.
+                    Currícula 2019 — todos los ciclos académicos.</p>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="btn-branch">Abrir carpeta completa →</a>
+            </div>
+
+            <div class="unalm-cycles-grid">
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">I</span>
+                    <span class="cycle-label">Primer Ciclo</span>
+                    <span class="cycle-courses">Intro a la Economía, Matemáticas Básicas</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">II</span>
+                    <span class="cycle-label">Segundo Ciclo</span>
+                    <span class="cycle-courses">Microeconomía I, Estadística</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">III</span>
+                    <span class="cycle-label">Tercer Ciclo</span>
+                    <span class="cycle-courses">Microeconomía II, Macroeconomía I</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">IV</span>
+                    <span class="cycle-label">Cuarto Ciclo</span>
+                    <span class="cycle-courses">Macroeconomía II, Econometría I</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">V</span>
+                    <span class="cycle-label">Quinto Ciclo</span>
+                    <span class="cycle-courses">Economía Agraria, Finanzas</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">VI</span>
+                    <span class="cycle-label">Sexto Ciclo</span>
+                    <span class="cycle-courses">Econometría II, Política Económica</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">VII</span>
+                    <span class="cycle-label">Séptimo Ciclo</span>
+                    <span class="cycle-courses">Comercio Internacional, Desarrollo Rural</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">VIII</span>
+                    <span class="cycle-label">Octavo Ciclo</span>
+                    <span class="cycle-courses">Evaluación de Proyectos, Gestión Pública</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">IX</span>
+                    <span class="cycle-label">Noveno Ciclo</span>
+                    <span class="cycle-courses">Tesis, Investigación Aplicada</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing"
+                    target="_blank" class="cycle-card">
+                    <span class="cycle-num">X</span>
+                    <span class="cycle-label">Décimo Ciclo</span>
+                    <span class="cycle-courses">Práctica Pre-profesional</span>
+                </a>
+            </div>
+
         </div>
+        <!-- ===== FIN PANEL: UNALM ===== -->
 
-        <div class="schema-container">
-            <div class="schema-card positiva" onclick="toggleCard(this)">
-                <h2 class="schema-title">Positiva</h2>
-                <p class="schema-subtitle">Analiza fenómenos económicos tal como son</p>
-                <span class="tap-hint">Ver detalles +</span>
+        <!-- ===== PANEL: BOMBEROS ===== -->
+        <div class="tab-panel" id="panel-bomberos" role="tabpanel" aria-labelledby="tab-bomberos">
 
-                <div class="schema-content-hidden">
-                    <ul>
-                        <li>Muestra la realidad económica y predice resultados sin evaluación moral</li>
-                        <li>
-                            <strong>Economía Descriptiva</strong>
-                            Recoge información para elaborar bases de datos (INEI, MEF, SUNAT, BCRP, etc).
-                        </li>
-                        <li>
-                            <strong>Teoría Económica</strong>
-                            Analiza datos y utiliza teorías para comprender la realidad.
-                            <br>Aquí encontramos a la <em>Microeconomía</em> y <em>Macroeconomía</em>.
-                        </li>
+            <div class="bomberos-layout">
+
+                <!-- SIDEBAR -->
+                <aside class="bomberos-sidebar">
+                    <div class="bs-header">
+                        <h2>🚒 Bomberos</h2>
+                        <p>CGBVP — Recursos de formación</p>
+                    </div>
+                    <ul class="bs-nav" role="tablist">
+                        <li><button class="bs-nav-btn bs-active" onclick="switchBsTab('formacion')"
+                                id="bstab-formacion"><span class="bs-nav-emoji">🔴</span> Formación ESBAS</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('organizacion')"
+                                id="bstab-organizacion"><span class="bs-nav-emoji">🔵</span> Organización</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('historia')" id="bstab-historia"><span
+                                    class="bs-nav-emoji">🟣</span> Historia y Cultura</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('servicios')" id="bstab-servicios"><span
+                                    class="bs-nav-emoji">🟢</span> Servicios de Emergencia</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('equipamiento')"
+                                id="bstab-equipamiento"><span class="bs-nav-emoji">🔶</span> Equipamiento</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('codigos')" id="bstab-codigos"><span
+                                    class="bs-nav-emoji">🟤</span> Códigos CGBVP</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('balotarios')" id="bstab-balotarios"><span
+                                    class="bs-nav-emoji">🔷</span> Balotarios ESBAS</button></li>
+                        <li><button class="bs-nav-btn" onclick="switchBsTab('biblioteca')" id="bstab-biblioteca"><span
+                                    class="bs-nav-emoji">⚪</span> Biblioteca</button></li>
                     </ul>
-                </div>
-            </div>
+                </aside>
 
-            <div class="schema-card normativa" onclick="toggleCard(this)">
-                <h2 class="schema-title">Normativa</h2>
-                <p class="schema-subtitle">Propone cómo deberían ser los fenómenos económicos</p>
-                <span class="tap-hint">Ver detalles +</span>
+                <!-- CONTENT -->
+                <div class="bomberos-content">
 
-                <div class="schema-content-hidden">
-                    <ul>
-                        <li>
-                            <strong>Emite juicio de Valor</strong>
-                            Formula decisiones o recomendaciones basadas en <em>valores o teorías "más justas"</em>.
-                        </li>
-                        <li>
-                            <strong>Política Económica</strong>
-                            Medidas del Estado para lograr objetivos macroeconómicos.
-                            <br><em>- P. Monetaria (BCRP):</em> Estabilidad, liquidez.
-                            <br><em>- P. Fiscal (MEF):</em> Impuestos, gasto público.
-                        </li>
-                    </ul>
+                    <!-- 1. Formación ESBAS -->
+                    <div class="bs-panel bs-panel-active" id="bspanel-formacion">
+                        <div class="bs-panel-header">
+                            <h3><span>🔴</span> Formación ESBAS</h3>
+                            <p>Lecciones teóricas oficiales divididas en tres módulos. Contenido esencial para ingresar
+                                al Cuerpo General de Bomberos Voluntarios del Perú.</p>
+                        </div>
+
+                        <div class="modules-list">
+
+                            <!-- MÓDULO I -->
+                            <div class="module-card mod-open" id="modulo-i">
+                                <div class="module-header" onclick="toggleModule('modulo-i')">
+                                    <div class="module-header-left">
+                                        <span class="module-badge">📘</span>
+                                        <div>
+                                            <div class="module-title">Módulo I — Fundamentos e Institución</div>
+                                            <div class="module-count">9 lecciones</div>
+                                        </div>
+                                    </div>
+                                    <span class="module-toggle">▾</span>
+                                </div>
+                                <div class="module-lessons">
+                                    <div class="lessons-grid">
+                                        <a href="#" class="lesson-item"><span
+                                                class="lesson-num">01</span>Introducción</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">02</span>Doctrina y
+                                            Mística</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">03</span>Historia del
+                                            CGBVP</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">04</span>Organización,
+                                            Normas y Reglamento</a>
+                                        <a href="#" class="lesson-item"><span
+                                                class="lesson-num">05</span>Comunicaciones</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">06</span>Seguridad y
+                                            Trabajo en Equipo</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">07</span>Manejo
+                                            Psicológico — Estrés en Bomberos</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">08</span>Sistema de
+                                            Comando de Incidentes y Contabilidad de Personal</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">09</span>Seguridad y
+                                            Gestión del Aire del EPRA</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- MÓDULO II -->
+                            <div class="module-card" id="modulo-ii">
+                                <div class="module-header" onclick="toggleModule('modulo-ii')">
+                                    <div class="module-header-left">
+                                        <span class="module-badge">🔥</span>
+                                        <div>
+                                            <div class="module-title">Módulo II — Incendios y Extinción</div>
+                                            <div class="module-count">12 lecciones</div>
+                                        </div>
+                                    </div>
+                                    <span class="module-toggle">▾</span>
+                                </div>
+                                <div class="module-lessons">
+                                    <div class="lessons-grid">
+                                        <a href="#" class="lesson-item"><span class="lesson-num">10</span>Comportamiento
+                                            del Fuego I</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">11</span>Comportamiento
+                                            del Fuego II</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">12</span>Extintores</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">13</span>Métodos de
+                                            Abastecimiento</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">14</span>Hidráulica
+                                            Aplicada a la Lucha Contra Incendios</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">15</span>Chorros de
+                                            Extinción</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">16</span>Técnicas de
+                                            Extinción Contra Incendios</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">17</span>Entrada
+                                            Forzada</a>
+                                        <a href="#" class="lesson-item"><span
+                                                class="lesson-num">18</span>Ventilación</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">19</span>Escaleras
+                                            Contra Incendios, Tipos y Usos</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">20</span>Conservación
+                                            de la Propiedad</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">21</span>Evaluación de
+                                            Estructuras</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- MÓDULO III -->
+                            <div class="module-card" id="modulo-iii">
+                                <div class="module-header" onclick="toggleModule('modulo-iii')">
+                                    <div class="module-header-left">
+                                        <span class="module-badge">🏗️</span>
+                                        <div>
+                                            <div class="module-title">Módulo III — Operaciones Avanzadas</div>
+                                            <div class="module-count">13 lecciones</div>
+                                        </div>
+                                    </div>
+                                    <span class="module-toggle">▾</span>
+                                </div>
+                                <div class="module-lessons">
+                                    <div class="lessons-grid">
+                                        <a href="#" class="lesson-item"><span class="lesson-num">22</span>Incendios en
+                                            Edificios</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">23</span>Incendios en
+                                            Sótanos</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">24</span>Incendios en
+                                            Vehículos</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">25</span>Incendios en
+                                            Líquidos Inflamables y Combustibles</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">26</span>Fugas e
+                                            Incendios en Gases Inflamables</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">27</span>Concentrados y
+                                            Espumas Contra Incendios</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">28</span>Investigación
+                                            de Incendios</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">29</span>Rescate en
+                                            Incendios</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">30</span>Rescate en
+                                            Ascensores</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">31</span>Sistemas de
+                                            Rescate con Cuerdas</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">32</span>Atención Pre
+                                            Hospitalaria I</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">33</span>Atención Pre
+                                            Hospitalaria II</a>
+                                        <a href="#" class="lesson-item"><span class="lesson-num">34</span>Emergencias
+                                            con Materiales Peligrosos</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 2. Organización Institucional -->
+                    <div class="bs-panel" id="bspanel-organizacion">
+                        <div class="bs-panel-header">
+                            <h3><span>🔵</span> Organización Institucional</h3>
+                            <p>Estructura, rangos y funcionamiento interno del Cuerpo General de Bomberos Voluntarios
+                                del Perú.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📜</span>
+                                <span class="bs-card-title">Escalafón</span>
+                                <span class="bs-card-desc">Jerarquía oficial del personal bombero y su progresión
+                                    institucional.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">⭐</span>
+                                <span class="bs-card-title">Rangos</span>
+                                <span class="bs-card-desc">Descripción de cada rango, funciones y distintivos
+                                    asociados.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🏅</span>
+                                <span class="bs-card-title">Insignias</span>
+                                <span class="bs-card-desc">Insignias, medallas y condecoraciones del CGBVP.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">👔</span>
+                                <span class="bs-card-title">Comando Actual</span>
+                                <span class="bs-card-desc">Jefatura nacional y estructura de mando vigente.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🏛️</span>
+                                <span class="bs-card-title">Estructura del CGBVP</span>
+                                <span class="bs-card-desc">Organigrama institucional, departamentos y comisiones.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🗺️</span>
+                                <span class="bs-card-title">Compañías y Comandancias</span>
+                                <span class="bs-card-desc">Distribución territorial de comandancias y compañías a nivel
+                                    nacional.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 3. Historia y Cultura -->
+                    <div class="bs-panel" id="bspanel-historia">
+                        <div class="bs-panel-header">
+                            <h3><span>🟣</span> Historia y Cultura</h3>
+                            <p>Raíces, tradiciones y esencia de la institución bomberil peruana.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🏛️</span>
+                                <span class="bs-card-title">Historia del CGBVP</span>
+                                <span class="bs-card-desc">Origen y evolución del Cuerpo General de Bomberos desde
+                                    1860.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🔴</span>
+                                <span class="bs-card-title">Historia de la Compañía</span>
+                                <span class="bs-card-desc">Fundación, hitos y evolución histórica de la compañía
+                                    local.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🎖️</span>
+                                <span class="bs-card-title">Tradiciones</span>
+                                <span class="bs-card-desc">Ceremonias, rituales y costumbres del servicio
+                                    bomberil.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">❤️‍🔥</span>
+                                <span class="bs-card-title">Mística Bomberil</span>
+                                <span class="bs-card-desc">Valores, vocación de servicio y espíritu del voluntario
+                                    bombero.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 4. Servicios de Emergencia -->
+                    <div class="bs-panel" id="bspanel-servicios">
+                        <div class="bs-panel-header">
+                            <h3><span>🟢</span> Servicios de Emergencia</h3>
+                            <p>Tipos de emergencias, centrales de atención y protocolos de respuesta básica.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🚨</span>
+                                <span class="bs-card-title">Tipos de Emergencias</span>
+                                <span class="bs-card-desc">Clasificación de emergencias: incendios, rescates, MATPEL,
+                                    médicas y más.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📞</span>
+                                <span class="bs-card-title">Centrales (116, 911)</span>
+                                <span class="bs-card-desc">Números de emergencia, centros de despacho y coordinación
+                                    interinstitucional.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📋</span>
+                                <span class="bs-card-title">Protocolos Básicos</span>
+                                <span class="bs-card-desc">Procedimientos de respuesta, activación de unidades y gestión
+                                    en escena.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 5. Equipamiento y Recursos -->
+                    <div class="bs-panel" id="bspanel-equipamiento">
+                        <div class="bs-panel-header">
+                            <h3><span>🔶</span> Equipamiento y Recursos</h3>
+                            <p>Unidades, EPP y equipos especializados de la compañía.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🚒</span>
+                                <span class="bs-card-title">Máquina 4-1</span>
+                                <span class="bs-card-desc">Autobomba principal. Equipamiento, capacidad y
+                                    operación.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">⚗️</span>
+                                <span class="bs-card-title">MATPEL 4</span>
+                                <span class="bs-card-desc">Unidad de materiales peligrosos. Equipos y protocolos de
+                                    respuesta.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🏗️</span>
+                                <span class="bs-card-title">Rescate Pesada 4</span>
+                                <span class="bs-card-desc">Equipos de rescate estructural pesado y sus
+                                    aplicaciones.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🔧</span>
+                                <span class="bs-card-title">Rescate Ligera 4</span>
+                                <span class="bs-card-desc">Unidad de rescate ligero para primeras intervenciones.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🪜</span>
+                                <span class="bs-card-title">SNORKEL</span>
+                                <span class="bs-card-desc">Plataforma articulada para intervención en altura.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🚑</span>
+                                <span class="bs-card-title">Ambulancia</span>
+                                <span class="bs-card-desc">Unidad de atención médica prehospitalaria y
+                                    equipamiento.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🦺</span>
+                                <span class="bs-card-title">EPP</span>
+                                <span class="bs-card-desc">Equipo de Protección Personal: casco, traje de aproximación,
+                                    botas, guantes.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📐</span>
+                                <span class="bs-card-title">Equipos Especializados y NFPA</span>
+                                <span class="bs-card-desc">Normas NFPA aplicables al equipamiento y mantenimiento de
+                                    unidades.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 6. Códigos CGBVP -->
+                    <div class="bs-panel" id="bspanel-codigos">
+                        <div class="bs-panel-header">
+                            <h3><span>🟤</span> Códigos CGBVP</h3>
+                            <p>Comunicación operativa y códigos radiales oficiales del Cuerpo General de Bomberos.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📡</span>
+                                <span class="bs-card-title">Códigos Radiales</span>
+                                <span class="bs-card-desc">Listado completo de códigos de radio usados en
+                                    operaciones.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🎙️</span>
+                                <span class="bs-card-title">Comunicación Operativa</span>
+                                <span class="bs-card-desc">Protocolos de comunicación en escena, sala de despacho y
+                                    coordinación.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 7. Balotarios ESBAS -->
+                    <div class="bs-panel" id="bspanel-balotarios">
+                        <div class="bs-panel-header">
+                            <h3><span>🔷</span> Balotarios ESBAS</h3>
+                            <p>Material de repaso para el examen de ingreso a la Escuela Básica de Bomberos.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="balotario-cultura-general.html" class="bs-card">
+                                <span class="bs-card-icon">📖</span>
+                                <span class="bs-card-title">Cultura General y Bomberil</span>
+                                <span class="bs-card-desc">120 preguntas oficiales del banco PROFBAS con respuestas.</span>
+                                <span class="bs-card-tag">Abrir →</span>
+                            </a>
+                            <a href="balotario-1.html" class="bs-card">
+                                <span class="bs-card-icon">1️⃣</span>
+                                <span class="bs-card-title">Balotario 1 — Con Respuestas</span>
+                                <span class="bs-card-desc">107 preguntas con respuestas. Fuente: CGBVP Formación Académica.</span>
+                                <span class="bs-card-tag">Abrir →</span>
+                            </a>
+                            <a href="balotario-2.html" class="bs-card">
+                                <span class="bs-card-icon">2️⃣</span>
+                                <span class="bs-card-title">Balotario 2 — Versión Ampliada</span>
+                                <span class="bs-card-desc">70 preguntas con respuestas más detalladas y contexto ampliado.</span>
+                                <span class="bs-card-tag">Abrir →</span>
+                            </a>
+                            <a href="balotario-3.html" class="bs-card">
+                                <span class="bs-card-icon">✏️</span>
+                                <span class="bs-card-title">Balotario 3 — Modo Examen</span>
+                                <span class="bs-card-desc">107 preguntas sin respuestas para autoevaluación y práctica.</span>
+                                <span class="bs-card-tag">Practicar →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📝</span>
+                                <span class="bs-card-title">Simulacros</span>
+                                <span class="bs-card-desc">Exámenes de práctica con corrección inmediata y puntaje.</span>
+                                <span class="bs-card-tag">Próximamente →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">⚠️</span>
+                                <span class="bs-card-title">Banco de Errores</span>
+                                <span class="bs-card-desc">Preguntas frecuentemente falladas y sus respuestas correctas.</span>
+                                <span class="bs-card-tag">Próximamente →</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 8. Biblioteca y Recursos -->
+                    <div class="bs-panel" id="bspanel-biblioteca">
+                        <div class="bs-panel-header">
+                            <h3><span>⚪</span> Biblioteca y Recursos</h3>
+                            <p>Manuales, normas y documentos de referencia para la formación bomberil.</p>
+                        </div>
+                        <div class="bs-cards-grid">
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📄</span>
+                                <span class="bs-card-title">PDFs</span>
+                                <span class="bs-card-desc">Documentos descargables: manuales, reglamentos y material de
+                                    estudio.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🇺🇸</span>
+                                <span class="bs-card-title">IFSTA</span>
+                                <span class="bs-card-desc">Manuales del International Fire Service Training Association
+                                    en español.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">📐</span>
+                                <span class="bs-card-title">NFPA</span>
+                                <span class="bs-card-desc">Normas de la National Fire Protection Association aplicadas
+                                    al CGBVP.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                            <a href="#" class="bs-card">
+                                <span class="bs-card-icon">🔗</span>
+                                <span class="bs-card-title">Links</span>
+                                <span class="bs-card-desc">Recursos web, plataformas y repositorios externos de interés
+                                    bomberil.</span>
+                                <span class="bs-card-tag">Ver →</span>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- fin .bomberos-content -->
+
             </div>
+            <!-- fin .bomberos-layout -->
+
         </div>
-
-        <div class="branches-section">
-            <div class="branch-card">
-                <div class="branch-header">
-                    <h3>Microeconomía</h3>
-                    <span class="branch-school">Escuela Neoclásica s.XIX</span>
-                    <p class="branch-def">
-                        Estudio de decisiones y comportamiento de consumidores, empresas y mercados específicos. 
-                        Para entender la asignación de recursos y formación de precios.
-                    </p>
-                </div>
-                <a href="#biblio-micro" class="btn-branch">Ver Bibliografía ↓</a>
-            </div>
-
-            <div class="branch-card">
-                <div class="branch-header">
-                    <h3>Macroeconomía</h3>
-                    <span class="branch-school">Keynesianos s.XX</span>
-                    <p class="branch-def">
-                        Estudio de variables agregadas como el PBI, la inflación y el desempleo. Analiza la economía en su conjunto.
-                    </p>
-                </div>
-                <a href="#biblio-macro" class="btn-branch">Ver Bibliografía ↓</a>
-            </div>
-        </div>
-
-        <p class="intro-text">
-            Una selección clara y directa de materiales esenciales para empezar en economía: libros, guías y
-            repositorios confiables. Todo gratuito, accesible y pensado para quienes quieren aprender sin complicarse.
-        </p>
-
-        <div class="recursos-grid">
-            <div class="recurso-item">
-                <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" target="_blank">
-                    <img src="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/unalm.png" alt="UNALM" loading="lazy" />
-                </a>
-                <div class="recurso-info">
-                    <h2>UNALM</h2>
-                    <p>Economía todos los ciclos. Currícula 2019.</p>
-                    <a href="https://drive.google.com/drive/folders/1Y2XXILHlinV76D9UQ8kkvTI4aZwZp1-s?usp=sharing" target="_blank" class="recurso-link">Ver recursos →</a>
-                </div>
-            </div>
-
-            <div class="recurso-item">
-                <a href="#">
-                    <img src="https://github.com/MatiasCalero/home/blob/main/images/unmsm.png?raw=true" alt="UNMSM" loading="lazy" />
-                </a>
-                <div class="recurso-info">
-                    <h2>UNMSM</h2>
-                    <p>Materiales y recursos académicos San Marcos.</p>
-                    <a href="#" class="recurso-link">Ver recursos →</a>
-                </div>
-            </div>
-
-            <div class="recurso-item">
-                <a href="https://drive.google.com/drive/u/0/folders/1t7KUIGs0ePc5sE-qFoJaPnqlLil9FFBl">
-                    <img src="https://github.com/MatiasCalero/home/blob/main/images/pucp.png?raw=true" alt="PUCP" loading="lazy" />
-                </a>
-                <div class="recurso-info">
-                    <h2>PUCP</h2>
-                    <p>Guías, libros y repositorios de la Pontificia Universidad Católica.</p>
-                    <a href="https://drive.google.com/drive/u/0/folders/1t7KUIGs0ePc5sE-qFoJaPnqlLil9FFBl" class="recurso-link">Ver recursos →</a>
-                </div>
-            </div>
-
-            <div class="recurso-item">
-                <a href="#">
-                    <img src="https://github.com/MatiasCalero/home/blob/main/images/uni.png?raw=true" alt="UNI" loading="lazy" />
-                </a>
-                <div class="recurso-info">
-                    <h2>UNI</h2>
-                    <p>Material académico y recursos de la Universidad Nacional de Ingeniería.</p>
-                    <a href="#" class="recurso-link">Ver recursos →</a>
-                </div>
-            </div>
-
-            <div class="recurso-item">
-                <a href="#">
-                    <img src="https://github.com/MatiasCalero/home/blob/main/images/up.png?raw=true" alt="Universidad Pacífico" loading="lazy" />
-                </a>
-                <div class="recurso-info">
-                    <h2>Universidad Pacífico</h2>
-                    <p>Recursos y materiales de economía de la Universidad Pacífico.</p>
-                    <a href="#" class="recurso-link">Ver recursos →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="biblio-section" id="bibliografia">
-            <h2 class="biblio-title">Bibliografía</h2>
-            <div class="biblio-cols">
-                
-                <div class="biblio-col" id="biblio-micro">
-                    <h4>Microeconomía</h4>
-                    <ul class="biblio-list">
-                        <li>
-                            <a href="https://archive.org/details/mankiwprincipiosdeeconomia7maedicion2017" class="biblio-card" target="_blank">
-                                <span class="biblio-book-title">Principios de Microeconomía</span>
-                                <div class="biblio-meta">
-                                    <span class="biblio-author">Mankiw, G.</span>
-                                    <span class="biblio-tag">Esencial</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://danielmorochoruiz.files.wordpress.com/2017/01/microeconomia_-_pyndick.pdf" class="biblio-card" target="_blank">
-                                <span class="biblio-book-title">Microeconomía 8va Ed.</span>
-                                <div class="biblio-meta">
-                                    <span class="biblio-author">Pindyck & Rubinfeld</span>
-                                    <span class="biblio-tag">Intermedio</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://drive.google.com/file/d/14k5_RJCDegIKiRnUzQcrfe1oADdBpua0/view?usp=sharing" class="biblio-card" target="_blank">
-                                <span class="biblio-book-title">Microeconomía Intermedia</span>
-                                <div class="biblio-meta">
-                                    <span class="biblio-author">Varian, H.</span>
-                                    <span class="biblio-tag">Intermedio</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="biblio-col" id="biblio-macro">
-                    <h4>Macroeconomía</h4>
-                    <ul class="biblio-list">
-                        <li>
-                            <a href="https://drive.google.com/file/d/1hoYosV3EyfosbnEdeBr4Lo_m5zA1RRHV/view?usp=sharing" class="biblio-card" target="_blank">
-                                <span class="biblio-book-title">Macroeconomía</span>
-                                <div class="biblio-meta">
-                                    <span class="biblio-author">Blanchard</span>
-                                    <span class="biblio-tag">Esencial</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://drive.google.com/file/d/1eJFj2uTLkfDFcxmhoWqy6jDY-AUmoPZB/view?usp=sharing" class="biblio-card" target="_blank">
-                                <span class="biblio-book-title">Macroeconomía</span>
-                                <div class="biblio-meta">
-                                    <span class="biblio-author">Waldo Mendoza</span>
-                                    <span class="biblio-tag">Intermedio</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.ricardopanza.com.ar/files/macro1/Macroeconomia_en_la_economia_global_Larrain_Sachs_2da_Edi_pdf.pdf" class="biblio-card" target="_blank">
-                                <span class="biblio-book-title">Macroeconomía Global</span>
-                                <div class="biblio-meta">
-                                    <span class="biblio-author">Sachs & Larrain</span>
-                                    <span class="biblio-tag">Intermedio</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
+        <!-- ===== FIN PANEL: BOMBEROS ===== -->
 
     </main>
 
@@ -642,9 +2093,10 @@
             <div class="footer-left">
                 <a href="index.html" class="logo-mc">mc</a>
                 <p>gracias, internet.</p>
-                
+
                 <div class="social-text-links">
-                    <a href="https://www.instagram.com/matias_calero/" target="_blank" class="social-link-txt">instagram</a>
+                    <a href="https://www.instagram.com/matias_calero/" target="_blank"
+                        class="social-link-txt">instagram</a>
                     <a href="https://www.youtube.com/@matias_calero" target="_blank" class="social-link-txt">youtube</a>
                 </div>
             </div>
@@ -656,7 +2108,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>matias calero© 2025</p>
+            <p>matias calero© 2026</p>
         </div>
     </footer>
 
@@ -686,8 +2138,39 @@
                 element.classList.add('expanded');
             }
         }
+
+        // 4. Tab System Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            const activeBtn = document.getElementById('tab-' + tabId);
+            const activePanel = document.getElementById('panel-' + tabId);
+            if (activeBtn) { activeBtn.classList.add('active'); activeBtn.setAttribute('aria-selected', 'true'); }
+            if (activePanel) { activePanel.classList.add('active'); }
+        }
+
+        // 5. Bomberos Inner Tab Logic
+        function switchBsTab(sectionId) {
+            document.querySelectorAll('.bs-nav-btn').forEach(btn => btn.classList.remove('bs-active'));
+            document.querySelectorAll('.bs-panel').forEach(panel => panel.classList.remove('bs-panel-active'));
+            const btn = document.getElementById('bstab-' + sectionId);
+            const panel = document.getElementById('bspanel-' + sectionId);
+            if (btn) btn.classList.add('bs-active');
+            if (panel) panel.classList.add('bs-panel-active');
+        }
+
+        // 6. Module accordion Logic
+        function toggleModule(moduleId) {
+            const card = document.getElementById(moduleId);
+            card.classList.toggle('mod-open');
+        }
     </script>
 
 </body>
-</html>
 
+</html>

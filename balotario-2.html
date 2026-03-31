@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8"/><link rel="icon" type="image/png" href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="description" content="Balotario 2 — Versión ampliada con respuestas · CGBVP"/>
+<title>Balotario 2 — Versión Ampliada · CGBVP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<script>(function(){document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')})();</script>
+<style>
+:root{--font-body:'DM Sans',sans-serif;--font-title:'Libre Baskerville',serif;--tsm:.4s cubic-bezier(.25,.46,.45,.94);--tf:.2s ease;--color-text:#1a1a1a;--color-subtext:#4a4a4a;--accent:#000;--bg:#f2eddf;--header-bg:rgba(242,237,223,.95);--card-bg:rgba(255,255,255,.5);--border-color:#e7e3da;--shadow:rgba(0,0,0,.08);--header-height:90px;--info-red:#da2c25;--tag-bg:#eaddcf}
+[data-theme=dark]{--color-text:#eaeaea;--color-subtext:#a0a0a0;--accent:#fff;--bg:#121212;--header-bg:rgba(18,18,18,.95);--card-bg:rgba(255,255,255,.05);--border-color:#2a2a2a;--shadow:rgba(0,0,0,.4);--tag-bg:#333}
+html{scroll-behavior:smooth}*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);color:var(--color-text);background:var(--bg);transition:background var(--tsm),color var(--tsm);padding-top:var(--header-height);min-height:100vh;display:flex;flex-direction:column}
+header.header-vertical{position:fixed;top:0;left:0;width:100%;z-index:200;background:var(--header-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-color);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:var(--header-height);transition:background var(--tsm),border-color var(--tsm)}
+.logo-mc{font-family:var(--font-title);font-size:2.2rem;font-weight:700;color:var(--color-text);text-decoration:none;letter-spacing:-1.5px;transition:transform var(--tf)}.logo-mc:hover{transform:scale(1.05)}
+.header-controls{display:flex;align-items:center;gap:36px}.nav-list{display:flex;gap:32px;list-style:none}
+.nav-list a{color:var(--color-text);text-decoration:none;font-size:1.15rem;font-weight:500;position:relative;opacity:.8;transition:opacity var(--tf)}.nav-list a:hover{opacity:1}
+.nav-list a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:var(--tf)}.nav-list a:hover::after{width:100%}
+.theme-toggle{background:none;border:none;cursor:pointer;color:var(--color-text);padding:4px;transition:transform .2s}.theme-toggle:hover{transform:rotate(15deg) scale(1.1)}.theme-toggle svg{width:26px;height:26px;fill:currentColor}
+[data-theme=light] .icon-moon,[data-theme=dark] .icon-sun{display:none}
+.hamburger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer}.hamburger span{width:28px;height:3px;background:var(--color-text);border-radius:3px;transition:.25s}
+main{max-width:900px;margin:0 auto;padding:60px 24px 80px;flex:1;opacity:0;animation:fadeIn .7s ease forwards}
+@keyframes fadeIn{to{opacity:1}}
+.page-hero{margin-bottom:36px}.page-breadcrumb{font-size:.78rem;color:var(--color-subtext);margin-bottom:14px}.page-breadcrumb a{color:var(--color-subtext);text-decoration:none}.page-breadcrumb a:hover{text-decoration:underline}
+.page-hero h1{font-family:var(--font-title);font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;margin-bottom:8px}.page-hero p{color:var(--color-subtext);font-size:.92rem;line-height:1.6}
+.balo-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.balo-stat{background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:12px 20px;text-align:center;min-width:100px}
+.balo-stat-num{font-family:var(--font-title);font-size:1.4rem;font-weight:700}.balo-stat-lbl{font-size:.72rem;color:var(--color-subtext)}
+.balo-controls{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.search-wrap{position:relative}.search-wrap input{width:100%;padding:11px 16px 11px 40px;border:1px solid var(--border-color);border-radius:10px;background:var(--card-bg);color:var(--color-text);font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color var(--tf)}.search-wrap input:focus{border-color:var(--color-text)}.search-wrap input::placeholder{color:var(--color-subtext)}.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.4}
+.cat-filters{display:flex;gap:8px;flex-wrap:wrap}
+.cat-btn{background:var(--card-bg);border:1px solid var(--border-color);border-radius:20px;padding:6px 14px;font-family:var(--font-body);font-size:.78rem;font-weight:500;color:var(--color-subtext);cursor:pointer;transition:all var(--tf)}.cat-btn:hover{border-color:var(--color-text);color:var(--color-text)}.cat-btn.active{background:var(--color-text);color:var(--bg);border-color:var(--color-text)}
+.balo-counter{font-size:.82rem;color:var(--color-subtext);margin-bottom:14px}
+.questions-list{display:flex;flex-direction:column;gap:8px}
+.q-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;overflow:hidden;transition:box-shadow .2s,border-color .2s}.q-card:hover{border-color:var(--color-text);box-shadow:0 4px 16px var(--shadow)}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;cursor:pointer;user-select:none}
+.q-num{font-family:var(--font-title);font-size:.72rem;font-weight:700;color:var(--info-red);min-width:28px;padding-top:2px;flex-shrink:0}
+.q-text{font-size:.9rem;font-weight:500;line-height:1.45;flex:1}.q-arrow{font-size:.85rem;color:var(--color-subtext);transition:transform .3s;flex-shrink:0;padding-top:2px}.q-card.open .q-arrow{transform:rotate(180deg)}
+.q-answer{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.25,.46,.45,.94)}.q-card.open .q-answer{max-height:400px}
+.q-answer-inner{padding:0 18px 14px 58px;font-size:.86rem;color:var(--color-subtext);line-height:1.7;border-top:1px solid var(--border-color)}.q-answer-inner strong{color:var(--color-text);font-weight:500}
+.q-card[data-hidden=true]{display:none}
+.creative-footer{background:var(--bg);border-top:1px solid var(--border-color);padding:50px 24px;margin-top:auto}
+.footer-container{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:40px}
+.footer-left p{color:var(--color-subtext);margin-bottom:20px}.social-text-links{display:flex;gap:20px}.social-link-txt{color:var(--color-text);font-weight:500;text-decoration:none}.social-link-txt:hover{text-decoration:underline}
+.retro-btn{display:inline-block;background:#fff;color:#000;font-weight:700;font-size:1rem;padding:11px 24px;border:2px solid #000;border-radius:8px;text-decoration:none;box-shadow:5px 5px 0 #000;transition:all .15s ease}.retro-btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #000}
+[data-theme=dark] .retro-btn{background:#1a1a1a;color:#fff;border-color:#fff;box-shadow:5px 5px 0 #fff}[data-theme=dark] .retro-btn:hover{box-shadow:7px 7px 0 #fff}
+.footer-bottom{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border-color);color:var(--color-subtext);font-size:.9rem}
+@media(max-width:850px){.nav-list{display:none}.hamburger{display:flex}.footer-container{flex-direction:column;text-align:center}.social-text-links{justify-content:center}}
+</style>
+</head>
+<body>
+<header class="header-vertical">
+  <a href="index.html" class="logo-mc">mc</a>
+  <div class="header-controls">
+    <nav id="navMenu"><ul class="nav-list"><li><a href="index.html">Inicio</a></li><li><a href="recursos.html">Recursos</a></li></ul></nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 4V2M12 20V22M4 12H2M22 12H20M17.65 6.35L19.06 4.94M6.34 17.66L4.93 19.07M17.65 17.66L19.06 19.07M6.34 6.35L4.93 4.94M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+    </button>
+    <button class="hamburger" id="hamb"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+  <div class="page-hero">
+    <p class="page-breadcrumb"><a href="recursos.html">Recursos</a> / <a href="recursos.html">Bomberos</a> / Balotarios ESBAS / <strong>Balotario 2</strong></p>
+    <h1>Balotario 2 — Versión Ampliada</h1>
+    <p>70 preguntas con respuestas detalladas. Haz clic en cada pregunta para revelar la respuesta.</p>
+  </div>
+  <div class="balo-stats">
+    <div class="balo-stat"><div class="balo-stat-num">70</div><div class="balo-stat-lbl">Preguntas</div></div>
+    <div class="balo-stat"><div class="balo-stat-num">5</div><div class="balo-stat-lbl">Categorías</div></div>
+    <div class="balo-stat"><div class="balo-stat-num">14</div><div class="balo-stat-lbl">Nota mínima</div></div>
+  </div>
+  <div class="balo-controls">
+    <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="Buscar pregunta o respuesta…" autocomplete="off"/></div>
+    <div class="cat-filters" id="catFilters"></div>
+  </div>
+  <div class="balo-counter" id="counter"></div>
+  <div class="questions-list" id="questionsList"></div>
+</main>
+<footer class="creative-footer">
+  <div class="footer-container">
+    <div class="footer-left"><a href="index.html" class="logo-mc">mc</a><p>gracias, internet.</p><div class="social-text-links"><a href="https://www.instagram.com/matias_calero/" target="_blank" class="social-link-txt">instagram</a><a href="https://www.youtube.com/@matias_calero" target="_blank" class="social-link-txt">youtube</a></div></div>
+    <div><a href="https://wa.me/51900981764" target="_blank" class="retro-btn">Contáctame</a></div>
+  </div>
+  <div class="footer-bottom"><p>matias calero© 2026</p></div>
+</footer>
+<script>
+document.getElementById('themeToggle').addEventListener('click',()=>{const n=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n)});
+document.getElementById('hamb').addEventListener('click',()=>document.getElementById('navMenu').classList.toggle('mobile-open'));
+
+const CATS=[
+  {id:'hist-mund',label:'🌍 Historia y Eventos Mundiales'},
+  {id:'hist-peru',label:'🇵🇪 Historia y Geografía del Perú'},
+  {id:'ciencias',label:'🔬 Ciencias y Naturaleza'},
+  {id:'geo',label:'🌐 Geografía Mundial'},
+  {id:'cultura',label:'📚 Literatura, Arte y Cultura'},
+];
+
+const RAW=[
+  [1,'hist-mund','La Segunda Guerra Mundial — causas, consecuencias, años, bomba atómica.','Conflicto global 1939–1945. Causas: Tratado de Versalles, expansión territorial, fascismo. Consecuencias: destrucción masiva, creación de la ONU, uso de la bomba atómica en Hiroshima y Nagasaki.'],
+  [12,'hist-mund','La Revolución Francesa.','Movimiento sociopolítico (1789–1799) que terminó con la monarquía absoluta e instauró los principios de libertad, igualdad y fraternidad.'],
+  [13,'hist-mund','El hombre en la Luna.','Misión Apollo 11 (1969). Neil Armstrong y Buzz Aldrin caminaron en la Luna.'],
+  [69,'hist-mund','El muro de Berlín.','Construido en 1961 para separar Berlín Este y Oeste. Demolido en 1989, simbolizando la caída del comunismo en Europa.'],
+  [3,'hist-peru','El descubrimiento de América.','El 12 de octubre de 1492, Cristóbal Colón llegó a las Américas navegando para España.'],
+  [11,'hist-peru','El Combate del 2 de Mayo — fecha, causas, consecuencias, héroes.','Ocurrió en 1866 en Lima. Se enfrentó la invasión española. Símbolo de patriotismo y de los héroes nacionales.'],
+  [14,'hist-peru','El Imperio Incaico — extensión, organización, los suyos.','Civilización precolombina con 4,000 km de extensión en la costa oeste de Sudamérica. Suyos: Antisuyu, Chinchaysuyu, Contisuyu y Collasuyu.'],
+  [18,'hist-peru','Presidentes del Perú que gobernaron más tiempo.','Alberto Fujimori (1990–2000), más de 10 años de mandato.'],
+  [19,'hist-peru','Andrés Avelino Cáceres.','General y presidente peruano. Lideró la resistencia contra Chile en la Guerra del Pacífico. Conocido como "El Brujo de los Andes."'],
+  [24,'hist-peru','Tratado que determinó la frontera entre Perú y Colombia.','Tratado de Límites y Libre Navegación Fluvial entre Colombia y Perú (1922), con mediación de EE.UU.'],
+  [25,'hist-peru','Departamentos y capitales del Perú.','25 departamentos + Provincia Constitucional del Callao. Capital nacional: Lima.'],
+  [30,'hist-peru','Nombre oficial del Perú.','República del Perú.'],
+  [35,'hist-peru','Daniel Alcides Carrión.','Médico peruano (13/08/1857 – 05/10/1885). Mártir de la medicina peruana; demostró la relación entre la verruga peruana y la fiebre de la Oroya.'],
+  [36,'hist-peru','Las fronteras del Perú.','Ecuador, Colombia, Brasil, Bolivia, Chile y el océano Pacífico.'],
+  [65,'hist-peru','El pico más alto del Perú.','Nevado Huascarán, Cordillera Blanca, con 6,768 metros.'],
+  [2,'ciencias','El COVID-19.','Pandemia causada por el SARS-CoV-2, identificada en 2019. Síntomas respiratorios, fiebre y en casos graves neumonía.'],
+  [4,'ciencias','Gravedad.','Fuerza de atracción entre cualquier objeto con masa o energía.'],
+  [5,'ciencias','Presión atmosférica.','Fuerza que ejerce el aire sobre la superficie terrestre debido a la gravedad. Varía según altitud y clima.'],
+  [6,'ciencias','¿Qué es la combustión?','Reacción química de oxidación rápida que genera fuego, calor y luz. Requiere combustible, oxígeno y fuente de ignición.'],
+  [7,'ciencias','La materia.','Todo lo que tiene masa y ocupa espacio. Formada por átomos y moléculas; existe en estado sólido, líquido o gaseoso.'],
+  [8,'ciencias','Agente extintor.','Sustancia que ayuda a apagar un fuego: agua, polvo químico, CO₂ y espumas.'],
+  [9,'ciencias','La energía.','Capacidad de realizar trabajo o producir cambios: térmica, eléctrica, radiante, etc.'],
+  [10,'ciencias','El esqueleto humano.','Estructura ósea que da soporte, protege órganos y permite el movimiento. Compuesto por huesos, articulaciones y cartílagos.'],
+  [15,'ciencias','Las arterias del cuerpo humano.','Vasos sanguíneos que llevan sangre oxigenada desde el corazón hacia los órganos y tejidos.'],
+  [22,'ciencias','La penicilina.','Descubierta en 1928 por Alexander Fleming. Antibiótico que combate infecciones bacterianas.'],
+  [26,'ciencias','Hidroeléctrica de Gallito Ciego.','Ubicada en la cuenca del río Jequetepeque, La Libertad. Operativa desde 1988.'],
+  [29,'ciencias','Volcanes del Perú.','Misti, Ubinas, Sabancaya y Ticsani, entre otros.'],
+  [31,'ciencias','Lagos del Perú.','Lago Titicaca (el más alto del mundo navegable) y lagunas como Lagunillas y Conga.'],
+  [39,'ciencias','El corazón y la sangre.','Bombean sangre y transportan oxígeno y nutrientes a las células del cuerpo.'],
+  [51,'ciencias','La paleontología.','Ciencia que estudia los restos de organismos fósiles para entender la historia de la vida en la Tierra.'],
+  [52,'ciencias','Los animales más rápidos del mundo.','El halcón peregrino en picada y el guepardo en tierra.'],
+  [64,'ciencias','La teoría de la relatividad.','Formulada por Albert Einstein (1905). Incluye la equivalencia entre masa y energía (E=mc²).'],
+  [16,'geo','Los océanos del mundo.','Pacífico, Atlántico, Índico, Antártico y Ártico. El Pacífico es el más grande y profundo.'],
+  [23,'geo','Los desiertos de Sudamérica.','Patagonia (Argentina), Atacama (Chile), Siloli (Bolivia), Sechura (Perú), entre otros.'],
+  [27,'geo','Ríos del Perú.','Amazonas, Ucayali, Mantaro y Urubamba, entre los principales.'],
+  [46,'geo','Los planetas del sistema solar.','Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno.'],
+  [49,'geo','Las montañas más altas de América.','El Aconcagua (Argentina), con 6,961 metros.'],
+  [54,'geo','Los continentes del mundo.','África, América, Asia, Europa, Oceanía y la Antártida.'],
+  [63,'geo','El país más pequeño del mundo.','La Ciudad del Vaticano.'],
+  [17,'cultura','La OMS.','Agencia de la ONU que coordina acciones internacionales de salud pública y combate epidemias.'],
+  [20,'cultura','Mario Vargas Llosa.','Escritor peruano (28/05/1936 – 13/04/2025). Premio Nobel de Literatura 2010. Obras: «La ciudad y los perros», «La fiesta del chivo», «Lituma en los Andes».'],
+  [21,'cultura','La ONU.','Fundada en 1945. Promueve la paz, la seguridad, el desarrollo y los derechos humanos a nivel global.'],
+  [32,'cultura','La flor nacional del Perú.','La Cantuta (Cantua buxifolia).'],
+  [33,'cultura','Las lenguas oficiales del Perú.','El español, el quechua y el aimara.'],
+  [37,'cultura','Autor de «Cien años de soledad».','Gabriel García Márquez (publicada en 1967).'],
+  [43,'cultura','«Cien años de soledad».','Obra maestra del realismo mágico latinoamericano, publicada en 1967.'],
+  [45,'cultura','Cristóbal Colón.','Explorador genovés que llegó a América el 12 de octubre de 1492 navegando para la Corona española.'],
+  [47,'cultura','«La Mona Lisa».','Creada por Leonardo da Vinci (hacia 1503–1519). Destaca por la técnica del sfumato.'],
+  [50,'cultura','El ave nacional del Perú.','El gallito de las rocas (Rupicola peruvianus).'],
+  [53,'cultura','Simón Bolívar.','Líder venezolano que luchó por la independencia de Venezuela, Colombia, Ecuador, Perú y Bolivia. «El Libertador».'],
+  [56,'cultura','Instrumento de viento típico de los Andes peruanos.','La quena.'],
+  [59,'cultura','Isabel Allende.','Escritora chilena, autora de «La Casa de los Espíritus» y «Eva Luna».'],
+  [68,'cultura','«Los Miserables».','Novela de Victor Hugo (1862). Aborda justicia social, redención y humanismo.'],
+  [70,'cultura','«La Última Cena».','Creada por Leonardo da Vinci entre 1495–1498, en Santa María delle Grazie (Milán).'],
+];
+
+const QS=RAW.map(r=>({n:r[0],c:r[1],q:r[2],a:r[3]}));
+let activeCat='all';
+
+function buildFilters(){
+  const wrap=document.getElementById('catFilters');
+  const allBtn=document.createElement('button');
+  allBtn.className='cat-btn active';allBtn.textContent=`Todas (${QS.length})`;
+  allBtn.addEventListener('click',()=>setFilter('all',allBtn));wrap.appendChild(allBtn);
+  CATS.forEach(cat=>{
+    const count=QS.filter(q=>q.c===cat.id).length;
+    const btn=document.createElement('button');btn.className='cat-btn';btn.textContent=`${cat.label} (${count})`;
+    btn.addEventListener('click',()=>setFilter(cat.id,btn));wrap.appendChild(btn);
+  });
+}
+function setFilter(catId,btn){activeCat=catId;document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();let visible=0;
+  document.querySelectorAll('.q-card').forEach(card=>{
+    const show=(activeCat==='all'||card.dataset.cat===activeCat)&&(!q||card.dataset.q.includes(q)||card.dataset.a.includes(q));
+    card.dataset.hidden=show?'false':'true';if(show)visible++;
+  });
+  document.getElementById('counter').textContent=`Mostrando ${visible} pregunta${visible!==1?'s':''}`;
+}
+function buildCards(){
+  const list=document.getElementById('questionsList');
+  QS.forEach(item=>{
+    const card=document.createElement('div');
+    card.className='q-card';card.dataset.cat=item.c;card.dataset.q=item.q.toLowerCase();card.dataset.a=item.a.toLowerCase();card.dataset.hidden='false';
+    card.innerHTML=`<div class="q-header" onclick="this.parentElement.classList.toggle('open')"><span class="q-num">${String(item.n).padStart(2,'0')}</span><span class="q-text">${item.q}</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="q-answer-inner"><strong>→</strong> ${item.a}</div></div>`;
+    list.appendChild(card);
+  });
+}
+buildFilters();buildCards();applyFilters();
+document.getElementById('searchInput').addEventListener('input',applyFilters);
+</script>
+</body>
+</html>
