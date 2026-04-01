@@ -1,0 +1,2955 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/MatiasCalero/home/refs/heads/main/images/Logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bomberos - Matias Calero" />
+    <title>Bomberos — Matias Calero</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet" />
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --font-body: 'DM Sans', sans-serif;
+            --font-title: 'Libre Baskerville', serif;
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.2s ease;
+
+            --color-text: #1a1a1a;
+            --color-subtext: #4a4a4a;
+            --accent: #000000;
+            --bg: #f2eddf;
+            --header-bg: rgba(242, 237, 223, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --border-color: #e7e3da;
+            --shadow: rgba(0, 0, 0, 0.08);
+
+            --header-height: 90px;
+
+            /* Colores Infografía */
+            --info-red: #da2c25;
+            --info-black: #1a1a1a;
+
+            /* Color Bibliografía Card */
+            --biblio-card-bg: #fcfaf4;
+            --tag-bg: #eaddcf;
+        }
+
+        [data-theme="dark"] {
+            --color-text: #eaeaea;
+            --color-subtext: #a0a0a0;
+            --accent: #ffffff;
+            --bg: #121212;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --info-black: #2d2d2d;
+
+            --biblio-card-bg: rgba(255, 255, 255, 0.05);
+            --tag-bg: #333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--bg);
+            transition: background var(--transition-smooth), color var(--transition-smooth);
+            padding-top: var(--header-height);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        header.header-vertical {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 200;
+            background: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: var(--header-height);
+            transition: background var(--transition-smooth), border-color var(--transition-smooth);
+        }
+
+        .logo-mc {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -1.5px;
+            transition: transform var(--transition-fast);
+        }
+
+        .logo-mc:hover {
+            transform: scale(1.05);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-list a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.8;
+            transition: opacity var(--transition-fast);
+        }
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            opacity: 1;
+        }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--accent);
+            transition: var(--transition-fast);
+        }
+
+        .nav-list a:hover::after,
+        .nav-list a.active::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle & Hamburger */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+
+        [data-theme="light"] .icon-moon {
+            display: none;
+        }
+
+        [data-theme="dark"] .icon-sun {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--color-text);
+            border-radius: 3px;
+            transition: 0.25s;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px 80px 24px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+            flex: 1;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===== TAB SYSTEM ===== */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 48px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-subtext);
+            padding: 12px 32px;
+            position: relative;
+            transition: color var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-text);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+        }
+
+        .tab-btn.active {
+            color: var(--color-text);
+        }
+
+        .tab-btn.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab-btn:hover {
+            color: var(--color-text);
+        }
+
+        /* TAB PANELS */
+        .tab-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: tabFadeIn 0.4s ease forwards;
+        }
+
+        @keyframes tabFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== UNALM TAB ===== */
+        .unalm-hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .unalm-hero h2 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .unalm-hero p {
+            font-size: 1.1rem;
+            color: var(--color-subtext);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .unalm-cycles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .cycle-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cycle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--color-text);
+        }
+
+        .cycle-num {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .cycle-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-subtext);
+        }
+
+        .cycle-courses {
+            font-size: 0.9rem;
+            color: var(--color-subtext);
+            margin-top: 4px;
+        }
+
+        /* ===== BOMBEROS TAB ===== */
+        .bomberos-hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .bomberos-hero h2 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .bomberos-hero p {
+            font-size: 1.1rem;
+            color: var(--color-subtext);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .bomberos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .bomberos-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bomberos-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px var(--shadow);
+            border-color: var(--info-red);
+        }
+
+        .bomberos-card-icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+
+        .bomberos-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+        }
+
+        .bomberos-card p {
+            font-size: 0.95rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+        }
+
+        .bomberos-card .card-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--info-red);
+            margin-top: auto;
+        }
+
+        .bomberos-badge {
+            display: inline-block;
+            background: var(--info-red);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+
+        @media(max-width: 600px) {
+            .tab-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* DEFINICIÓN */
+        .main-definition {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-definition h1 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .main-definition p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--color-subtext);
+        }
+
+        /* ===== ESQUEMA INTERACTIVO ===== */
+        .schema-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            min-height: 380px;
+        }
+
+        .schema-card {
+            flex: 1;
+            position: relative;
+            border-radius: 16px;
+            padding: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: flex 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .schema-card.positiva {
+            background: var(--info-red);
+            box-shadow: 0 10px 30px rgba(218, 44, 37, 0.3);
+        }
+
+        .schema-card.normativa {
+            background: var(--info-black);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .schema-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .schema-subtitle {
+            font-family: var(--font-body);
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .tap-hint {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .schema-content-hidden {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            margin-top: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
+        }
+
+        .schema-card:hover,
+        .schema-card.expanded {
+            flex: 2;
+        }
+
+        .schema-card:hover .schema-content-hidden,
+        .schema-card.expanded .schema-content-hidden {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 24px;
+        }
+
+        .schema-card:hover .tap-hint,
+        .schema-card.expanded .tap-hint {
+            display: none;
+        }
+
+        .schema-content-hidden ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .schema-content-hidden li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .schema-content-hidden li:last-child {
+            border-bottom: none;
+        }
+
+        .schema-content-hidden strong {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== SECCIÓN COMPLEMENTARIA: MICRO Y MACRO ===== */
+        .branches-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .branch-card {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            background: var(--card-bg);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .branch-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-text);
+        }
+
+        .branch-header h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .branch-school {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--info-red);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .branch-def {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .btn-branch {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--color-text);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            align-self: flex-start;
+            transition: opacity 0.3s;
+        }
+
+        .btn-branch:hover {
+            opacity: 0.8;
+        }
+
+        /* ===== GRID RECURSOS (IMÁGENES MEJORADAS) ===== */
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            color: var(--color-text);
+        }
+
+        .recursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .recurso-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recurso-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: var(--info-red);
+        }
+
+        /* AQUÍ ESTÁ EL CAMBIO PARA LAS IMÁGENES */
+        .recurso-item img {
+            width: 100%;
+            height: 200px;
+            /* Altura fija y mayor para impacto */
+            object-fit: cover;
+            /* Llena el espacio sin bordes blancos */
+            object-position: center;
+            padding: 0;
+            /* SIN PADDING */
+            margin: 0;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+            display: block;
+        }
+
+        .recurso-info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .recurso-info h2 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .recurso-info p {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .recurso-link {
+            text-decoration: underline;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+
+        /* ===== BIBLIOGRAFÍA (ESTILO TARJETA) ===== */
+        .biblio-section {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .biblio-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .biblio-cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .biblio-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-text);
+            display: inline-block;
+        }
+
+        .biblio-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .biblio-card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--biblio-card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .biblio-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: var(--color-text);
+        }
+
+        .biblio-book-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+
+        .biblio-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-body);
+        }
+
+        .biblio-author {
+            font-size: 0.9rem;
+            color: var(--color-subtext);
+        }
+
+        .biblio-tag {
+            background-color: var(--tag-bg);
+            color: var(--color-subtext);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== FOOTER CREATIVO & RETRO BTN ===== */
+        .creative-footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border-color);
+            padding: 50px 24px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-left h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-left p {
+            color: var(--color-subtext);
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
+
+        /* Enlaces de texto simples */
+        .social-text-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-link-txt {
+            color: var(--color-text);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .social-link-txt:hover {
+            text-decoration: underline;
+        }
+
+        /* Botón Retro WhatsApp "Contáctame" */
+        .retro-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px 28px;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 5px 5px 0px #000000;
+            transition: all 0.15s ease;
+        }
+
+        .retro-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #000000;
+        }
+
+        .retro-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px #000000;
+        }
+
+        [data-theme="dark"] .retro-btn {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 5px 5px 0px #ffffff;
+        }
+
+        [data-theme="dark"] .retro-btn:hover {
+            box-shadow: 7px 7px 0px #ffffff;
+        }
+
+        [data-theme="dark"] .retro-btn:active {
+            box-shadow: 2px 2px 0px #ffffff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--color-subtext);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 850px) {
+            .nav-list {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .schema-container,
+            .branches-section {
+                flex-direction: column;
+            }
+
+            .schema-card {
+                min-height: 200px;
+            }
+
+            nav.mobile-open {
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                box-shadow: 0 10px 30px var(--shadow);
+            }
+
+            nav.mobile-open .nav-list {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-text-links {
+                justify-content: center;
+            }
+        }
+
+        /* ===== MÓDULOS ESBAS ===== */
+        .modules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: box-shadow 0.25s;
+        }
+
+        .module-card:hover {
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+            gap: 16px;
+        }
+
+        .module-header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .module-badge {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .module-title {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            line-height: 1.3;
+        }
+
+        .module-count {
+            font-size: 0.78rem;
+            color: var(--color-subtext);
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+        .module-toggle {
+            font-size: 1.2rem;
+            color: var(--color-subtext);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .module-card.mod-open .module-toggle {
+            transform: rotate(180deg);
+        }
+
+        .module-lessons {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-top: 0px solid var(--border-color);
+        }
+
+        .module-card.mod-open .module-lessons {
+            max-height: 800px;
+            border-top-width: 1px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--color-text);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .lesson-item:hover {
+            border-color: var(--color-text);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .lesson-num {
+            font-family: var(--font-title);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--info-red);
+            min-width: 22px;
+            padding-top: 1px;
+        }
+
+        /* ===== BOMBEROS SIDEBAR LAYOUT ===== */
+        .bomberos-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .bomberos-sidebar {
+            position: sticky;
+            top: calc(var(--header-height) + 24px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .bs-header {
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .bs-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .bs-header p {
+            font-size: 0.8rem;
+            color: var(--color-subtext);
+        }
+
+        .bs-nav {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .bs-nav-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-subtext);
+            text-align: left;
+            transition: background var(--transition-fast), color var(--transition-fast);
+            border-left: 3px solid transparent;
+        }
+
+        .bs-nav-btn:hover {
+            background: var(--border-color);
+            color: var(--color-text);
+        }
+
+        .bs-nav-btn.bs-active {
+            background: var(--border-color);
+            color: var(--color-text);
+            border-left-color: var(--color-text);
+        }
+
+        .bs-nav-emoji {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Content panels */
+        .bomberos-content {
+            min-height: 420px;
+        }
+
+        .bs-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .bs-panel.bs-panel-active {
+            display: block;
+            animation: tabFadeIn 0.35s ease forwards;
+        }
+
+        .bs-panel-header {
+            margin-bottom: 28px;
+        }
+
+        .bs-panel-header h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bs-panel-header p {
+            font-size: 1rem;
+            color: var(--color-subtext);
+            line-height: 1.55;
+        }
+
+        /* Sub-item cards grid */
+        .bs-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .bs-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 18px;
+            text-decoration: none;
+            color: var(--color-text);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+            cursor: pointer;
+        }
+
+        .bs-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow);
+            border-color: var(--color-text);
+        }
+
+        .bs-card-icon {
+            font-size: 1.6rem;
+        }
+
+        .bs-card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .bs-card-desc {
+            font-size: 0.82rem;
+            color: var(--color-subtext);
+            line-height: 1.4;
+        }
+
+        .bs-card-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--info-red);
+            margin-top: auto;
+        }
+
+        /* Pronto badge */
+        .bs-soon {
+            font-size: 0.7rem;
+            background: var(--border-color);
+            color: var(--color-subtext);
+            padding: 2px 8px;
+            border-radius: 4px;
+            align-self: flex-start;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media(max-width: 860px) {
+            .bomberos-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .bomberos-sidebar {
+                position: static;
+            }
+
+            .bs-nav {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 10px;
+                gap: 6px;
+            }
+
+            .bs-nav li {
+                flex: 0 0 auto;
+            }
+
+            .bs-nav-btn {
+                border-left: none;
+                border-radius: 8px;
+                border-bottom: 2px solid transparent;
+                padding: 8px 14px;
+                font-size: 0.82rem;
+            }
+
+            .bs-nav-btn.bs-active {
+                border-left-color: transparent;
+                border-bottom-color: var(--color-text);
+            }
+        }
+
+        /* ===== BALOTARIO SPA ===== */
+        .balo-app {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .balo-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .balo-tab-btn {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-subtext);
+            border-radius: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .balo-tab-btn:hover {
+            color: var(--color-text);
+            background: var(--border-color);
+        }
+
+        .balo-tab-btn.active {
+            background: var(--color-text);
+            color: var(--bg);
+        }
+
+        .balo-header-wrap h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .balo-header-wrap p {
+            color: var(--color-subtext);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .tip-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--info-red);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--color-subtext);
+            line-height: 1.6
+        }
+
+        .balo-stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px
+        }
+
+        .balo-stat {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 20px;
+            text-align: center;
+            min-width: 100px
+        }
+
+        .balo-stat-num {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            font-weight: 700
+        }
+
+        .balo-stat-lbl {
+            font-size: .72rem;
+            color: var(--color-subtext)
+        }
+
+        .balo-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px
+        }
+
+        .search-wrap {
+            position: relative
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 11px 16px 11px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--card-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: .95rem;
+            outline: none;
+            transition: border-color var(--transition-fast)
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--color-text)
+        }
+
+        .search-wrap input::placeholder {
+            color: var(--color-subtext)
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: .4
+        }
+
+        .cat-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .cat-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-family: var(--font-body);
+            font-size: .78rem;
+            font-weight: 500;
+            color: var(--color-subtext);
+            cursor: pointer;
+            transition: all var(--transition-fast)
+        }
+
+        .cat-btn:hover {
+            border-color: var(--color-text);
+            color: var(--color-text)
+        }
+
+        .cat-btn.active {
+            background: var(--color-text);
+            color: var(--bg);
+            border-color: var(--color-text)
+        }
+
+        .balo-counter {
+            font-size: .82rem;
+            color: var(--color-subtext);
+            margin-bottom: 14px
+        }
+
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .q-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 13px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: border-color .2s, box-shadow .2s;
+            cursor: pointer;
+        }
+
+        .q-item:hover {
+            border-color: var(--info-red);
+            box-shadow: 0 3px 12px var(--shadow)
+        }
+
+        .q-item[data-hidden="true"] {
+            display: none
+        }
+
+        .q-num {
+            font-family: var(--font-title);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--info-red);
+            min-width: 26px;
+            padding-top: 2px;
+            flex-shrink: 0
+        }
+
+        .q-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .q-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .q-ans {
+            background: rgba(218, 44, 37, 0.05);
+            border-left: 3px solid var(--info-red);
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            display: none;
+            color: var(--color-text);
+        }
+
+        .q-ans.show {
+            display: block;
+            animation: fadeIn 0.3s ease forwards;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <header class="header-vertical">
+        <a href="index.html" class="logo-mc">mc</a>
+
+        <div class="header-controls">
+            <nav id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="recursos.html">Recursos</a></li>
+                    <li><a href="bomberos.html" class="active">Bomberos</a></li>
+                    <li><a href="#convocatorias">Convocatorias</a></li>
+                </ul>
+            </nav>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                <svg class="icon-sun" viewBox="0 0 24 24">
+                    <path
+                        d="M12 4V2M12 20V22M4 12H2M22 12H20M17.65 6.35L19.06 4.94M6.34 17.66L4.93 19.07M17.65 17.66L19.06 19.07M6.34 6.35L4.93 4.94M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24">
+                    <path
+                        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+                </svg>
+            </button>
+
+            <button class="hamburger" id="hamb"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main>
+
+
+        <div class="bomberos-hero" style="margin-top: 20px;">
+            <h2>Bomberos</h2>
+            <p>Recursos oficiales, balotarios y materiales de estudio para el CGBVP.</p>
+        </div>
+        <div class="bomberos-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="bomberos-sidebar">
+                <div class="bs-header">
+                    <h2>Índice</h2>
+                </div>
+                <ul class="bs-nav" role="tablist">
+                    <li><button class="bs-nav-btn bs-active" onclick="switchBsTab('formacion')" id="bstab-formacion">
+                            Formación ESBAS</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('organizacion')" id="bstab-organizacion">
+                            Organización</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('historia')" id="bstab-historia"> Historia y
+                            Cultura</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('servicios')" id="bstab-servicios"> Servicios de
+                            Emergencia</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('equipamiento')" id="bstab-equipamiento">
+                            Equipamiento</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('codigos')" id="bstab-codigos"> Códigos
+                            CGBVP</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('balotarios')" id="bstab-balotarios"> Balotarios
+                            ESBAS</button></li>
+                    <li><button class="bs-nav-btn" onclick="switchBsTab('biblioteca')" id="bstab-biblioteca">
+                            Biblioteca</button></li>
+                </ul>
+            </aside>
+
+            <!-- CONTENT -->
+            <div class="bomberos-content">
+
+                <!-- 1. Formación ESBAS -->
+                <div class="bs-panel bs-panel-active" id="bspanel-formacion">
+                    <div class="bs-panel-header">
+                        <h3> Formación ESBAS</h3>
+                        <p>Lecciones teóricas divididas en tres módulos</p>
+                    </div>
+
+                    <div class="modules-list">
+
+                        <!-- MÓDULO I -->
+                        <div class="module-card mod-open" id="modulo-i">
+                            <div class="module-header" onclick="toggleModule('modulo-i')">
+                                <div class="module-header-left">
+                                    <span class="module-badge">📘</span>
+                                    <div>
+                                        <div class="module-title">Módulo I — Fundamentos e Institución</div>
+                                        <div class="module-count">9 lecciones</div>
+                                    </div>
+                                </div>
+                                <span class="module-toggle">▾</span>
+                            </div>
+                            <div class="module-lessons">
+                                <div class="lessons-grid">
+                                    <a href="#" class="lesson-item"><span class="lesson-num">01</span>Introducción</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">02</span>Doctrina y
+                                        Mística</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">03</span>Historia del
+                                        CGBVP</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">04</span>Organización,
+                                        Normas y Reglamento</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">05</span>Comunicaciones</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">06</span>Seguridad y
+                                        Trabajo en Equipo</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">07</span>Manejo
+                                        Psicológico — Estrés en Bomberos</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">08</span>Sistema de
+                                        Comando de Incidentes y Contabilidad de Personal</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">09</span>Seguridad y
+                                        Gestión del Aire del EPRA</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MÓDULO II -->
+                        <div class="module-card" id="modulo-ii">
+                            <div class="module-header" onclick="toggleModule('modulo-ii')">
+                                <div class="module-header-left">
+                                    <span class="module-badge">🔥</span>
+                                    <div>
+                                        <div class="module-title">Módulo II — Incendios y Extinción</div>
+                                        <div class="module-count">12 lecciones</div>
+                                    </div>
+                                </div>
+                                <span class="module-toggle">▾</span>
+                            </div>
+                            <div class="module-lessons">
+                                <div class="lessons-grid">
+                                    <a href="#" class="lesson-item"><span class="lesson-num">10</span>Comportamiento
+                                        del Fuego I</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">11</span>Comportamiento
+                                        del Fuego II</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">12</span>Extintores</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">13</span>Métodos de
+                                        Abastecimiento</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">14</span>Hidráulica
+                                        Aplicada a la Lucha Contra Incendios</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">15</span>Chorros de
+                                        Extinción</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">16</span>Técnicas de
+                                        Extinción Contra Incendios</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">17</span>Entrada
+                                        Forzada</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">18</span>Ventilación</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">19</span>Escaleras
+                                        Contra Incendios, Tipos y Usos</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">20</span>Conservación
+                                        de la Propiedad</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">21</span>Evaluación de
+                                        Estructuras</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MÓDULO III -->
+                        <div class="module-card" id="modulo-iii">
+                            <div class="module-header" onclick="toggleModule('modulo-iii')">
+                                <div class="module-header-left">
+                                    <span class="module-badge">🏗️</span>
+                                    <div>
+                                        <div class="module-title">Módulo III — Operaciones Avanzadas</div>
+                                        <div class="module-count">13 lecciones</div>
+                                    </div>
+                                </div>
+                                <span class="module-toggle">▾</span>
+                            </div>
+                            <div class="module-lessons">
+                                <div class="lessons-grid">
+                                    <a href="#" class="lesson-item"><span class="lesson-num">22</span>Incendios en
+                                        Edificios</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">23</span>Incendios en
+                                        Sótanos</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">24</span>Incendios en
+                                        Vehículos</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">25</span>Incendios en
+                                        Líquidos Inflamables y Combustibles</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">26</span>Fugas e
+                                        Incendios en Gases Inflamables</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">27</span>Concentrados y
+                                        Espumas Contra Incendios</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">28</span>Investigación
+                                        de Incendios</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">29</span>Rescate en
+                                        Incendios</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">30</span>Rescate en
+                                        Ascensores</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">31</span>Sistemas de
+                                        Rescate con Cuerdas</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">32</span>Atención Pre
+                                        Hospitalaria I</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">33</span>Atención Pre
+                                        Hospitalaria II</a>
+                                    <a href="#" class="lesson-item"><span class="lesson-num">34</span>Emergencias
+                                        con Materiales Peligrosos</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 2. Organización Institucional -->
+                <div class="bs-panel" id="bspanel-organizacion">
+                    <div class="bs-panel-header">
+                        <h3>Organización Institucional</h3>
+                        <p>Estructura, rangos y funcionamiento interno del CGBVP.</p>
+                    </div>
+                    <div class="bs-cards-grid">
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">📜</span>
+                            <span class="bs-card-title">Escalafón</span>
+                            <span class="bs-card-desc">Jerarquía oficial del personal bombero y su progresión
+                                institucional.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">👔</span>
+                            <span class="bs-card-title">Comando Actual</span>
+                            <span class="bs-card-desc">Jefatura nacional y estructura de mando vigente.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🏛️</span>
+                            <span class="bs-card-title">Estructura del CGBVP</span>
+                            <span class="bs-card-desc">Organigrama institucional, departamentos y comisiones.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🗺️</span>
+                            <span class="bs-card-title">Compañías y Comandancias</span>
+                            <span class="bs-card-desc">Distribución territorial de comandancias y compañías a nivel
+                                nacional.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Historia y Cultura -->
+                <div class="bs-panel" id="bspanel-historia">
+                    <div class="bs-panel-header">
+                        <h3> Historia y Cultura</h3>
+                        <p>Raíces, tradiciones y esencia de la institución bomberil peruana.</p>
+                    </div>
+                    <div class="bs-cards-grid">
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🏛️</span>
+                            <span class="bs-card-title">Historia del CGBVP</span>
+                            <span class="bs-card-desc">Origen y evolución del Cuerpo General de Bomberos desde
+                                1860.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🔴</span>
+                            <span class="bs-card-title">Historia de la Compañía</span>
+                            <span class="bs-card-desc">Fundación, hitos y evolución histórica de la compañía
+                                local.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🎖️</span>
+                            <span class="bs-card-title">Tradiciones</span>
+                            <span class="bs-card-desc">Ceremonias, rituales y costumbres del servicio
+                                bomberil.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">❤️‍🔥</span>
+                            <span class="bs-card-title">Mística Bomberil</span>
+                            <span class="bs-card-desc">Valores, vocación de servicio y espíritu del voluntario
+                                bombero.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Servicios de Emergencia -->
+                <div class="bs-panel" id="bspanel-servicios">
+                    <div class="bs-panel-header">
+                        <h3> Servicios de Emergencia</h3>
+                        <p>Tipos de emergencias, centrales de atención y protocolos de respuesta básica.</p>
+                    </div>
+                    <div class="bs-cards-grid">
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🚨</span>
+                            <span class="bs-card-title">Tipos de Emergencias</span>
+                            <span class="bs-card-desc">Clasificación de emergencias: incendios, rescates, MATPEL,
+                                médicas y más.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">📞</span>
+                            <span class="bs-card-title">Centrales (116, 911)</span>
+                            <span class="bs-card-desc">Números de emergencia, centros de despacho y coordinación
+                                interinstitucional.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">📋</span>
+                            <span class="bs-card-title">Protocolos Básicos</span>
+                            <span class="bs-card-desc">Procedimientos de respuesta, activación de unidades y gestión
+                                en escena.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. Equipamiento y Recursos -->
+                <div class="bs-panel" id="bspanel-equipamiento">
+                    <div class="bs-panel-header">
+                        <h3> Equipamiento y Recursos</h3>
+                        <p>Unidades, EPP y equipos especializados de la compañía.</p>
+                    </div>
+                    <div class="bs-cards-grid">
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🚒</span>
+                            <span class="bs-card-title">Máquina 4-1</span>
+                            <span class="bs-card-desc">Autobomba principal. Equipamiento, capacidad y
+                                operación.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">⚗️</span>
+                            <span class="bs-card-title">MATPEL 4</span>
+                            <span class="bs-card-desc">Unidad de materiales peligrosos. Equipos y protocolos de
+                                respuesta.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🏗️</span>
+                            <span class="bs-card-title">Rescate Pesada 4</span>
+                            <span class="bs-card-desc">Equipos de rescate estructural pesado y sus
+                                aplicaciones.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🔧</span>
+                            <span class="bs-card-title">Rescate Ligera 4</span>
+                            <span class="bs-card-desc">Unidad de rescate ligero para primeras intervenciones.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🪜</span>
+                            <span class="bs-card-title">SNORKEL</span>
+                            <span class="bs-card-desc">Plataforma articulada para intervención en altura.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🚑</span>
+                            <span class="bs-card-title">Ambulancia</span>
+                            <span class="bs-card-desc">Unidad de atención médica prehospitalaria y
+                                equipamiento.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">🦺</span>
+                            <span class="bs-card-title">EPP</span>
+                            <span class="bs-card-desc">Equipo de Protección Personal: casco, traje de aproximación,
+                                botas, guantes.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="#" class="bs-card">
+                            <span class="bs-card-icon">📐</span>
+                            <span class="bs-card-title">Equipos Especializados y NFPA</span>
+                            <span class="bs-card-desc">Normas NFPA aplicables al equipamiento y mantenimiento de
+                                unidades.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 6. Códigos CGBVP -->
+                <div class="bs-panel" id="bspanel-codigos">
+                    <div class="bs-panel-header">
+                        <h3> Códigos Oficiales del CGBVP</h3>
+                        <p>Permiten ejecutar protocolos y operaciones con rapidez en la transmisión, exactitud en el
+                            mensaje y confidencialidad</p>
+                    </div>
+
+                    <style>
+                        .codes-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                            gap: 12px;
+                            margin-bottom: 35px;
+                        }
+
+                        .code-card {
+                            background: var(--card-bg);
+                            border: 1px solid var(--border-color);
+                            border-radius: 8px;
+                            padding: 12px 15px;
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                            transition: transform 0.2s, border-color 0.2s;
+                        }
+
+                        .code-card:hover {
+                            border-color: var(--info-red);
+                            transform: translateY(-2px);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                        }
+
+                        html.dark .code-card:hover {
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                        }
+
+                        .code-card .c-num {
+                            font-family: monospace, san-serif;
+                            font-weight: 700;
+                            color: var(--info-red);
+                            font-size: 1.15rem;
+                            min-width: 55px;
+                        }
+
+                        .code-card .c-txt {
+                            color: var(--color-text);
+                            font-size: 0.95rem;
+                            line-height: 1.3;
+                        }
+
+                        .code-section-title {
+                            color: var(--color-text);
+                            font-size: 1.3rem;
+                            font-weight: 600;
+                            margin-top: 10px;
+                            margin-bottom: 15px;
+                            padding-bottom: 8px;
+                            border-bottom: 1px solid var(--border-color);
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                        }
+                    </style>
+
+                    <h4 class="code-section-title">Códigos de Comunicación Básica</h4>
+                    <div class="codes-grid">
+                        <div class="code-card">
+                            <div class="c-num">10.01</div>
+                            <div class="c-txt">Adelante</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.02</div>
+                            <div class="c-txt">Operador(a) de radio identifíquese</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.03</div>
+                            <div class="c-txt">Cambie frecuencia</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.04</div>
+                            <div class="c-txt">Llame por teléfono</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.05</div>
+                            <div class="c-txt">Comprendido / recibido</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.06</div>
+                            <div class="c-txt">Afirmativo</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.07</div>
+                            <div class="c-txt">Se dirige / diríjase</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.08</div>
+                            <div class="c-txt">Repita el mensaje</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.09</div>
+                            <div class="c-txt">Negativo</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.10</div>
+                            <div class="c-txt">Comunicación con</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.11</div>
+                            <div class="c-txt">Comanda la unidad</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.12</div>
+                            <div class="c-txt">En espera</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.13</div>
+                            <div class="c-txt">Derrotero</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.14</div>
+                            <div class="c-txt">Consulta. se consulta</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.15</div>
+                            <div class="c-txt">Efectivos</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.16</div>
+                            <div class="c-txt">Indique proporciones</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.17</div>
+                            <div class="c-txt">Informe / novedades</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.18</div>
+                            <div class="c-txt">Dirección</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.19</div>
+                            <div class="c-txt">Ubicación</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.20</div>
+                            <div class="c-txt">La unidad se encuentra en el lugar</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.21</div>
+                            <div class="c-txt">Línea privada</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.22</div>
+                            <div class="c-txt">En sintonía</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.23</div>
+                            <div class="c-txt">Se retira del lugar</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.24</div>
+                            <div class="c-txt">Urgente</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.25</div>
+                            <div class="c-txt">Emergencia</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.26</div>
+                            <div class="c-txt">En servicio</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.27</div>
+                            <div class="c-txt">Disponible</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.28</div>
+                            <div class="c-txt">Emergencia cancelada</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.29</div>
+                            <div class="c-txt">Manténgase en alerta</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.30</div>
+                            <div class="c-txt">Ingresa su base</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.31</div>
+                            <div class="c-txt">Traslado</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.32</div>
+                            <div class="c-txt">Emergencia en progreso</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.33</div>
+                            <div class="c-txt">Emergencia dominada</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.34</div>
+                            <div class="c-txt">Tome precauciones</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.35</div>
+                            <div class="c-txt">Requiere policía</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.36</div>
+                            <div class="c-txt">Fuera de sintonía</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.37</div>
+                            <div class="c-txt">Requiere empresa eléctrica</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.38</div>
+                            <div class="c-txt">Abastecimiento de</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.39</div>
+                            <div class="c-txt">Fuera de servicio</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.40</div>
+                            <div class="c-txt">Espere órdenes superiores</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.41</div>
+                            <div class="c-txt">Herido</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.42</div>
+                            <div class="c-txt">Muerto</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.43</div>
+                            <div class="c-txt">Herido FFAA/FFPP herido</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.44</div>
+                            <div class="c-txt">Paramédico</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.45</div>
+                            <div class="c-txt">Médico</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.46</div>
+                            <div class="c-txt">Enfermo</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.47</div>
+                            <div class="c-txt">No interferir</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.48</div>
+                            <div class="c-txt">Piloto voluntario</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.49</div>
+                            <div class="c-txt">Piloto rentado</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.50</div>
+                            <div class="c-txt">Espere nuevas órdenes superiores</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.51</div>
+                            <div class="c-txt">Parturienta</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.52</div>
+                            <div class="c-txt">Toque sirena</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.53</div>
+                            <div class="c-txt">Regrese a su base</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.54</div>
+                            <div class="c-txt">Prosiga la marcha</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.55</div>
+                            <div class="c-txt">Requiere de Empr. de Agua</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.56</div>
+                            <div class="c-txt">Deje sin efecto</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.57</div>
+                            <div class="c-txt">Utilice claves</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.58</div>
+                            <div class="c-txt">Fin de estado de alerta</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.59</div>
+                            <div class="c-txt">Guardia nocturna</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">10.60</div>
+                            <div class="c-txt">Tipo de emergencia</div>
+                        </div>
+                    </div>
+                    <h4 class="code-section-title">Códigos de Emergencias</h4>
+                    <div class="codes-grid">
+                        <div class="code-card">
+                            <div class="c-num">20.01</div>
+                            <div class="c-txt">Accidente de efectivo CBP</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.02</div>
+                            <div class="c-txt">Accidente vehículo CBP</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.03</div>
+                            <div class="c-txt">Atentado / artefacto explosivo</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.04</div>
+                            <div class="c-txt">Atropellado</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.05</div>
+                            <div class="c-txt">Atrapado en ascensor</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.06</div>
+                            <div class="c-txt">Aniego / Inundación</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.07</div>
+                            <div class="c-txt">Falsa Alarma</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.08</div>
+                            <div class="c-txt">Incendio en vehículo</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.09</div>
+                            <div class="c-txt">Derrumbe</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.10</div>
+                            <div class="c-txt">Derrame de producto</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.11</div>
+                            <div class="c-txt">Material peligros - indique</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.12</div>
+                            <div class="c-txt">Fuga de gas – indique proporc.</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.13</div>
+                            <div class="c-txt">Grifo / Cisterna</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.14</div>
+                            <div class="c-txt">Amago de incendio (cód. 0)</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.15</div>
+                            <div class="c-txt">No requiere apoyo (cód. 1)</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.16</div>
+                            <div class="c-txt">Medianas proporciones (cód. 2)</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.17</div>
+                            <div class="c-txt">Med. prop. alta prob. propagación (cód 4)</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.18</div>
+                            <div class="c-txt">Grandes proporciones (cód 4)</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.19</div>
+                            <div class="c-txt">Catástrofe - orden 7.11 - 7.12</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.20</div>
+                            <div class="c-txt">Incendio forestal</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.21</div>
+                            <div class="c-txt">Incendio en terreno baldío</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.22</div>
+                            <div class="c-txt">Corto circuito</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.23</div>
+                            <div class="c-txt">Accidente vehicular</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.24</div>
+                            <div class="c-txt">Rescate / Salvamento / Atrapados</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.25</div>
+                            <div class="c-txt">Huayco</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.26</div>
+                            <div class="c-txt">Fumigación</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">20.27</div>
+                            <div class="c-txt">Poste eléctrico/aviso luminoso</div>
+                        </div>
+                    </div>
+                    <h4 class="code-section-title">Códigos de Comandancia y Oficialidad</h4>
+                    <div class="codes-grid">
+                        <div class="code-card">
+                            <div class="c-num">30.11</div>
+                            <div class="c-txt">Primer jefe de compañía</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.12</div>
+                            <div class="c-txt">Segundo jefe de compañía</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.13</div>
+                            <div class="c-txt">Jefe de operaciones</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.14</div>
+                            <div class="c-txt">Jefe de Sanidad</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.17</div>
+                            <div class="c-txt">Jefe de administración</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.18</div>
+                            <div class="c-txt">Jefe de servicio</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.19</div>
+                            <div class="c-txt">Jefe de disciplina</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.22</div>
+                            <div class="c-txt">Médico de turno</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.30</div>
+                            <div class="c-txt">Otro servicio / Servicio especial</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.31</div>
+                            <div class="c-txt">Practicas / charlas / simulacros</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.32</div>
+                            <div class="c-txt">Eventos / conciertos / festivales</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.33</div>
+                            <div class="c-txt">Abrir puertas</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.34</div>
+                            <div class="c-txt">Colocar letreros / pancartas</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.35</div>
+                            <div class="c-txt">Velorio / Entierro</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">30.36</div>
+                            <div class="c-txt">Apoyos sociales</div>
+                        </div>
+                    </div>
+                    <h4 class="code-section-title">Códigos Complementarios</h4>
+                    <div class="codes-grid">
+                        <div class="code-card">
+                            <div class="c-num">01.01</div>
+                            <div class="c-txt">Contador</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">01.02</div>
+                            <div class="c-txt">Secretaria</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">01.06</div>
+                            <div class="c-txt">Operador de radio</div>
+                        </div>
+                    </div>
+                    <h4 class="code-section-title">Grados</h4>
+                    <div class="codes-grid">
+                        <div class="code-card">
+                            <div class="c-num">03.01</div>
+                            <div class="c-txt">Brigadier General</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.02</div>
+                            <div class="c-txt">Brigadier Mayor</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.03</div>
+                            <div class="c-txt">Brigadier</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.04</div>
+                            <div class="c-txt">Teniente brigadier</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.05</div>
+                            <div class="c-txt">Capitán</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.06</div>
+                            <div class="c-txt">Teniente</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.07</div>
+                            <div class="c-txt">Sub. Teniente</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.08</div>
+                            <div class="c-txt">Seccionario</div>
+                        </div>
+                        <div class="code-card">
+                            <div class="c-num">03.09</div>
+                            <div class="c-txt">Aspirante</div>
+                        </div>
+                    </div>
+
+                    <div class="bs-panel-header" style="margin-top: 40px; margin-bottom: 20px;">
+                        <h3>Protocolos de comunicación</h3>
+                        <p>Ejemplo de comunicación radial.</p>
+                    </div>
+
+                    <div class="tip-box" style="margin-bottom:20px;">
+                        <strong>Reporte de la salida de una unidad:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px; line-height: 1.8; color: var(--color-subtext);">
+                            <li>Solicitar comunicación con la Central: <br><strong
+                                    style="color:var(--color-text);">"Maquina 4-1, 10.10, Central"</strong></li>
+                            <li>Esperar respuesta: <br><strong style="color:var(--color-text);">Central dice: 10.01,
+                                    Maquina 4-1</strong></li>
+                            <li>Indicar que maquina está saliendo a la emergencia: <br><strong
+                                    style="color:var(--color-text);">"Maquina 4-1, 10.07 al 10.25"</strong></li>
+                            <li>Indicar quien está al mando: <br><strong style="color:var(--color-text);">"10.11, 3.09
+                                    Matias Calero"</strong></li>
+                            <li>Número de efectivos: <br><strong style="color:var(--color-text);">"10.15 3"</strong>
+                            </li>
+                            <li>Piloto de la unidad: <br><strong style="color:var(--color-text);">"10.48 o 10.49 Sr.
+                                    Neil Prado"</strong></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                <!-- 7. Balotarios ESBAS -->
+                <div class="bs-panel" id="bspanel-balotarios">
+                    <div class="bs-panel-header">
+                        <h3>Balotarios ESBAS</h3>
+                        <p>Material de repaso para el examen de ingreso a la Escuela Básica de Bomberos.</p>
+                    </div>
+                    <div class="balo-app" id="baloAppContainer">
+                        <div class="balo-tabs" id="baloTabs"></div>
+
+                        <div id="baloHeader" class="balo-header-wrap">
+                            <h2 id="baloTitle">Cargando...</h2>
+                            <p id="baloDesc"></p>
+                            <div class="tip-box" id="baloTip" style="display:none;"></div>
+                            <div class="balo-controls">
+                                <div class="search-wrap">
+                                    <span class="search-icon">🔍</span>
+                                    <input type="text" id="searchInput" placeholder="Buscar pregunta..."
+                                        autocomplete="off" />
+                                </div>
+                                <div class="cat-filters" id="catFilters"></div>
+                            </div>
+                            <div class="balo-counter" id="counter"></div>
+                        </div>
+
+                        <div class="questions-list" id="questionsList"></div>
+                    </div>
+                </div>
+
+                <!-- 8. Biblioteca y Recursos -->
+                <div class="bs-panel" id="bspanel-biblioteca">
+                    <div class="bs-panel-header">
+                        <h3> Biblioteca y Recursos</h3>
+                        <p>Manuales, normas y documentos de referencia para la formación bomberil.</p>
+                    </div>
+                    <div class="bs-cards-grid">
+                        <a href="#" class="bs-card" onclick="switchBsTab('tarea10426'); return false;">
+                            <span class="bs-card-icon" style="display:none;"></span>
+                            <span class="bs-card-title">Tarea 1/04/26</span>
+                            <span class="bs-card-desc">Apuntes de estudio: Información de la bomba, EPP, Himno y
+                                más.</span>
+                            <span class="bs-card-tag">Leer →</span>
+                        </a>
+                        <a href="https://drive.google.com/drive/folders/1skTearnRzLJJ2SZ3jm8i4ZPBUU-JV_kI?usp=drive_link"
+                            target="_blank" class="bs-card">
+
+                            <span class="bs-card-title">IFSTA</span>
+                            <span class="bs-card-desc">Manuales del International Fire Service Training Association
+                                en español.</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1akt06Nb1PgRwHkF0JaiG48AIJ6zAEb-K/view?usp=sharing"
+                            target="_blank" class="bs-card">
+
+                            <span class="bs-card-title">Manual ESBAS 2021</span>
+                            <span class="bs-card-desc">Manual Completo</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+                        <a href="https://drive.google.com/drive/folders/1VfNjniEXkV1ShUaoa_fzXYwbwrHDdpHh?usp=sharing"
+                            target="_blank" class="bs-card">
+
+                            <span class="bs-card-title">Manual ESBAS 2026</span>
+                            <span class="bs-card-desc">Por Módulos</span>
+                            <span class="bs-card-tag">Ver →</span>
+                        </a>
+
+                        <a href="#" class="bs-card" onclick="switchBsTab('links'); return false;">
+                            <span class="bs-card-icon">🔗</span>
+                            <span class="bs-card-title">Links</span>
+                            <span class="bs-card-desc">Recursos web, plataformas y repositorios externos de interés
+                                bomberil.</span>
+                            <span class="bs-card-tag">Explorar →</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- 8.5 Panel Links -->
+                <div class="bs-panel" id="bspanel-links">
+                    <div class="bs-panel-header">
+                        <h3><a href="#" onclick="switchBsTab('biblioteca'); return false;"
+                                style="color: var(--color-subtext); text-decoration: none; margin-right: 15px; font-size:1.1rem;">←
+                                Volver</a> Links</h3>
+                    </div>
+                    <div class="bs-cards-grid" style="margin-top: 20px;">
+                        <a href="https://sgonorte.bomberosperu.gob.pe/24horas" target="_blank" class="bs-card">
+                            <span class="bs-card-icon">🌐</span>
+                            <span class="bs-card-title">SGO Norte - 24 Horas</span>
+                            <span class="bs-card-desc">Sistema de Gestión Operativa (Emergencias activas en Lima
+                                Norte).</span>
+                            <span class="bs-card-tag">Ingresar →</span>
+                        </a>
+                        <a href="https://www.bomberosperu.gob.pe/np_heroes.asp" target="_blank" class="bs-card">
+                            <span class="bs-card-icon">🎖️</span>
+                            <span class="bs-card-title">Héroes CGBVP</span>
+                            <span class="bs-card-desc">Mártires y héroes caídos en servicio en la historia del
+                                cuerpo.</span>
+                            <span class="bs-card-tag">Revisar →</span>
+                        </a>
+                        <a href="https://www.bomberosperu.gob.pe/sgo/ceem/SGO_CEEM_CDVehiculos.asp" target="_blank"
+                            class="bs-card">
+                            <span class="bs-card-icon">🚒</span>
+                            <span class="bs-card-title">Disponibilidad de Vehículos</span>
+                            <span class="bs-card-desc">Consulta de estado operativo de las unidades móviles del
+                                CGBVP.</span>
+                            <span class="bs-card-tag">Consultar →</span>
+                        </a>
+                        <a href="https://labombalima.blogspot.com/" target="_blank" class="bs-card">
+                            <span class="bs-card-icon">📖</span>
+                            <span class="bs-card-title">La Bomba Lima (Blog)</span>
+                            <span class="bs-card-desc">Blog histórico y noticioso con artículos sobre la B-4 a través
+                                del tiempo.</span>
+                            <span class="bs-card-tag">Leer →</span>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- 9. Tarea 1/04/26 -->
+                <div class="bs-panel" id="bspanel-tarea10426">
+                    <div class="bs-panel-header">
+                        <h3><a href="#" onclick="switchBsTab('biblioteca'); return false;"
+                                style="color: var(--color-subtext); text-decoration: none; margin-right: 15px; font-size:1.1rem;">←
+                                Volver</a> Tarea 1/04/26</h3>
+                        <p>Material de lectura y apuntes formales.</p>
+                    </div>
+                    <div
+                        style="background:var(--card-bg); border:1px solid var(--border-color); border-radius:12px; padding: 30px; margin-top: 10px; color: var(--color-text); line-height: 1.6;">
+                        <h2 style="color: var(--info-red); font-size: 1.5rem; margin-bottom: 12px;">TAREA 1: INFORMACIÓN
+                            DE LA BOMBA</h2>
+                        <p><strong>Nombre completo de la Compañía</strong><br>Benemérita Sesquicentenaria y Heroica,
+                            Decana de las Nacionales, Compañía Nacional de Bomberos Voluntarios "LIMA" Nº 4.</p>
+                        <p><strong>Fecha de Fundación</strong><br>Sábado 21 de Abril de 1866</p>
+                        <p><strong>Rótulo del cuartel</strong><br>Compañía Nacional de Bomberos Voluntarios "LIMA" Nº 4.
+                        </p>
+                        <p><strong>Dirección de la Compañía</strong><br>Jirón Manuel Candamo 455, Lince</p>
+                        <p><strong>Referencias a la Compañía</strong><br>
+                            - A media cuadra oeste del Centro de Salud Municipal Lince.<br>
+                            - A media cuadra en sentido nor-oeste del Parque Pedro Ruiz Gallo.<br>
+                            - En la calle paralela norte a la Cuadra 4 de la Av. Juan Pardo de Zela (Municipalidad de
+                            Lince).</p>
+                        <p><strong>Teléfono de la Compañía</strong><br>01 471 644 2</p>
+
+                        <hr style="border: 1px solid var(--border-color); margin: 24px 0;">
+
+                        <h3 style="color: var(--color-text); margin-bottom: 12px;">Respuesta de llamadas a la Compañía
+                        </h3>
+
+                        <p><strong>Inicio:</strong><br>
+                            <span class="tip-box" style="display:block; padding: 10px; margin-top:5px;">“Buenas noches,
+                                Bomba Lima, se comunica con el Postulante [...], ¿cuál es su emergencia?”</span>
+                        </p>
+
+                        <p style="margin-top:15px;"><strong>Si llama un informante -> "¿Cuál es su ubicación?"</strong>
+                        </p>
+                        <ul style="margin-left: 20px; list-style-type: disc;">
+                            <li><strong>- Lince</strong>
+                                <ul>
+                                    <li>Recopilar: Dirección Exacta, Nombre del informante y N° Celular</li>
+                                    <li>Llamar a la central para intermediar e informar a los efectivos en servicio.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li style="margin-top:8px;"><strong>- Fuera de Lince</strong>
+                                <ul>
+                                    <li>“Por favor, llame al 116 para poder despachar unidades cercanas a su ubicación.”
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <p style="margin-top:15px;"><strong>Si llama un Efectivo o la Central</strong><br>
+                        <ul style="margin-left: 20px; list-style-type: disc;">
+                            <li>Acatar órdenes e informar al efectivo al mando.</li>
+                        </ul>
+                        </p>
+
+                        <hr style="border: 1px solid var(--border-color); margin: 24px 0;">
+
+                        <h2 style="color: var(--info-red); font-size: 1.5rem; margin-bottom: 12px;">TAREA 2:
+                            Organización del CGBVP</h2>
+
+                        <h3 style="color: var(--color-text); margin-bottom: 8px;">Escalafón:</h3>
+                        <div style="display:flex; flex-direction:column; gap: 15px; margin-top: 15px;">
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 8px;">
+                                <strong style="color: var(--info-red);">Oficiales Mayores</strong>
+                                <ul style="margin-left:20px; list-style-type:disc; margin-top: 8px; margin-bottom: 0;">
+                                    <li>Brigadier General</li>
+                                    <li>Brigadier Mayor</li>
+                                </ul>
+                            </div>
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 8px;">
+                                <strong style="color: var(--info-red);">Oficiales Superiores</strong>
+                                <ul style="margin-left:20px; list-style-type:disc; margin-top: 8px; margin-bottom: 0;">
+                                    <li>Brigadier</li>
+                                    <li>Teniente Brigadier</li>
+                                </ul>
+                            </div>
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 8px;">
+                                <strong style="color: var(--info-red);">Oficiales</strong>
+                                <ul style="margin-left:20px; list-style-type:disc; margin-top: 8px; margin-bottom: 0;">
+                                    <li>Capitán</li>
+                                    <li>Teniente</li>
+                                    <li>Subteniente</li>
+                                </ul>
+                            </div>
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 8px;">
+                                <strong style="color: var(--info-red);">Personal Sub Alterno</strong>
+                                <ul style="margin-left:20px; list-style-type:disc; margin-top: 8px; margin-bottom: 0;">
+                                    <li>Seccionario</li>
+                                    <li>Aspirante</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 style="color: var(--color-text); margin-top: 30px; margin-bottom: 8px;">Organigrama CGBVP
+                        </h3>
+                        <ul style="margin-left: 20px; list-style-type: none; padding-left: 0;">
+                            <li style="margin-bottom: 10px;"><strong>Comandancia General</strong><br>Brigadier General
+                                CBP Juan Carlos Morales Carpio (Cmte. General 90.11)</li>
+                            <li style="margin-bottom: 10px;"><strong>Vice comandancia General
+                                    90.12</strong><br>Brigadier General CBP José German Medina Arzola (Vice cmte. IV
+                                CDLC 4.12)</li>
+                            <li style="margin-bottom: 10px;"><strong>Comandancia Territorial
+                                    Centro</strong><br>Brigadier General CBP Alfonso Panizo Otero</li>
+                            <li style="margin-bottom: 10px;"><strong>IV Comandancia Departamental Lima
+                                    Centro</strong><br>Brigadier CBP Juan Daniel Mendoza Rivera</li>
+                            <li style="margin-bottom: 10px;"><strong>IV Vice comandancia Departamental Lima
+                                    Centro</strong><br>Cmte. IV CDLC 4.11<br>Brigadier Mayor CBP Marcos Roberto Pajuelo
+                                Herrera</li>
+                            <li style="margin-bottom: 10px;"><strong>Jefe de la 2da Brigada</strong><br>Brig. CBP Javier
+                                Vargas Rivera (4.12.2)</li>
+                            <li><strong>Unidades Básicas Operativas de la 2da Brigada</strong><br>- B Lima 4<br>- B
+                                Victoria 8<br>- B Jesús María 202</li>
+                        </ul>
+
+                        <h3 style="color: var(--color-text); margin-top: 25px; margin-bottom: 8px;">Compañías de la IV
+                            CDLC</h3>
+                        <p>Roma Nº 2 | France Nº 3 | Lima Nº 4 | Victoria Nº 8 | Salvadora Lima Nº 10 | Internacional Nº
+                            14 | Rímac Nº 21 | Chosica Nº 32 | Magdalena Nº 36 | San Miguel Nº 83 | San Juan de
+                            Lurigancho Nº 121 | Salamanca Nº 127 | Santa Anita Nº 138 | Jesús María Nº 202</p>
+
+                        <h3 style="color: var(--color-text); margin-top: 35px; margin-bottom: 5px;">Cuadro Orgánico de
+                            la Bomba Lima 4 (2026)</h3>
+                        <p
+                            style="margin-top: 0; margin-bottom: 15px; font-style:italic; font-size: 0.95rem; color: var(--color-subtext);">
+                            Nombramiento oficial bajo la Resol. N° 001-2026-CGBVP/IVCDLC-B4</p>
+
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+                            <div
+                                style="background:var(--bg); border-left: 4px solid var(--info-red); padding: 15px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <strong
+                                    style="color: var(--info-red); font-size: 1.1rem; display:block; margin-bottom: 8px;">Jefatura
+                                    Lima 4</strong>
+                                <p style="margin: 4px 0;"><strong>30.11 Primer Jefe:</strong> Brigadier CBP Juan José
+                                    Bardales Sifuentes</p>
+                                <p style="margin: 4px 0;"><strong>30.12 Segundo Jefe:</strong> Capitán CBP Diego Alonzo
+                                    Jaime Robles</p>
+                            </div>
+
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 6px;">
+                                <strong
+                                    style="color: var(--color-text); font-size: 1.05rem; display:block; margin-bottom: 8px;">Secciones
+                                    de Asesoramiento</strong>
+                                <ul style="margin-left: 20px; margin-bottom: 0px; line-height: 1.6;">
+                                    <li><strong>Administración:</strong> Capitán CBP Nicolás Masseur Bedon</li>
+                                    <li><strong>Imagen de Compañía:</strong> Seccionario CBP Michell Valeria Marmanillo
+                                        Torres</li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 6px;">
+                                <strong
+                                    style="color: var(--color-text); font-size: 1.05rem; display:block; margin-bottom: 8px;">Secciones
+                                    en Línea</strong>
+                                <ul style="margin-left: 20px; margin-bottom: 0px; line-height: 1.6;">
+                                    <li><strong>Máquinas:</strong> Teniente CBP Yasser Boluarte Zarate</li>
+                                    <li><strong>Servicios Generales:</strong> Capitán CBP Miriam Rosario Castillo
+                                        Altamirano</li>
+                                    <li><strong>Atención Pre-Hospitalaria:</strong> Sub Teniente CBP Silvia María Venel
+                                        Velasco</li>
+                                </ul>
+                            </div>
+
+                            <div
+                                style="background:var(--bg); border:1px solid var(--border-color); padding: 15px; border-radius: 6px;">
+                                <strong
+                                    style="color: var(--color-text); font-size: 1.05rem; display:block; margin-bottom: 8px;">Encargos
+                                    Específicos</strong>
+                                <ul style="margin-left: 20px; margin-bottom: 0px; line-height: 1.6;">
+                                    <li><strong>Asesor Gral. Instrucción y Entrenamiento:</strong> Brigadier CBP José
+                                        Luis De Las Casas Bethell</li>
+                                    <li><strong>Asesoría Legal:</strong> Sub Teniente CBP Christian José Benites Curo
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p><strong>Antigüedad de las secciones</strong><br>
+                            1. Administración | 2. Operaciones | 3. Servicios Generales | 4. Instrucción | 5. Atención
+                            Pre Hospitalaria</p>
+
+                        <p><strong>Diferencias entre UBO y Compañía</strong><br>Las Compañías son Centenarias</p>
+
+                        <hr style="border: 1px solid var(--border-color); margin: 24px 0;">
+
+                        <h2 style="color: var(--info-red); font-size: 1.5rem; margin-bottom: 12px;">TAREA 3:
+                            Brigadieres Generales y Brigadieres Mayores de la Lima 4</h2>
+
+                        <p><strong>3.01 de la Lima 4</strong></p>
+                        <ol style="margin-left: 20px;">
+                            <li style="margin-bottom:8px;">Brigadier General CBP Waldo Hernán Olivos
+                                Villareal<br><em>Comandante General del CGBVP en los períodos de 1977-1981 y 1984 a
+                                    1992</em></li>
+                            <li style="margin-bottom:8px;">Brigadier General CBP Tulio Nicolini Ayarza<br><em>Comandante
+                                    General del CGBVP en los períodos 1992-1995 y 2002 a 2005</em></li>
+                            <li style="margin-bottom:8px;">Brigadier General CBP Duilio Nicolini Alva<br><em>Inspector
+                                    General de los Bomberos Voluntarios del Perú (Fallece 27 de enero de 2021)</em></li>
+                        </ol>
+
+                        <p style="margin-top:15px;"><strong>3.02 activos en la Lima 4</strong></p>
+                        <ul style="margin-left: 20px; list-style-type: disc;">
+                            <li>Brigadier Mayor CBP Eduardo Valcárcel Hidalgo</li>
+                            <li>Brigadier Mayor CBP Miguel Hugo Gallegos Flores</li>
+                            <li>Brigadier Mayor CBP Carlos Paredes Arrascue</li>
+                            <li>Brigadier Mayor CBP Óscar Ruiz Márquez</li>
+                            <li>Brigadier Mayor CBP Luis Neyra Salinas</li>
+                        </ul>
+
+                        <hr style="border: 1px solid var(--border-color); margin: 24px 0;">
+
+                        <h2 style="color: var(--info-red); font-size: 1.5rem; margin-bottom: 12px;">TAREA 4: HIMNO
+                            DEL BOMBERO</h2>
+                        <p><strong>Resolución N 396-2009-CGBVP</strong><br>Aprueba el himno como símbolo
+                            institucional<br>
+                            Letra y música: Brigadier CBP Julio César Coz Vargas<br>
+                            Aprobado en 2002 por Resol Jefatural N833-2002-CG-CGBVP</p>
+
+                        <div
+                            style="background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); font-style: italic; text-align: center;">
+                            <p><strong>CORO</strong><br>
+                                Entusiastas, alertas y ufanos<br>poseídos de peruanidad,<br>aquí están los bomberos
+                                voluntarios<br>con su lema Dios, Patria, Humanidad.</p>
+
+                            <p><strong>1° ESTROFA</strong><br>
+                                Dos de mayo en el puerto chalaco<br>es Alarco bombero inmortal,<br>dio la vida por su
+                                deber sacro<br>al servicio de la sociedad.</p>
+
+                            <p><strong>2° ESTROFA</strong><br>
+                                Los bomberos caídos en lucha<br>en Chorrillos, Arica y San Juan,<br>nos señalan que
+                                somos peruanos<br>voluntarios en la guerra y la paz.</p>
+
+                            <p><strong>3° ESTROFA</strong><br>
+                                Nuestro Cuerpo ha pasado a la Historia<br>por su noble y altruista misión,<br>por sus
+                                hijos, cubiertos de gloria<br>que es orgullo de nuestra Nación.</p>
+                        </div>
+
+                        <hr style="border: 1px solid var(--border-color); margin: 24px 0;">
+
+                        <h2 style="color: var(--info-red); font-size: 1.5rem; margin-bottom: 12px;">TAREA 5:
+                            EQUIPACIÓN Y NORMAS (EPP/NFPA)</h2>
+
+                        <p><strong>Definición y Propósito</strong><br>Son implementos de uso individual o personal
+                            destinados a protegernos de riesgos, enfermedades y accidentes.</p>
+
+                        <div style="display:flex; flex-wrap:wrap; gap: 20px; margin-top: 15px;">
+                            <div style="flex:1; min-width: 250px;">
+                                <p><strong>Componentes del EPP</strong></p>
+                                <ol style="margin-left: 20px; list-style-type: lower-alpha;">
+                                    <li>Casco</li>
+                                    <li>Capucha</li>
+                                    <li>Capote o Chaquetón</li>
+                                    <li>Pantalón</li>
+                                    <li>Guantes</li>
+                                    <li>Botas</li>
+                                    <li>Equipo de Protección Respiratorio Autónomo (EPRA)</li>
+                                    <li>Protección para los ojos</li>
+                                </ol>
+                            </div>
+                            <div style="flex:1; min-width: 250px;">
+                                <p><strong>Normas NFPA</strong></p>
+                                <ul style="margin-left: 20px; list-style-type: disc;">
+                                    <li><strong>NFPA 1971:</strong> Ropa para inc. estructurales</li>
+                                    <li><strong>NFPA 1972:</strong> Cascos</li>
+                                    <li><strong>NFPA 1500:</strong> Seg. y salud ocupacional</li>
+                                    <li><strong>NFPA 1982:</strong> Sistema PASS</li>
+                                    <li><strong>NFPA 1851:</strong> Cuidado de EPP</li>
+                                    <li><strong>NFPA 1975:</strong> Uniformes de faena</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p style="margin-top:20px;"><strong>Partes del EPP (DETALLE EXACTO)</strong></p>
+                        <ul style="margin-left: 20px; list-style-type: disc;">
+                            <li><strong>Casco:</strong> 1. Forro exterior, 2. Protector de Nomex, 3. Visera
+                                Policarbonato, 4. Carrillera Nomex, 5. Cintas reflectivas, 6. Borde del casco.</li>
+                            <li><strong>Capucha:</strong> Protege orejas, cuello y cara. Material: Nomex, Kevlar o PBI.
+                            </li>
+                            <li><strong>Capote / Chaquetón / Pantalón:</strong><br><em>Capas:</em> Cubierta exterior,
+                                Barrera contra humedad, Barrera térmica.<br>
+                                <em>Elementos:</em> Cintas retroreflectivas, Muñequeras, Collares, Cierres, DRD
+                                (Dispositivo rescate de arrastre).
+                            </li>
+                            <li><strong>Guantes:</strong> Capa externa, Capa intermedia impermeable, Capa interna
+                                térmica.</li>
+                            <li><strong>Botas:</strong> 1. Sujetador, 2. Caña y caucho, 3. Planta antIDESLIZANTE con
+                                banda de acero, 4. Puntera de acero.</li>
+                            <li><strong>Protección visual:</strong> Gafas, Protectores faciales (Norma ANSI Z87.1).</li>
+                            <li><strong>Sistema PASS:</strong> Alarma por inmovilidad (30 segundos), ≥95 decibeles (NFPA
+                                1982).</li>
+                        </ul>
+
+                        <p style="margin-top:15px;"><strong>Consideraciones de Seguridad</strong></p>
+                        <ul style="margin-left: 20px; list-style-type: disc;">
+                            <li>El EPP no protege contra fenómenos extremos (flashover, backdraft)</li>
+                            <li>Debe estar limpio, seco y en buen estado</li>
+                            <li>No debe modificarse y debe inspeccionarse constantemente</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- fin .bomberos-content -->
+
+        </div>
+        <!-- fin .bomberos-layout -->
+
+    </main>
+
+    <footer class="creative-footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a href="index.html" class="logo-mc">mc</a>
+                <p>gracias, internet.</p>
+
+                <div class="social-text-links">
+                    <a href="https://www.instagram.com/matias_calero/" target="_blank"
+                        class="social-link-txt">instagram</a>
+                    <a href="https://www.youtube.com/@matias_calero" target="_blank" class="social-link-txt">youtube</a>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <a href="https://wa.me/51900981764" target="_blank" class="retro-btn">
+                    Contáctame
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>matias calero© 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Theme Logic
+        const toggle = document.getElementById('themeToggle');
+        toggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+
+        // 2. Mobile Menu Logic
+        const hamb = document.getElementById('hamb');
+        const nav = document.getElementById('navMenu');
+        hamb.addEventListener('click', () => {
+            nav.classList.toggle('mobile-open');
+        });
+
+        // 3. Schema Card Logic
+        function toggleCard(element) {
+            if (element.classList.contains('expanded')) {
+                element.classList.remove('expanded');
+            } else {
+                document.querySelectorAll('.schema-card').forEach(el => el.classList.remove('expanded'));
+                element.classList.add('expanded');
+            }
+        }
+
+        // 4. Tab System Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            const activeBtn = document.getElementById('tab-' + tabId);
+            const activePanel = document.getElementById('panel-' + tabId);
+            if (activeBtn) { activeBtn.classList.add('active'); activeBtn.setAttribute('aria-selected', 'true'); }
+            if (activePanel) { activePanel.classList.add('active'); }
+        }
+
+        // 5. Bomberos Inner Tab Logic
+        function switchBsTab(sectionId) {
+            document.querySelectorAll('.bs-nav-btn').forEach(btn => btn.classList.remove('bs-active'));
+            document.querySelectorAll('.bs-panel').forEach(panel => panel.classList.remove('bs-panel-active'));
+            const btn = document.getElementById('bstab-' + sectionId);
+            const panel = document.getElementById('bspanel-' + sectionId);
+            if (btn) btn.classList.add('bs-active');
+            if (panel) panel.classList.add('bs-panel-active');
+        }
+
+        // 6. Module accordion Logic
+        function toggleModule(moduleId) {
+            const card = document.getElementById(moduleId);
+            card.classList.toggle('mod-open');
+        }
+    </script>
+
+
+    <script src="bomberos-balotarios.js"></script>
+    <script src="balotarios-logic.js"></script>
+
+</body>
+
+</html>
